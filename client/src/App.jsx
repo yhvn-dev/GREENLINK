@@ -15,10 +15,12 @@ function App() {
         <BrowserRouter>
 
           <Routes>
+            
             {/* Homepage */}
               <Route path='/' element={<Home></Home>}/>
 
               <Route path='/about' element={<About></About>}/>
+
             {/* Other Pages */}
           </Routes>
 

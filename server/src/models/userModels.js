@@ -61,10 +61,8 @@ export const updateUser = async(id,userData) => {
 export const deleteUser = async (id) =>{
     
     try{
-
         const { rows } = await query("DELETE FROM users WHERE id = $1 RETURNING *",[id])
         return rows[0]
-
     }catch(err){
         console.log(`MODELS: Error Deleting Users ${err}`)
         throw err
