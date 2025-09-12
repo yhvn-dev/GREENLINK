@@ -1,37 +1,96 @@
 import {query} from "../config/db.js"
 
 export const getUsers = async() =>{
-    const { rows } = await query("SELECT * FROM users");
-    return rows
+    try{
+        const { rows } = await query("SELECT * FROM users");
+        return rows
+    }catch(err){
+         console.log(`MODELS: Error Getting Users ${err}`)
+        throw err
+    }
 }
 
 
-export const selectUser = async(id) =>{
-
+export const selectUser = async(id) => {
     try{
         const { rows } = await query("SELECT * FROM users WHERE id = $1",[id])
         return rows[0] 
     }catch(err){
-        console.log(`Error Selecting User ${err} On Models`)
+        console.log(`MODELS: Error Selecting User ${err}`)
         throw err
     }   
 }
 
-export const insertUsers = async(username,fullname,email,phone_number,password_hash,role,status)=>{
-    
+
+export const insertUsers = async(userData) => {    
     try{
-        const userData = {username,fullname,email,phone_number,password_hash,role,status}
+
+        const {username,fullname,email,phone_number,password_hash,role,status} = userData
         const { rows } = await query(`INSERT INTO users 
                 (username,fullname,email,phone_number,password_hash,role,status) 
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[userData])
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,password_hash,role,status])
                 
         return rows[0]
 
     }catch(err){
-        console.log(`Error Inserting Users ${err} On Models`)
+        console.log(`MODELS: Error Inserting Users ${err}`)
+        throw err
     }
     
 }
+
+export const updateUser = async(id,userData) => {
+    try{
+
+      const {username,fullname,email,phone_number,password_hash,role,status} = userData
+      const { rows } = await query(`UPDATE users SET 
+                       username = $1,fullname = $2, email = $3,phone_number = $4,password_hash = $5,role = $6,
+                       status = $7 WHERE id = $8 RETURNING *`,
+                       [username,fullname,email,phone_number,password_hash,role,status,id])
+
+      return rows[0]
+
+    }catch(err){
+        console.log(`MODELS: Error Updating Users ${err}`)
+        throw err
+    }
+}
+
+
+
+export const deleteUser = async (id) =>{
+    
+    try{
+
+        const { rows } = await query("DELETE FROM users WHERE id = $1 RETURNING *",[id])
+        return rows[0]
+
+    }catch(err){
+        console.log(`MODELS: Error Deleting Users ${err}`)
+        throw err
+    }
+
+}
+
+
+export const searchUser = async (term) => {
+  try {
+    const { rows } = await query(
+      `SELECT * FROM users 
+       WHERE username ILIKE $1 
+       OR fullname ILIKE $1 
+       OR email ILIKE $1 
+       OR phone_number ILIKE $1 
+       OR role ILIKE $1 
+       OR status ILIKE $1`,
+      [`%${term}%`]
+    );
+    return rows; 
+  } catch (err) {
+    console.log(`MODELS: Error SEARCHING Users`, [`%${term}%`]);
+    throw err;
+  }
+};
 
 
 
