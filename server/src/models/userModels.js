@@ -1,11 +1,27 @@
 import {query} from "../config/db.js"
 
+
+export const findUser = async(loginInput) =>{
+
+    try{
+        const { rows } = await query("SELECT * FROM users WHERE username = $1 OR email = $1",[loginInput]) 
+        return rows[0]
+        
+    }catch(err){
+        console.log(`MODELS: Error Getting Username and Email ${err}`, )
+        throw err
+    }
+}
+
+
+
+
 export const getUsers = async() =>{
     try{
         const { rows } = await query("SELECT * FROM users");
         return rows
     }catch(err){
-         console.log(`MODELS: Error Getting Users ${err}`)
+        console.log(`MODELS: Error Getting Users ${err}`)
         throw err
     }
 }

@@ -2,6 +2,7 @@
 
 :root{
 
+
     /* [PL1] FOUNDATIONS */
     --main-white--: hsl(258, 44%, 93%);
     --white-blple--: hsl(221, 32%, 77%);
@@ -93,49 +94,57 @@
     --dis-2-6:2.617rem;
     --dis-4-2:4.23rem;
     --dis-6-8:6.84rem;
-
+    
 }
 
 
 @media screen and (max-width:550px){
 
-   .btn_nav{
-        position: absolute;
-        flex-direction: column;
-        justify-content: start;
-        align-items: end;
-        height: 50vh;
-        width: 200px;
-        
-        gap: 1rem;
-        top: 0;
-        right: 0;
-        border-radius: 10px;
-        padding: 0.5rem;
-       
-   }    
+    .hamburger{
+        display: block;
+        cursor: pointer;
+    }
+
+
+    .btn_nav svg{
+        display: block;
+        width:var(--fns-up4);
+        height: var(--fns-up4);
+    }
     
-        .btn_nav svg{
-            display: block;
-        }
-       
-        .links_box{
+        .links_box {
             flex-direction: column-reverse;
-            justify-content: start;
-            display: none;
-        }
-       
+            justify-content: center;
+            align-items: start;
+            background-color: transparent;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 200px;
+            height: 50vh;
+            border-radius: 10px;
+            padding: 0.5rem;
+            gap: 1rem;    
+
+    }
+
         .btn_nav .links{
             display: flex;
             align-items: center;
-            justify-content: end;
+            justify-content: center;
             width: 50%;
-            height: 10%;
-            
+            height: 10%;   
         }
+            .btn_nav .btnl {
+                margin: 1rem 0rem 1rem 1rem;
+                padding: 0.4rem 0rem;
+            }
         
         .header .links:last-child{
             margin-right: 0rem;
         }
     
 }
+
+
+
