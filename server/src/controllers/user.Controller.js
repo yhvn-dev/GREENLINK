@@ -1,4 +1,5 @@
 import * as userModels from "../models/userModels.js";
+import bcrypt from "bcrypt"
 
 export const getUsers = async (req,res) => {
     try {
@@ -10,6 +11,46 @@ export const getUsers = async (req,res) => {
         res.status(500).json({ message: "CONTROLLER: Error Getting Users" });
     }
 };
+
+
+export const loginUser = async (req,res) =>{
+    
+    try{
+
+        const { loginInput,password } = req.body;        
+        const user = await userModels.findUser(loginInput);
+
+        // credentials
+        if (!user){
+            return res.status(404).json({message:"User Not Found"})
+        }
+
+        // password
+        const isMatch = await bcrypt.compare(password,user.password_hash)
+        if(!isMatch){
+            return res.status(401).json({message: "Invalid Credentials"})
+        }
+        console.log("Pasword Provided",password)
+        console.log("User Password",user.password_hash)
+        
+
+        res.status(200).json({
+            message:"Login Sucessfull",
+            user:{
+                id:user.id,
+                username: user.username,
+                email:user.email,
+            },    
+        })
+
+        console.log(user)
+    
+    }catch(err){
+        console.error("CONTROLLER:",err)   
+        res.status(500).json({message: "CONTROLLER: Error Getting Credentials"} ) 
+    }
+
+}
 
 
 export const selectUser = async (req, res) => {

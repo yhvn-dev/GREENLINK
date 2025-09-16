@@ -1,4 +1,5 @@
 import {query} from "../config/db.js"
+import bcrypt from "bcrypt";
 
 
 export const findUser = async(loginInput) =>{
@@ -13,8 +14,7 @@ export const findUser = async(loginInput) =>{
     }
 }
 
-
-
+                
 
 export const getUsers = async() =>{
     try{
@@ -41,10 +41,15 @@ export const selectUser = async(id) => {
 export const insertUsers = async(userData) => {    
     try{
 
-        const {username,fullname,email,phone_number,password_hash,role,status} = userData
+        
+
+        const {username,fullname,email,phone_number,password,role,status} = userData
+        const salt = await bcrypt.genSalt(10);
+
+        const hashedPassword = await bcrypt.hash(password,salt)
         const { rows } = await query(`INSERT INTO users 
                 (username,fullname,email,phone_number,password_hash,role,status) 
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,password_hash,role,status])
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,hashedPassword,role,status])
                 
         return rows[0]
 
