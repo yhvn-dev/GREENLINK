@@ -2,6 +2,21 @@ import {query} from "../config/db.js"
 import bcrypt from "bcrypt";
 
 
+
+export const descUser = async () => {
+    try{
+
+        const table = await query(`SELECT column_name, data_type, is_nullable
+            FROM information_schema.columns
+            WHERE table_name = users`)
+        return table[0]
+        
+    }catch(err){
+        console.log(`MODELS: Error Describing Tables`)
+        throw err
+    }
+}
+
 export const findUser = async(loginInput) =>{
 
     try{
@@ -41,15 +56,13 @@ export const selectUser = async(id) => {
 export const insertUsers = async(userData) => {    
     try{
 
-        
-
         const {username,fullname,email,phone_number,password,role,status} = userData
         const salt = await bcrypt.genSalt(10);
 
         const hashedPassword = await bcrypt.hash(password,salt)
         const { rows } = await query(`INSERT INTO users 
                 (username,fullname,email,phone_number,password_hash,role,status) 
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,hashedPassword,role,status])
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,password,role,status])
                 
         return rows[0]
 

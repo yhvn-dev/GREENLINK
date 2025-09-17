@@ -1,5 +1,21 @@
 import * as userModels from "../models/userModels.js";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+
+
+export const fetchUserTable = async (req,res) =>{
+    
+    try{
+
+        const table = await userModels.descUser();
+        res.status(200).json(table)
+        console.log(table)
+        
+    }catch(err){
+        console.log("CONTROLLER:",err)
+        res.status(500).json({message:"CONTROLLER: Error Describing Table"})
+    }
+    
+}
 
 export const getUsers = async (req,res) => {
     try {
@@ -17,7 +33,7 @@ export const loginUser = async (req,res) =>{
     
     try{
 
-        const { loginInput,password } = req.body;        
+        const { loginInput,password_hash } = req.body;        
         const user = await userModels.findUser(loginInput);
 
         // credentials
@@ -26,14 +42,14 @@ export const loginUser = async (req,res) =>{
         }
 
         // password
-        const isMatch = await bcrypt.compare(password,user.password_hash)
+        const isMatch = await bcrypt.compare(password_hash,user.password_hash)
         if(!isMatch){
             return res.status(401).json({message: "Invalid Credentials"})
         }
-        console.log("Pasword Provided",password)
+
+        console.log("Pasword Provided",password_hash)
         console.log("User Password",user.password_hash)
         
-
         res.status(200).json({
             message:"Login Sucessfull",
             user:{
@@ -42,20 +58,20 @@ export const loginUser = async (req,res) =>{
                 email:user.email,
             },    
         })
-
         console.log(user)
+
     
     }catch(err){
         console.error("CONTROLLER:",err)   
-        res.status(500).json({message: "CONTROLLER: Error Getting Credentials"} ) 
     }
+        res.status(500).json({message: "CONTROLLER: Error Getting Credentials"} ) 
 
 }
 
 
 export const selectUser = async (req, res) => {
+    const userId = req.params.id;
     try {
-        const userId = req.params.id;
         const user = await userModels.selectUser(userId);
         
         if (!user) return res.status(404).json({ message: "User not found" });
