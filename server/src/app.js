@@ -6,15 +6,14 @@ dotenv.config()
 
 const app = express()
 app.use(express.json())
-
+app.use(cors())
 
 
 app.use('/',userRoutes)
-app.use(cors())
+
 app.get("/hello",(req,res)=>{
     res.send("<p>Hello World</p>")
 })
-
 
 app.get("/",(req,res) =>{
     res.send("Serving is Running")

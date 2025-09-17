@@ -18,7 +18,7 @@ export const loginValidation = [
          }),
 
          
-    body("password_hash")
+    body("password")
         .notEmpty().withMessage("Password is Required")
         .isLength({min:6}).withMessage("Password Must Be At Least 6 Characters"),
         

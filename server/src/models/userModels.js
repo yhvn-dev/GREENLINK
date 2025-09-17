@@ -1,7 +1,5 @@
 import {query} from "../config/db.js"
-import bcrypt from "bcrypt";
-
-
+import * as utils from "../utils/hashPass.js"
 
 export const descUser = async () => {
     try{
@@ -57,12 +55,12 @@ export const insertUsers = async(userData) => {
     try{
 
         const {username,fullname,email,phone_number,password,role,status} = userData
-        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await utils.hashedPass(password)
+        console.log("Password Value",password)
 
-        const hashedPassword = await bcrypt.hash(password,salt)
         const { rows } = await query(`INSERT INTO users 
                 (username,fullname,email,phone_number,password_hash,role,status) 
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,password,role,status])
+                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,hashedPassword,role,status])
                 
         return rows[0]
 
@@ -76,11 +74,18 @@ export const insertUsers = async(userData) => {
 export const updateUser = async(id,userData) => {
     try{
 
-      const {username,fullname,email,phone_number,password_hash,role,status} = userData
+      const {username,fullname,email,phone_number,password,role,status} = userData
+      const hashedPassword = await utils.hashedPass(password)
+
       const { rows } = await query(`UPDATE users SET 
-                       username = $1,fullname = $2, email = $3,phone_number = $4,password_hash = $5,role = $6,
-                       status = $7 WHERE id = $8 RETURNING *`,
-                       [username,fullname,email,phone_number,password_hash,role,status,id])
+                       username = $1,fullname = $2, email = $3,phone_number = $4,
+                       password_hash = $5,role = $6, status = $7 WHERE id = $8 
+                       RETURNING *`,
+                       [username,fullname,email,phone_number,hashedPassword,role,status,id])
+
+                    // if another user has $3 (the email) - no update
+                    // if the same user same id - update works
+                    // AND NOT EXISTS (SELECT 1 FROM users WHERE email = $3 and id <> $8)
 
       return rows[0]
 

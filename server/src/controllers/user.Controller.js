@@ -33,7 +33,7 @@ export const loginUser = async (req,res) =>{
     
     try{
 
-        const { loginInput,password_hash } = req.body;        
+        const { loginInput,password } = req.body;        
         const user = await userModels.findUser(loginInput);
 
         // credentials
@@ -42,12 +42,12 @@ export const loginUser = async (req,res) =>{
         }
 
         // password
-        const isMatch = await bcrypt.compare(password_hash,user.password_hash)
+        const isMatch = await bcrypt.compare(password,user.password_hash)
         if(!isMatch){
             return res.status(401).json({message: "Invalid Credentials"})
         }
 
-        console.log("Pasword Provided",password_hash)
+        console.log("Pasword Provided",password)
         console.log("User Password",user.password_hash)
         
         res.status(200).json({

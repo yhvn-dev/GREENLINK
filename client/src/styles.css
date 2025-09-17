@@ -122,10 +122,11 @@ svg{
 }
 
 .btn-p{
-    background:linear-gradient(45deg,var(--pal2-greena),var(--pal2-greena));
+    background-color: var(--acc-greena-);
     box-shadow: 0px 5px 10px 1px var(--shad-alpha-e);
     border-radius: 10px;
     color: var(--main-white--);
+    cursor:pointer;
 }
 .btn-h{
     border: 2px solid var(--acc-darkc);
