@@ -46,9 +46,6 @@ export const loginUser = async (req,res) =>{
         if(!isMatch){
             return res.status(401).json({message: "Invalid Credentials"})
         }
-
-        console.log("Pasword Provided",password)
-        console.log("User Password",user.password_hash)
         
         res.status(200).json({
             message:"Login Sucessfull",
@@ -56,16 +53,19 @@ export const loginUser = async (req,res) =>{
                 id:user.id,
                 username: user.username,
                 email:user.email,
+                phone_number:user.phone_number,
+                role:user.role,
+                status:user.status
             },    
         })
         console.log(user)
 
     
     }catch(err){
-        console.error("CONTROLLER:",err)   
+        console.error("CONTROLLER:",err)
+        return res.status(500).json({message: "CONTOLLER Error Getting Credentials"})
     }
-        res.status(500).json({message: "CONTROLLER: Error Getting Credentials"} ) 
-
+    
 }
 
 

@@ -48,12 +48,13 @@
 
     /* SIGNS */
     --color-danger-a: hsl(355, 100%, 70%);
-    --color-danger-b: hsl(355, 70%, 80%);
+    --color-danger-b: hsl(355,100%, 85%);
     --color-danger-c:hsl(353, 40%, 90%);
     --color-warning: hsl(35, 80%, 70%);
     --color-success-a: hsl(125, 85%, 60%);
-    --color-success-b: hsl(160,60%, 70%);
-    --color-success-c:hsl(150, 80%, 80%);
+    --color-success-a-soft: hsl(110, 58%, 90%);
+    --color-success-c: hsl(160,60%, 70%);
+    --color-success-d:hsl(150, 80%, 80%);
  
 
     /* SHADOWS */
@@ -107,7 +108,7 @@
 }
 
 *{
-    font-family: "Inter Reg";
+    font-family: 'Inter', sans-serif;
     padding:0rem;
     margin: 0rem;
     color: var(--acc-darkb);
@@ -121,12 +122,91 @@ svg{
     cursor: pointer;
 }
 
+body{
+    margin: 0rem;
+    padding: 0rem;
+}
+
+
+
+/* CONTAINERS */
+
+
+.form-svg{
+    position: absolute;
+    right:1%;
+    top:28%;
+}
+
+.down{
+   @apply flex flex-col items-center; padding:var(--dis-1-3);
+}
+
+.full{
+    width: 100%; height: 100%;
+}
+
+.card{
+    display: flex; align-items: center; justify-content: center;  box-sizing: border-box; border-radius: 10px; 
+    box-shadow: 5px 5px 20px 1px var(--shad-alpha-e); overflow: hidden;
+    max-width: 80%;    
+    width: clamp(300px,80%, 800px);   
+    height: 80%;                   
+}
+
+.form
+
+.formMsg_box{
+    @apply flex items-center justify-start w-[85%];
+    margin: 0.2rem 0rem;
+}
+    .formMsg_box .formMsg{
+       font-size: var(--fns-down-1); padding:0.1rem var(--dis-0-6);  ;border-radius: 8px;
+        width: 100%;
+    }
+    .formMsg_box .errMsg{
+        background: var(--color-danger-c); 
+    }
+    
+    .formMsg_box.successMsgBox{
+        margin-top: 1rem;
+    }
+    .formMsg_box .succMsg {
+        border: 1px solid var(--color-success-a);
+        background-color: var(--color-success-a-soft); display: flex; justify-content: center; padding: var(--dis-0-6) var(--dis-1);
+}
+
+
+.form_box{
+    @apply flex flex-col items-center justify-center relative w-[85%];
+    margin-top: 2rem;
+}
+.form-inp{
+    @apply w-full; padding:0.2rem 1.8rem 0.2rem  var(--dis-0-6); 
+    border-radius: 10px; border: 2px solid var(--acc-darkc);
+}
+
+.form_box label{
+    @apply pointer-events-none left-[2%] bg-white;
+    transition: ease 0.4s; padding: 0rem var(--dis-0-6);
+    position: absolute; font-size: var(--fns-down-1); color:var(--acc-darkc);
+}
+
+.form_box input:focus + label,
+.form_box input:not(:placeholder-shown) + label{
+    transform: translateY(-100%); font-size: var(--fns-default-down-0-6);
+}
+
+
+/* BUTTONS */
+
 .btn-p{
-    background-color: var(--acc-greena-);
-    box-shadow: 0px 5px 10px 1px var(--shad-alpha-e);
-    border-radius: 10px;
-    color: var(--main-white--);
-    cursor:pointer;
+    background-color: var(--acc-greenb);  box-shadow: 0px 5px 10px 1px var(--shad-alpha-e); border-radius: 10px;
+    color: var(--main-white--); cursor:pointer; padding: 0.2rem var(--dis-0-6);
+}
+.btn-p-full{
+    background-color: var(--acc-greenb); box-shadow: 0px 5px 10px 1px var(--shad-alpha-d); border-radius: 10px;
+    color: var(--main-white--); cursor:pointer; padding: 0.3rem var(--dis-0-6); width: 100%;
 }
 
 .btn-animate{
@@ -134,10 +214,10 @@ svg{
     transition:0.2s;
 }
 
-.logo{
-    font-family: "Inter Med";
+/* .logo{
+    font-family: "Inter Medium";
     
-}
+} */
 
 .btn-h{
     border: 2px solid var(--acc-darkc);
@@ -149,9 +229,26 @@ svg{
     border-radius: 0px;
 }
 
-body{
-    margin: 0rem;
-    padding: 0rem;
+
+
+
+
+
+
+/* texts */
+.title{
+    font-size: var(--fns-default-up1-6); font-weight: 600; color:var(--acc-dark);
+}
+.descrp{
+    font-size: var(--fns-down-1); color:var(--acc-darkc);
 }
 
 
+
+
+/* imgs */
+
+.bushes{
+    width: 40%;
+    height: auto;
+}

@@ -3,8 +3,9 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { Header } from "../../components/header"
-import { Nav } from "../../components/nav"
-import * as Logos from "../../components/logo" 
+import { User,Lock } from "react-feather";
+import { colors } from "../../utils/colors.Js"
+import Bush1 from "../../assets/Images/Bush 1.png"
 
 import * as validate from "../../utils/userValidations"
 
@@ -15,6 +16,7 @@ function Login() {
   const [sucessMsg,setsucessMsg] = useState("")
   const [mode,setMode] = useState("notLoggedIn");
 
+  const [showNav,setShowNav] = useState(false);
   const navigate = useNavigate(); 
   
   const handleSubmit = async (e) =>{
@@ -52,87 +54,117 @@ function Login() {
         setErrorMsg({server: "Login failed or server is not reachable!"})
       }else{
         setErrorMsg({server: "An Unexpected Error Occured"})
-      }
+        }
 
       setsucessMsg("") 
     }
   
-    
   }
     
-  
   return (
-    <section className="page login grid grid-cols-1 grid-rows-[10vh_90vh] h-[100vh] w-full bg-green-200">
+    <section className="page login grid grid-cols-1 grid-rows-[8vh_92vh] h-[100vh] w-full bg-white">
 
-        <Header>
+        <Header
+        
+          navChildren={
 
+            <>
 
-            <nav className="flex justify-between items-center bg-red-400 h-full">
-
-              <div className="header_part left flex justify-start items-center bg-fuchsia-200 h-full w-1/2">
-                <Logos.Text_Logo/>
-              </div>
-              <div className="header_part right flex justify-end items-center h-full w-1/2 bg-red-500">
-
-                   <ul className="h_part h_right flex justify-end items-center w-1/2 h-full">
+              { /* Hamburger icon */}
+                <div 
+                className="links icon_frame hamburger md:hidden" 
+                onClick={() => setShowNav(prev => !prev)}>
+                <svg className="icons" xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"/>
+                </svg> 
+              </div>          
+              
+              {/* Nav group */}
+              <div 
+                className={`links_box w-full  ${showNav ? "flex" : "hidden"} md:flex`} >
                   
-                  
-                    <Nav>     
-                      
-                      {/* Hamburger icon */}
-                      {/* <div 
-                        className="links icon_frame hamburger md:hidden" 
-                        onClick={() => setShowNav(prev => !prev)}>
-                        <svg className="icons" xmlns="http://www.w3.org/2000/svg" 
-                          viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"/>
-                        </svg>
-                      </div>    */}
-                          
-                      {/* Nav group */}
-                      {/* <div 
-                        className={`links_box w-full  ${showNav ? "flex" : "hidden"} md:flex`} >
-                          
-                        <Link to="" className="btnl links btn-u">Home</Link>
-                        <Link to="" className="btnl links">About</Link>
-                        <Link to="/contacts" className="btnl links">Contacts</Link>  
-                        <Link to="/login" className="btnl links btn-p" >Login</Link>
-    
-                      </div> */}
-    
-                    </Nav>
-                  
-                </ul>
-
-              </div> 
+                <Link to="/" className="btnl links ">Home</Link>
+                <Link to="" className="btnl links">About</Link>
+                <Link to="/contacts" className="btnl links">Contacts</Link>  
                 
-            </nav>
-          
-        </Header>
+              </div>
 
-        <div className="hero header_hero bg-amber-300">
+            </>  
 
-              hero
-      
+        }              
+        
+        />
+
+        
+
+
+        {/* hero */}
+        
+        <div className="hero header_hero flex justify-center items-center ">
+
+              <form onSubmit={handleSubmit} className="forms card ">
+
+                  <ul className="form_part down left w-1/2 h-full bg-[var(--pal2-whiteb)]">
+
+                      <img className="bushes" src={Bush1}></img>
+                      <span>Take care of your plants</span>
+                      <p></p>
+                  
+                  </ul>
+                  <ul className="form_part down right  w-1/2 h-full ">
+                                                                
+                      <div class="form_box title_box h-[20%] w-full">
+
+                        <span className="title form_title" >LOGIN</span>
+                        <p className="descrp">Water Your Plants Login Here</p>
+                      </div>
+
+
+
+                      <ul class="input_box_frame down justify-centerw-full h-[80%] w-full">
+
+                        {/* username */}
+                          <div className="form_box input_box">
+
+                            <input ref={loginInputRef} className="form-inp" name="username-email-inp" placeholder=""/>
+                            <label>Username or Email</label>
+                            <svg className="form-svg"><User size={16} color={colors.accDarkc}/></svg>                           
+                          </div>
+                            <ol className="formMsg_box flex">
+                             {errorMsg.loginInput && <p className="formMsg errMsg justify-start">{errorMsg.loginInput}</p>}
+                            </ol>
+                            
+
+                          {/* password */}
+                          <div className="form_box input_box">
+                            <input ref={passwordRef} className="form-inp" type="password" name="password-inp" placeholder=""/>
+                            <label>Password</label>
+                            <svg className="form-svg"><Lock size={16} color={colors.accDarkc}/></svg>
+                          </div>
+                          <ol className="formMsg_box flex">
+                                {errorMsg.password && <p className="formMsg errMsg justify-start">{errorMsg.password}</p>} 
+                            </ol>
+                        
+                          
+                          <div className="form_box btn_box">
+                            <button  className="btn-p-full" type="submit">Login</button>
+                          </div>
+                          <ol className="formMsg_box successMsgBox">
+                              {errorMsg.server && <p className="formMsg errMsg justify-start">{errorMsg.server}</p>}
+                              {sucessMsg && <p className="formMsg succMsg">{sucessMsg}</p>}
+                          </ol>
+
+                          <div className="form_box social_login_box"></div>
+                            
+                      </ul>
+                     
+                    
+                  </ul>
+
+              </form>
+
         </div>
-{/* 
-        <form onSubmit={handleSubmit} className="flex justify-center items-center flex-col gap-[1rem]">
-          <input ref={loginInputRef} type="text" className="inputs email_username border-2"/>
-          {errorMsg.loginInput && <p className="text-red-500">{errorMsg.loginInput}</p>}
-          
-          <input ref={passwordRef} type="password" className="inputs password border-2"/>
-          {errorMsg.password && <p className="text-red-500">{errorMsg.password}</p>}
-          
-          <button type="submit"
-          className={`buttons btn-p
-          ${mode === "notLoggedIn" ? "btn-p" : "btn-animate" }`}>Login</button>
-
-          {errorMsg.server && <p className="text-red-500">{errorMsg.server}</p>}    
-          {sucessMsg && <p className="text-green-500">{sucessMsg}</p>}
-
-        </form>   */}
-
-       
     </section>
   )
   
