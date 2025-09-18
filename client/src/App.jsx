@@ -4,6 +4,7 @@ import Login from "./pages/Login/login.jsx"
 import Contact from "./pages/Contacts/contacts.jsx"
 import Home from "./pages/Home/home.jsx"
 import About from "./pages/About/about.jsx"
+import Dashboard from './pages/Dashboard/dashboard.jsx';
 
 
 import './styles.css'
@@ -17,11 +18,11 @@ function App() {
 
           <Routes>
             
-            {/* Homepage */}
               <Route path='/' element={<Home/>}/>
               <Route path='/contacts' element={<Contact/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/login' element={<Login/>}/>
+              <Route path='/dashboard' element={<Dashboard/>}/>
 
             {/* Other Pages */}
           </Routes>

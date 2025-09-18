@@ -128,6 +128,17 @@ svg{
     color: var(--main-white--);
     cursor:pointer;
 }
+
+.btn-animate{
+    background-color: red;
+    transition:0.2s;
+}
+
+.logo{
+    font-family: "Inter Med";
+    
+}
+
 .btn-h{
     border: 2px solid var(--acc-darkc);
     border-radius: 10px;
