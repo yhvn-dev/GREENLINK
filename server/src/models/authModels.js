@@ -1,0 +1,37 @@
+import { query } from "../config/db.js"
+
+
+export const insertRefreshToken = async (user_id,tokenBody) =>{
+    
+    try{
+
+        const {refresh_token,device} = tokenBody 
+
+        const { rows } = await query(`INSERT INTO tokens (user_id,refresh_token,device) 
+        VALUES ($1,$2,$3) RETURNING *`,[user_id,refresh_token,device])
+
+        console.log("FROM MODEL",rows)
+        console.log("FROM MODEL DECONSTRUCTED",rows[0])
+        return rows[0]
+        
+    }catch(err){
+        console.log("MODELS: Error Inserting Refresh Tokens",err)
+        throw err
+    }
+
+}
+
+
+
+export const findRefreshToken = async (refreshToken) => {
+
+    try{
+        const { rows } = await query("SELECT * FROM tokens WHERE refresh_token = $1",[refreshToken])
+        return rows[0];
+        
+    }catch(err){
+        console.log("MODELS: Error Finding Refresh Token")
+        throw err
+    }
+
+}

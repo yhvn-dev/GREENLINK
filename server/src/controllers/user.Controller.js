@@ -1,18 +1,10 @@
 import * as userModels from "../models/userModels.js";
+import * as authModels from "../models/authModels.js";
+import { getDeviceInfo } from "../utils/getDeviceInfo.js";
 import { generateAccessToken, generateRefreshToken } from "../utils/tokens.js"
 import bcrypt from "bcrypt";
 
 
-export const fetchUserTable = async (req, res) => {
-  try {
-    const table = await userModels.descUser();
-    res.status(200).json(table);
-    console.log(table);
-  } catch (err) {
-    console.log("CONTROLLER:", err);
-    res.status(500).json({ message: "CONTROLLER: Error Describing Table" });
-  }
-};
 
 
 
@@ -27,10 +19,12 @@ export const getUsers = async (req, res) => {
   }
 };
 
+
+
+
 export const loginUser = async (req, res) => {
 
   try {
-    
     const { loginInput, password } = req.body;
     const user = await userModels.findUser(loginInput);
 
@@ -45,9 +39,17 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: "Invalid Credentials" });
     }
 
+    const userId = user.user_id;
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
+    const deviceInfo = getDeviceInfo(req);
 
+    const token = await authModels.insertRefreshToken(
+    userId,
+    {refresh_token: refreshToken, device: deviceInfo });
+    
+
+    
     res.status(200).json({
       message: "Login Successful",
       accessToken,
@@ -66,6 +68,7 @@ export const loginUser = async (req, res) => {
     console.log("ACCESS TOKEN:",accessToken)
     console.log("REFRESH TOKEN:",refreshToken)
     console.log(user);
+    console.log("")
 
   } catch (err) {
     console.error("CONTROLLER:", err);
@@ -75,6 +78,8 @@ export const loginUser = async (req, res) => {
   }
   
 };
+
+
 
 
 

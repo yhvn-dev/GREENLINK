@@ -1,19 +1,6 @@
 import {query} from "../config/db.js"
 import * as utils from "../utils/hashPass.js"
 
-export const descUser = async () => {
-    try{
-
-        const table = await query(`SELECT column_name, data_type, is_nullable
-            FROM information_schema.columns
-            WHERE table_name = users`)
-        return table[0]
-        
-    }catch(err){
-        console.log(`MODELS: Error Describing Tables`)
-        throw err
-    }
-}
 
 export const findUser = async(loginInput) =>{
 

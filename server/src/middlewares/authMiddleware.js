@@ -16,14 +16,13 @@ export const verifyAccessToken = async (req,res, next) =>{
       if (err) {  return res.sendStatus(403) }
 
       req.user = user;
-
       next();
     });
     
- }catch(err){
+  }catch(err){
     console.log("MIDDLEWARE: ERROR VERIFYING ACCESS TOKEN")
     return res.status(500).json({message: "Internal Server Error"})
- }
+  }
 
 }
 
@@ -38,18 +37,15 @@ export const verifyRefreshToken = async (req, res, next) => {
 
     if (!token) return res.sendStatus(401); // no token
 
-    
     jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
         
       if (err) {
        return res.sendStatus(403);   
       }
-
       req.user = user;
       next();
 
     });
-
 
   } catch (err) {
     console.error("MIDDLEWARE: Refresh Token Invalid,", err);
