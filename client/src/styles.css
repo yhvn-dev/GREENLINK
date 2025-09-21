@@ -240,15 +240,18 @@ body{
     font-size: var(--fns-default-up1-6); font-weight: 600; color:var(--acc-dark);
 }
 .descrp{
-    font-size: var(--fns-down-1); color:var(--acc-darkc);
+    font-size: var(--fns-down-1); color:var(--acc-darkc); 
 }
 
 
 
 
 /* imgs */
-
 .bushes{
     width: 40%;
     height: auto;
+    filter: drop-shadow(5px 5px 15px var(--shad-alpha));
 }
+
+.m-x{   margin: 0rem 1rem; } .m-t{ margin: 1rem 0rem; }; .m-1{margin:1rem} 
+.p-x{   padding: 0rem 1rem; } .p-t{ padding: 1rem 0rem}; .p-1{padding:1rem} 

@@ -2,6 +2,11 @@ import userRoutes from './routes/user.Routes.js'
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv"
+import { randomBytes } from "crypto"
+
+const secret = randomBytes(64).toString("hex");
+console.log("SECRET:", secret)
+
 dotenv.config()
 
 const app = express()

@@ -40,9 +40,9 @@ export const getUsers = async() =>{
 }
 
 
-export const selectUser = async(id) => {
+export const selectUser = async(user_id) => {
     try{
-        const { rows } = await query("SELECT * FROM users WHERE id = $1",[id])
+        const { rows } = await query("SELECT * FROM users WHERE user_id = $1",[user_id])
         return rows[0] 
     }catch(err){
         console.log(`MODELS: Error Selecting User ${err}`)
@@ -56,7 +56,6 @@ export const insertUsers = async(userData) => {
 
         const {username,fullname,email,phone_number,password,role,status} = userData
         const hashedPassword = await utils.hashedPass(password)
-        console.log("Password Value",password)
 
         const { rows } = await query(`INSERT INTO users 
                 (username,fullname,email,phone_number,password_hash,role,status) 
@@ -71,22 +70,21 @@ export const insertUsers = async(userData) => {
     
 }
 
-export const updateUser = async(id,userData) => {
+export const updateUser = async(user_id,userData) => {
     try{
 
       const {username,fullname,email,phone_number,password,role,status} = userData
       const hashedPassword = await utils.hashedPass(password)
 
+      console.log("Updating Users:", userData)
+      console.log("Data:",userData)
+
       const { rows } = await query(`UPDATE users SET 
                        username = $1,fullname = $2, email = $3,phone_number = $4,
-                       password_hash = $5,role = $6, status = $7 WHERE id = $8 
+                       password_hash = $5,role = $6, status = $7 WHERE user_id = $8 
                        RETURNING *`,
-                       [username,fullname,email,phone_number,hashedPassword,role,status,id])
-
-                    // if another user has $3 (the email) - no update
-                    // if the same user same id - update works
-                    // AND NOT EXISTS (SELECT 1 FROM users WHERE email = $3 and id <> $8)
-
+                       [username,fullname,email,phone_number,hashedPassword,role,status,user_id])
+     
       return rows[0]
 
     }catch(err){
@@ -97,10 +95,10 @@ export const updateUser = async(id,userData) => {
 
 
 
-export const deleteUser = async (id) =>{
+export const deleteUser = async (user_id) =>{
     
     try{
-        const { rows } = await query("DELETE FROM users WHERE id = $1 RETURNING *",[id])
+        const { rows } = await query("DELETE FROM users WHERE user_id = $1 RETURNING *",[user_id])
         return rows[0]
     }catch(err){
         console.log(`MODELS: Error Deleting Users ${err}`)
