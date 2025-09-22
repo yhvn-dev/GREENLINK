@@ -25,8 +25,11 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
             <div class="text_box down items-center text-center">
 
             <span className="text descr font-semibold text-[1rem]">Control your garden anytime anywhere</span>
-            <p className="text descrp">GREENLINK makes plant care effortless with smart, automated watering</p>
-            <p className="text descrp">Manage your garden through simple and reliable application</p>
+            <p className="text descrp">
+                GREENLINK makes plant care effortless with smart, automated watering,
+                Manage your garden through simple and reliable application.
+            </p>
+
 
             </div>            
         

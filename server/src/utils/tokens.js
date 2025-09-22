@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
 import dotenv from "dotenv";
 dotenv.config()
 
@@ -12,9 +11,13 @@ export const generateAccessToken = (user) => {
       role: user.role},      
 
      process.env.ACCESS_TOKEN_SECRET,         // secret
-    { expiresIn: "15m" }                 
+    { expiresIn: "5s" }                 
   );
 };
+
+
+
+
 
 
 export const generateRefreshToken = (user) => {
@@ -27,7 +30,8 @@ export const generateRefreshToken = (user) => {
    }, 
 
      process.env.REFRESH_TOKEN_SECRET, 
-   { expiresIn: "7d" }                     
+   { expiresIn: "30d" }                     
   );
 };
+
 

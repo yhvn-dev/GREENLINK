@@ -49,7 +49,6 @@ export const loginUser = async (req, res) => {
     {refresh_token: refreshToken, device: deviceInfo });
     
 
-    
     res.status(200).json({
       message: "Login Successful",
       accessToken,
@@ -124,7 +123,6 @@ export const updateUser = async (req, res) => {
     const userId = req.params.user_id; 
     const userData = req.body;
     const user = await userModels.updateUser(userId, userData);
-
 
     res.status(200).json(user);
     console.log(user);

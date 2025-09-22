@@ -6,14 +6,14 @@ export const loginValidation = [
          .notEmpty().withMessage("Username Or Email is Required")
          .custom((value) =>{
 
-         // If it looks like email validate email format
-         if(value.includes("@")){
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(value)) {
-                throw new Error("Invalid Email Format");
-            }    
-         } 
-            return true;
+             // If it looks like email validate email format
+            if(value.includes("@")){
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(value)) {
+                    throw new Error("Invalid Email Format");
+                }    
+            } 
+                return true;
 
          }),
 

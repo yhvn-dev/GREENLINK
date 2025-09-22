@@ -37,14 +37,20 @@ function Login() {
         loginInput,
         password
       });
+
+      console.log(data)
+      localStorage.setItem("accessToken",data.accessToken)
+      localStorage.setItem("refreshToken",data.refreshToken)
       
+    
       setsuccessMsg("Login Sucessfull!");
       setMode("loggedIn")
       setTimeout(() => {
         navigate("/dashboard")       
       }, 1500);
  
-      setErrorMsg({}) // clear error when sucess
+      setErrorMsg({}) 
+      
 
     }catch(err){
 
@@ -56,7 +62,7 @@ function Login() {
         setErrorMsg({server: "An Unexpected Error Occured"})
         }
 
-      setsucessMsg("") 
+      setsuccessMsg("") 
     }
   
   }

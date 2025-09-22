@@ -5,7 +5,7 @@ import Contact from "./pages/Contacts/contacts.jsx"
 import Home from "./pages/Home/home.jsx"
 import About from "./pages/About/about.jsx"
 import Dashboard from './pages/Dashboard/dashboard.jsx';
-
+import { ProtectedRoute } from './../routes/ProtectedRoutes/page.Routes.jsx';
 
 import './styles.css'
 
@@ -22,7 +22,15 @@ function App() {
               <Route path='/contacts' element={<Contact/>}/>
               <Route path='/about' element={<About/>}/>
               <Route path='/login' element={<Login/>}/>
-              <Route path='/dashboard' element={<Dashboard/>}/>
+              <Route path='/dashboard' 
+              
+              element={<ProtectedRoute> 
+                  
+                  <Dashboard/> 
+              
+              </ProtectedRoute>}/>
+
+
 
             {/* Other Pages */}
           </Routes>
