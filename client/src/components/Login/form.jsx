@@ -64,7 +64,7 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
 
                 {/* password */}
                 <div className="form_box input_box">
-                <input ref={passwordRef} className="form-inp" type="password" name="password-inp" placeholder=""/>
+                <input ref={passwordRef} className="form-inp" type="text" name="password-inp" placeholder=""/>
                 <label>Password</label>
                 <svg className="form-svg"><Lock size={16} color={colors.accDarkc}/></svg>
                 </div>

@@ -1,8 +1,9 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL:"http://localhost:5000",
-})
+  baseURL: "http://localhost:5000",
+  withCredentials: true
+});
 
 
  api.interceptors.request.use((config) => {
@@ -11,12 +12,10 @@ const api = axios.create({
     if(token){
         config.headers.Authorization = `Bearer ${token}`;
     }
-
     return config;
-
  })
 
- 
+
 
 
  api.interceptors.response.use(
@@ -29,16 +28,13 @@ const api = axios.create({
             originalRequest._retry = true;
 
             try{
-
-                // call refresh token - generate refresh token
-                const refreshToken = localStorage.getItem("refreshToken");
-                const { data } = await axios.post("http://localhost:5000/refresh-token",{
-                    refreshToken
-                })
- 
+  
+                const { data } = await api.post("http://localhost:5000/auth/refresh-token",{})
+                
                 // iset ulit sa local storage ang acess token na genearted ng refresh token
                 localStorage.setItem("accessToken",data.accessToken);
-            
+
+
                 // update header sa original request
                 originalRequest.headers["Authorization"] = `Bearer ${data.accessToken}`
                 return api(originalRequest);
@@ -49,9 +45,6 @@ const api = axios.create({
             }
 
         }
-
-
-    
        return Promise.reject(error);
 
 } )

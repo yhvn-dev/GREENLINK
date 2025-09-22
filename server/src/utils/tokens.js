@@ -11,11 +11,9 @@ export const generateAccessToken = (user) => {
       role: user.role},      
 
      process.env.ACCESS_TOKEN_SECRET,         // secret
-    { expiresIn: "5s" }                 
+    { expiresIn: "45s" }                 
   );
 };
-
-
 
 
 
@@ -33,5 +31,6 @@ export const generateRefreshToken = (user) => {
    { expiresIn: "30d" }                     
   );
 };
+
 
 

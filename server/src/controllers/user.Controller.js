@@ -44,32 +44,31 @@ export const loginUser = async (req, res) => {
     const refreshToken = generateRefreshToken(user);
     const deviceInfo = getDeviceInfo(req);
 
-    const token = await authModels.insertRefreshToken(
-    userId,
-    {refresh_token: refreshToken, device: deviceInfo });
-    
+    const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
+                                                              device: deviceInfo });
+      
+      res.cookie("refreshToken",refreshToken,{
+        httpOnly: true,
+        secure: true,     
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000, 
+      })                        
+      
 
-    res.status(200).json({
-      message: "Login Successful",
-      accessToken,
-      refreshToken,
-      user: {
-        user_id: user.user_id,
-        username: user.username,
-        email: user.email,
-        phone_number: user.phone_number,
-        role: user.role,
-        status: user.status,
-      },
-    });
+      res.status(200).json({
+        message: "Login Successful",
+        accessToken,
+        user: {
+          user_id: user.user_id,
+          username: user.username,
+          email: user.email,
+          phone_number: user.phone_number,
+          role: user.role,
+          status: user.status,
+        },
+      });
     
-    console.log("")
-    console.log("ACCESS TOKEN:",accessToken)
-    console.log("REFRESH TOKEN:",refreshToken)
-    console.log(user);
-    console.log("")
-
-  } catch (err) {
+  } catch (err) { 
     console.error("CONTROLLER:", err);
     return res
       .status(500)

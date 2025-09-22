@@ -1,5 +1,5 @@
 import {React, useState,useRef} from "react"
-import axios from "axios"
+import api from "../../utils/api"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { Header } from "../../components/header"
@@ -33,15 +33,12 @@ function Login() {
     
     try{
 
-      const { data } = await axios.post("http://localhost:5000/login",{
+      const { data } = await api.post("http://localhost:5000/auth/login",{
         loginInput,
         password
       });
-
-      console.log(data)
+ 
       localStorage.setItem("accessToken",data.accessToken)
-      localStorage.setItem("refreshToken",data.refreshToken)
-      
     
       setsuccessMsg("Login Sucessfull!");
       setMode("loggedIn")

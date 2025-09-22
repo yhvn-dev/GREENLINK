@@ -4,26 +4,29 @@ import publicRoutes from "./routes/UnprotectedRoutes/public.Routes.js"
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv"
-
+import cookieParser from "cookie-parser";
 
 
 // import { randomBytes } from "crypto"
 // const secret = randomBytes(64).toString("hex");
 
-
-
 dotenv.config()
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+
+app.use(cors({
+  origin: "http://localhost:3000", 
+  credentials: true
+}));
 
 
+app.use(cookieParser());
 
 
 app.use('/',userRoutes)
-app.use('/',publicRoutes)
-app.use('/',pageRoutes)
+app.use('/auth',publicRoutes)
+app.use('/page',pageRoutes)
 
 
 

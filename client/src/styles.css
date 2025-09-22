@@ -130,8 +130,6 @@ body{
 
 
 /* CONTAINERS */
-
-
 .form-svg{
     position: absolute;
     right:1%;
@@ -196,6 +194,10 @@ body{
 .form_box input:not(:placeholder-shown) + label{
     transform: translateY(-100%); font-size: var(--fns-default-down-0-6);
 }
+
+
+
+
 
 
 /* BUTTONS */

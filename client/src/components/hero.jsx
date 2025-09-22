@@ -2,12 +2,13 @@ import React from 'react'
 
 export function Hero({children}) {
   return (
-    <section class="conatiner hero">
+    <section class="container hero">
         {children}
     </section>
     
   )
   
 }
+
 
 
