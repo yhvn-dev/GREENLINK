@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from "react-router-dom"
 
-import { Header } from '../../components/header.jsx'
-import { Hero } from '../../components/hero.jsx'
+import { Header } from '../../components/Global/header'
+import { Hero } from '../../components/Global/hero'
 
 import "./home.css"
 import "./home.responsive.css"
@@ -12,7 +12,7 @@ function Home() {
 
   return (
     <>
-      <section className="page home  ">
+      <section className="page home">
         <div className="bd_wrapper"></div>
         <div className="front_wrapper">
     
@@ -46,26 +46,18 @@ function Home() {
 
             </>
 
-            
           }
-
 
         />  
 
-
-
-          
-          {/* Hero */}
-          <Hero> 
-            <div className="hero_box">
-              .hero_box
-            </div>
-          </Hero>
-
+            <Hero
+        
+            />
 
         </div>
         
       </section>
+
     </>
   )
 }

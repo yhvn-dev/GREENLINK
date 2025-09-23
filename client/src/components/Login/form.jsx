@@ -47,7 +47,6 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
             </div>
 
 
-
             <ul class="input_box_frame down justify-center w-full h-[80%] w-full">
 
             {/* username */}

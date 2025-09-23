@@ -24,10 +24,9 @@ app.use(cors({
 app.use(cookieParser());
 
 
-app.use('/',userRoutes)
+app.use('',userRoutes)
 app.use('/auth',publicRoutes)
 app.use('/page',pageRoutes)
-
 
 
 app.get("/hello",(req,res)=>{

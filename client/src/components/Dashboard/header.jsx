@@ -3,12 +3,13 @@
 
 import React from 'react'
 
-export function Header() {
+export function Header({left,right}) {
   return (
 
     
-    <section class="container header">
-        header
+    <section className="container header">
+        {left}
+        {right}
     </section>
 
   )

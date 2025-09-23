@@ -13,7 +13,7 @@ export const verifyAccessToken = async (req,res, next) =>{
     if (!token) return res.sendStatus(401); 
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) { return res.redirect("/login"); }
+      if (err) return res.status(403).json({ message: "Invalid or expired access token" });
 
       req.user = user;
       next();
@@ -28,28 +28,28 @@ export const verifyAccessToken = async (req,res, next) =>{
 
 
 
-export const verifyRefreshToken = async (req, res, next) => {
-
+export const verifyRefreshToken = (req, res, next) => {
   try {
-    
-    const authHeader = req.headers["authorization"];
-    const token = authHeader && authHeader.split(" ")[1];
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) {
+      return res.status(401).json({ message: "No refresh token found" });
+    }
 
-    if (!token) return res.sendStatus(401); // no token
-
-    jwt.verify(token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-        
+    jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
       if (err) {
-       return res.sendStatus(403);   
+        return res.status(403).json({ message: "Invalid or expired refresh token" });
       }
+
       req.user = user;
       next();
 
+      
     });
+
 
   } catch (err) {
     console.error("MIDDLEWARE: Refresh Token Invalid,", err);
     return res.status(500).json({ message: "Internal server error" });
   }
-
 };
+

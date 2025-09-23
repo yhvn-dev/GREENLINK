@@ -1,5 +1,5 @@
-import * as Logos from "../components/logo"
-import { Nav } from "../components/nav"
+import * as Logos from "./logo"
+import { Nav } from "./nav"
 
 export function Header({navChildren}) {
   return (
@@ -11,7 +11,6 @@ export function Header({navChildren}) {
             <Logos.Text_Logo/>
           </ul>
 
-  
           <ul className="h_part h_right flex justify-end items-center w-1/2 h-full" >
           
             <Nav>

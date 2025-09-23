@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken"
 
 dotenv.config()
 
-
 export const refreshAccessToken = async(req,res) => {
 
     try{
@@ -27,29 +26,30 @@ export const refreshAccessToken = async(req,res) => {
         });
 
         res.json({accessToken})
+
     }catch(err){
         return res.status(403).json({message: "AUTH CONTROLLER: Refresh Token Expired and Invalid!"})
     }        
 
 }
 
-export const deleteRefreshToken = async(req,res) =>{
 
-    try{
 
-         const refreshToken = req.cookies.refreshToken;
-         const result = await authModels.deleteRefreshToken(refreshToken)
-         res.clearCookie("refreshToken", { httpOnly: true, sameSite: "Strict", secure: true });
 
-        if(!result)  return res.status(401).json({message:"Error Deleting Refresh Token"})
+export const logoutAllDevices = async (req, res) => {
+  try {
+    const user_id = Number(req.user.user_id); 
+    const result = await authModels.deleteAllRefreshToken(user_id);
 
-        res.json({result})
+    // Always clear the cookie, kahit walang token sa DB
+    res.clearCookie("refreshToken", { httpOnly: true, sameSite: "Strict", secure: true });
 
-    }catch(err){
-        return res.status(403).json({message: "AUTH CONTROLLER: Referesh Token Deletion Unsuccessfull!"})
-    }
+    // Idagdag friendly message
+    return res.status(200).json({ message: "Logged out from all devices" });
 
-}
-
+  } catch (err) {
+    return res.status(500).json({ message: "Logout all devices failed", error: err.message });
+  }
+};
 
 

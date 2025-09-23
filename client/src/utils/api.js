@@ -17,14 +17,20 @@ const api = axios.create({
 
 
 
-
  api.interceptors.response.use(
   (response) => response,
   async (error) => {
+
+    console.log("❗ Interceptor caught error:", error?.response?.status, error?.response?.data);
+
     const originalRequest = error.config;
 
         // kugn may mali sa response
         if(error.response && error.response.status === 401 && !originalRequest._retry){
+
+            console.warn("⚠️ Access token expired, attempting refresh...");
+                
+
             originalRequest._retry = true;
 
             try{
@@ -33,6 +39,7 @@ const api = axios.create({
                 
                 // iset ulit sa local storage ang acess token na genearted ng refresh token
                 localStorage.setItem("accessToken",data.accessToken);
+                console.log("🔄 Access token refreshed at:", new Date());
 
 
                 // update header sa original request

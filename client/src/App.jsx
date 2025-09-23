@@ -4,7 +4,10 @@ import Login from "./pages/Login/login.jsx"
 import Contact from "./pages/Contacts/contacts.jsx"
 import Home from "./pages/Home/home.jsx"
 import About from "./pages/About/about.jsx"
-import Dashboard from './pages/Dashboard/dashboard.jsx';
+import Dashboard from "./pages/Dashboard/dashboard.jsx";
+import Users from "./pages/Users/users.jsx"
+
+
 import { ProtectedRoute } from "./routes/ProtectedRoutes/page.Routes.jsx";
 
 import './styles.css'
@@ -23,6 +26,8 @@ function App() {
               <Route path='/about' element={<About/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/dashboard' element={<ProtectedRoute> <Dashboard/> </ProtectedRoute>}/>
+              <Route path='/users' element={<ProtectedRoute> <Users/> </ProtectedRoute>} />
+        
 
             {/* Other Pages */}
           </Routes>

@@ -2,9 +2,10 @@ import {React, useState,useRef} from "react"
 import api from "../../utils/api"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
-import { Header } from "../../components/header"
+
 import { Form } from "../../components/Login/form"
- 
+import { Hero } from "../../components/Global/hero.jsx"
+import { Header } from "../../components/Global/header.jsx" 
 
 import * as validate from "../../utils/userValidations"
 import "./login.css"
@@ -47,7 +48,6 @@ function Login() {
       }, 1500);
  
       setErrorMsg({}) 
-      
 
     }catch(err){
 
@@ -58,14 +58,13 @@ function Login() {
       }else{
         setErrorMsg({server: "An Unexpected Error Occured"})
         }
-
       setsuccessMsg("") 
     }
   
   }
     
   return (
-    <section className="page login grid grid-cols-1 grid-rows-[8vh_92vh] h-[100vh] w-full bg-white">
+    <section className="page  login grid grid-cols-1 grid-rows-[8vh_92vh] h-[100vh] w-full bg-white">
 
         <Header
         
@@ -98,16 +97,17 @@ function Login() {
         
         />
 
-
         {/* hero */}        
-        <div className="hero flex justify-center items-center ">
+    
+          <Hero
+          
+             children={<Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} />}
 
-            <Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef}
-            />
-
-        </div>
-
+          />
+        
     </section>
+
+
   )
   
   

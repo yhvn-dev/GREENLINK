@@ -11,7 +11,7 @@ export const generateAccessToken = (user) => {
       role: user.role},      
 
      process.env.ACCESS_TOKEN_SECRET,         // secret
-    { expiresIn: "45s" }                 
+    { expiresIn: "15m" }                 
   );
 };
 
