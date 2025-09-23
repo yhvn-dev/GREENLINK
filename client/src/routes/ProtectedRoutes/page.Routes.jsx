@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
-import * as errorMsgs from "../../components/Global/errorMsgs"
+import * as Loader from "../../components/Global/loaders"
+
 
 import api from "../../utils/api"; // axios instance mo
 
@@ -51,7 +52,6 @@ export const ProtectedRoute = ({ children }) => {
             localStorage.setItem("accessToken", data.accessToken);
             console.log(`Access token refreshed! ${Math.floor(now / 1000)}`);
 
-
           } catch (err) {
             console.log("Refresh failed, redirecting to login");
             localStorage.removeItem("accessToken");
@@ -75,7 +75,7 @@ export const ProtectedRoute = ({ children }) => {
 
   }, [navigate]);
 
-  if(checking) return <errorMsgs.Unauthorized/>;
+  if(checking) return <Loader.CheckSession/>;
 
   return children;
 };
