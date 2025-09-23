@@ -6,10 +6,6 @@ import cors from "cors";
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser";
 
-
-// import { randomBytes } from "crypto"
-// const secret = randomBytes(64).toString("hex");
-
 dotenv.config()
 
 const app = express()
