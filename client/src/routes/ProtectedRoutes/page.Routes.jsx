@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import * as errorMsgs from "../../components/Global/errorMsgs"
+
 import api from "../../utils/api"; // axios instance mo
 
 export const ProtectedRoute = ({ children }) => {
@@ -19,8 +21,6 @@ export const ProtectedRoute = ({ children }) => {
       // KAPAG WLAANG NAKUHA NA ACESS TOKEN GALING SA LOCAL STORAGE
       if (!token) {
 
-
-
         // Walang token, try refresh
         try {
           const { data } = await api.post("/auth/refresh-token"); // cookie will be sent automatically
@@ -36,8 +36,6 @@ export const ProtectedRoute = ({ children }) => {
         return;
       }
 
-
-      
       try {
         const decoded = jwtDecode(token);
         const now = Date.now();
@@ -77,7 +75,7 @@ export const ProtectedRoute = ({ children }) => {
 
   }, [navigate]);
 
-  if(checking) return <div className="bg-amber-400 text-black"> checking Session....</div>
+  if(checking) return <errorMsgs.Unauthorized/>;
 
   return children;
 };

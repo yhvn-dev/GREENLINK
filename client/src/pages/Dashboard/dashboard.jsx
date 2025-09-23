@@ -3,6 +3,7 @@ import { Sidebar } from "../../components/Dashboard/sidebar"
 import { Header } from "../../components/Dashboard/header"
 import { Numbers } from "../../components/Dashboard/numbers" 
 import { Workspace } from "../../components/Dashboard/workspace"
+import { Logout } from "../../components/Global/logout"
 
 import {Grid,Activity,User,LogOut} from "react-feather"
 
@@ -10,7 +11,6 @@ import {Grid,Activity,User,LogOut} from "react-feather"
 import "./dashboard.css"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-
 
 
 function Dashboard() {
@@ -53,10 +53,8 @@ function Dashboard() {
                    Users
                 </Link>
 
-                <Link className="sb-btn logout-btn" to="/login">
-                  <svg className="svg-icons"><LogOut size={16}/></svg>  
-                   Logout
-                </Link>
+                <Logout/>
+
 
 
               </>}
