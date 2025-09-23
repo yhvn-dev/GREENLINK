@@ -1,30 +1,38 @@
 import jwt from "jsonwebtoken"
+import * as userModels from "../models/userModels.js" 
 
 
-export const verifyAccessToken = async (req,res, next) =>{
-    
- try{
-
+export const verifyAccessToken = async (req, res, next) => {
+  try {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
 
-    console.log("HEADERS: ", req.headers)
+    if (!token) return res.sendStatus(401);
 
-    if (!token) return res.sendStatus(401); 
+    // Synchronously verify token
+    const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-      if (err) return res.status(403).json({ message: "Invalid or expired access token" });
+    // Fetch user from DB
+    const userFromDB = await userModels.selectUser(payload.user_id);
+    if (!userFromDB) return res.status(404).json({ message: "User not found" });
 
-      req.user = user;
-      next();
-    });
-    
-  }catch(err){
-    console.log("MIDDLEWARE: ERROR VERIFYING ACCESS TOKEN")
-    return res.status(500).json({message: "Internal Server Error"})
+    req.user = userFromDB;
+    next();
+
+
+
+  
+  } catch (err) {
+    console.error("MIDDLEWARE: ERROR VERIFYING ACCESS TOKEN", err);
+    if (err.name === "TokenExpiredError") {
+      return res.status(403).json({ message: "Access token expired" });
+    }
+    return res.status(500).json({ message: "Internal Server Error" });
   }
+};
 
-}
+
+
 
 
 

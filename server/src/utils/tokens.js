@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken"
+
 import dotenv from "dotenv";
 dotenv.config()
 
@@ -8,8 +9,9 @@ export const generateAccessToken = (user) => {
     { user_id: user.user_id,   
       username: user.username,
       email: user.email,              // payload
-      role: user.role},      
-
+      role: user.role,
+      token_version:user.token_version    
+    },    
      process.env.ACCESS_TOKEN_SECRET,         // secret
     { expiresIn: "15m" }                 
   );
