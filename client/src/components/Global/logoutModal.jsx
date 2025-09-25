@@ -8,12 +8,11 @@ export function LogoutModal({isOpen,onClose}) {
   const navigate = useNavigate()
   if(!isOpen) return null;
 
-  const handleLogout = async (e) =>{
+  const handleAllLogout = async (e) =>{
       e.preventDefault();
   
        try {
-        await axios.delete("http://localhost:5000/users/logout-all",   { withCredentials: true }
-        );
+        await axios.delete("http://localhost:5000/users/logout-all",{ withCredentials: true });
      
         localStorage.removeItem("accessToken")
         navigate("/login");
@@ -22,6 +21,19 @@ export function LogoutModal({isOpen,onClose}) {
         console.error("Logout error:", err.response?.data?.message || err.message);
       }
     };
+
+    const handleDeviceLogout = async (e) =>{
+      e.preventDefault()
+      try{
+        await axios.delete("http://localhost:5000/users/logout",{withCredentials:true})
+
+        localStorage.removeItem("accessToken")
+        navigate("/login");
+
+      }catch(err){
+        console.error("Logout error:",err.response?.data?.message || err.message)
+      }
+    }
 
   return (
 
@@ -43,8 +55,9 @@ export function LogoutModal({isOpen,onClose}) {
  
           <ul className="btn_box w-full flex items-center justify-between p-t">
             <button className='logout-choices logout-all bg-[var(--color-danger-b)] rounded-[10px]'
-            onClick={handleLogout}>To all devices</button>
-            <button className='logout-choices logout-device btn-a rounded-[10px]'>This devices only</button>
+            onClick={handleAllLogout}>To all devices</button>
+            <button className='logout-choices logout-device btn-a rounded-[10px]
+            'onClick={handleDeviceLogout}>This devices only</button>
           </ul>
       </div>
 

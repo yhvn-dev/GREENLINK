@@ -45,6 +45,7 @@ export const logoutAllDevices = async (req, res) => {
 
     // Always clear the cookie, kahit walang token sa DB
     res.clearCookie("refreshToken", { httpOnly: true, sameSite: "Strict", secure: true });
+ 
 
     // Idagdag friendly message
     return res.status(200).json({ message: "Logged out from all devices" });
@@ -60,17 +61,21 @@ export const logoutFromThisDevice = async (req,res) =>{
 
   try{
     const user_id = Number(req.user.user_id);
-    const {device_id}  = req.body
+    const device_id  = req.cookies.device_id
+
+    if(!device_id) return res.status(404).json({message:"Device ID not found in cookies"})
     const result = await authModels.deleteRefreshTokenByDevice(user_id,device_id)
   
     console.log("")
     console.log("-----RESULT--------",result)
     console.log("")
 
-
     if(!result) return res.status(404).json({message:"Device Not Found Already Logged Out!"})
 
+    // I CLEAR ANG COOKIE
     res.clearCookie("refreshToken",{httpOnly: true, sameSite: "Strict", secure: true})
+    res.clearCookie("device_id",result.device_id,{httpOnly:true,sameSite:"Strict",secure:true})
+
     return res.status(200).json({message:"Logged out from this device "})
 
   }catch(err){

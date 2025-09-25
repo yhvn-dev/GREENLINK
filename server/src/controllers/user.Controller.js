@@ -44,8 +44,7 @@ export const loginUser = async (req, res) => {
     const refreshToken = generateRefreshToken(user);
     const deviceInfo = getDeviceInfo(req);
     
-    
-    const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
+     const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
                                                               device: deviceInfo });
       
       res.cookie("refreshToken",refreshToken,{
@@ -53,12 +52,19 @@ export const loginUser = async (req, res) => {
         secure: true,     
         sameSite: "Strict",
         maxAge: 7 * 24 * 60 * 60 * 1000, 
-      })                        
+      })              
       
-
+      res.cookie("device_id",token.device_id,{
+        httpOnly: true, 
+        secure: true,
+        sameSite: "Strict",
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      
       res.status(200).json({
         message: "Login Successful",
         accessToken,
+        device_id:token.device_id,
         user: {
           user_id: user.user_id,
           username: user.username,
@@ -68,8 +74,9 @@ export const loginUser = async (req, res) => {
           status: user.status,
         },
       });
+
+    console.log("DATA FROM LOGIN CONTROLLER:",token)
     
-      
   } catch (err) { 
     console.error("CONTROLLER:", err);
     return res
