@@ -38,18 +38,16 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
 
 
         <ul className="form_part down right  w-1/2 h-full bg-white rounded-[10px] ">
-            {/* right */}
-                                                    
+            {/* right */}                            
             <div class="form_box title_box h-[20%] w-full">
-
-            <span className="title form_title" >LOGIN</span>
-            <p className="descrp">Water Your Plants Login Here</p>
+                <span className="title form_title" >LOGIN</span>
+                <p className="descrp">Water Your Plants Login Here</p>
             </div>
 
 
-            <ul class="input_box_frame down justify-center w-full h-[80%] w-full">
+            <ul class="input_box_frame down justify-center w-full h-[80%]">
 
-            {/* username */}
+                {/* username */}
                 <div className="form_box input_box">
 
                 <input ref={loginInputRef} className="form-inp" name="username-email-inp" placeholder=""/>

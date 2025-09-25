@@ -46,7 +46,6 @@ export const logoutAllDevices = async (req, res) => {
     // Always clear the cookie, kahit walang token sa DB
     res.clearCookie("refreshToken", { httpOnly: true, sameSite: "Strict", secure: true });
  
-
     // Idagdag friendly message
     return res.status(200).json({ message: "Logged out from all devices" });
 
@@ -81,4 +80,6 @@ export const logoutFromThisDevice = async (req,res) =>{
   }catch(err){
      return res.status(500).json({ message: "Logout From This Devices", error: err.message });
   }
+
+
 }

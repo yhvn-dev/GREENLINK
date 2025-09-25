@@ -1,37 +1,50 @@
 import { useNavigate } from "react-router-dom"
+import axios from "axios"
 import { Sidebar } from "../../components/Dashboard/sidebar"
 import { Header } from "../../components/Dashboard/header"
 import { Numbers } from "../../components/Dashboard/numbers" 
 import { Workspace } from "../../components/Dashboard/workspace"
-import { Logout } from "../../components/Global/logout"
-import { LogoutModal } from "../../components/Global/logoutModal"
-import {Grid,Activity,User,LogOut} from "react-feather"
+import {Grid,Activity,User} from "react-feather"
 
 import "./dashboard.css"
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
 
 
 function Dashboard() {
-  const [isOpen,setModal] = useState(false);
- 
+  const [user,setUser] = useState(null);
+  const token = localStorage.getItem("accessToken")
+  
+  useEffect(() =>{
+
+    const fetchUser = async () =>{
+
+      try{
+        const res = await axios.get("http://localhost:5000/users/me",{
+          headers:{Authorization : `Bearer ${token}`}
+        })  
+        console.log(res.data)
+        setUser(res.data)
+      }catch(err){
+        console.error(err);
+      }
+    }
+
+    fetchUser() 
+
+  },[token])
+  
   return (
     <>
         <section className="page dashboard  bg-white overflow-y-auto relative">
 
-            <Header
-      
+            <Header 
                 left={
-                   <>
-                
-                   </>
-                }
-                right={
-                  < >
-
-                  </>
-                }
-
+                    <>
+                    </>
+                }   
+                user={user}       
             />
    
             <Sidebar

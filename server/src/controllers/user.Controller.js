@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
     const refreshToken = generateRefreshToken(user);
     const deviceInfo = getDeviceInfo(req);
     
-     const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
+    const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
                                                               device: deviceInfo });
       
       res.cookie("refreshToken",refreshToken,{
@@ -71,12 +71,14 @@ export const loginUser = async (req, res) => {
           email: user.email,
           phone_number: user.phone_number,
           role: user.role,
-          status: user.status,
+          status: user.status, 
+          created_at:user.created_at,
+          profile_picture: user.profile_picture
         },
       });
 
-    console.log("DATA FROM LOGIN CONTROLLER:",token)
-    
+  console.log("DATA FROM LOGIN CONTROLLER:",token)
+  
   } catch (err) { 
     console.error("CONTROLLER:", err);
     return res
@@ -87,7 +89,29 @@ export const loginUser = async (req, res) => {
 };
 
 
+export const getLoggedUser = async(req,res) =>{
 
+  try{ 
+
+   if(!req.user) return res.status(404).json({message:"User not found"})
+
+   res.json({
+      user_id: req.user.user_id,
+      username: req.user.username,
+      fullname: req.user.fullname,
+      email: req.user.email,
+      phone_number: req.user.phone_number,
+      role: req.user.role,
+      status: req.user.status,
+      profile_picture: req.user.profile_picture || null,
+    });
+
+  }catch(err){
+    console.error("CONTROLLER: Error Fetching Logged User",err)
+    return res.status(500).json({message:"Server Error Fetching Users"})
+  }
+
+}
 
 
 export const selectUser = async (req, res) => {

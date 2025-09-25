@@ -19,9 +19,6 @@ export const verifyAccessToken = async (req, res, next) => {
     req.user = userFromDB;
     next();
 
-
-
-  
   } catch (err) {
     console.error("MIDDLEWARE: ERROR VERIFYING ACCESS TOKEN", err);
     if (err.name === "TokenExpiredError") {
@@ -50,10 +47,8 @@ export const verifyRefreshToken = (req, res, next) => {
 
       req.user = user;
       next();
-
       
     });
-
 
   } catch (err) {
     console.error("MIDDLEWARE: Refresh Token Invalid,", err);

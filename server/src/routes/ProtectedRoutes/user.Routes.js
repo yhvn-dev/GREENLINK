@@ -9,8 +9,8 @@ const router = express.Router()
 
 router.get("/users/search", verifyAccessToken, userController.searchUser);
 router.get("/users", verifyAccessToken, userController.getUsers);
+router.get("/users/me",verifyAccessToken,userController.getLoggedUser)
 router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
-
 
 
 
