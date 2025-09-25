@@ -6,7 +6,7 @@ export function Workspace() {
   return (
 
         <section className='workspace grid h-full 
-        grid-rows-[1fr_9fr] grid-cols-[0.8fr_9.2fr] rounded-[10px]  overflow-y-auto ' > 
+        grid-rows-[1fr_9fr] grid-cols-[0.8fr_8.6fr_0.8fr] rounded-[10px] overflow-y-auto ' > 
 
                 <Wp_header
                 
@@ -22,16 +22,19 @@ export function Workspace() {
                     </>}
                 />
 
-                <nav className="bg-[var(--ptl-greenc)] down rounded-tl-[10px]  rounded-bl-[10px]">  
+                <nav className="beds_nav down rounded-tl-[10px]
+                     rounded-bl-[10px]  bg-[var(--pal2-whiteb)]
+                     shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
+                     col-start-1 col-end-2 row-start-2 row-end-2">  
                     
                 </nav>
 
             
                 <div class="content_box flex flex-col justify-start items-center w-full h-full
-                    row-start-2 col-start-2 col-end-3
-                    overflow-y-auto ">
+                    row-start-2 col-start-2 col-end-3 
+                    overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
                 
-                    <table className="table table-fixed  max-w-[100%] w-[100%] h-full">
+                    <table className="table table-fixed  max-w-[100%] w-[100%] h-full ">
 
                         {/* head */}
                         <thead>
@@ -60,7 +63,7 @@ export function Workspace() {
                                 </div>
                                 <div>
                                 <div className="font-bold">Hart Hagerty</div>
-                                <div className="text-sm opacity-50">United States</div>
+                                <div className="text-sm ">United States</div>
                                 </div>
                             </div>
                             </td>
@@ -83,9 +86,19 @@ export function Workspace() {
                 
                 </div>      
 
-            
+                {/* water level div */}
+                <div class="water_level_div  rounded-tl-[10px]
+                rounded-bl-[10px]  bg-[var(--pal2-whiteb)]
+                shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
+                col-start-33 col-end-3 row-start-2 row-end-2">
+                    
 
-        </section>
+                </div>
+
+                
+                        
+                        
+            </section>
 
   )
 }

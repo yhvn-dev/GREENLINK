@@ -25,7 +25,15 @@
     --acc-darkc: hsl(180, 2%, 43%);
 
     
-
+    --ptl-greena:#b7efc5;
+    --ptl-greenb:#92e6a7;
+    --ptl-greenc:#6ede8a;
+    --ptl-greend:#2dc653;
+    --ptl-greene:#25a244;
+    --ptl-greenf:#208b3a;
+    --ptl-greeng:#1a7431;
+    --ptl-greenh:#155d27;
+    --ptl-greenj:#10451d;
 
     
         /* [PAL2] PALLETA GREEN */
@@ -102,7 +110,12 @@
     --dis-4-2:4.23rem;
     --dis-6-8:6.84rem;
 
+   /* Gradient*/
+    --gd-a: (to left, --pal2-greena)
+
 }
+
+
 
 
 body{
@@ -125,24 +138,32 @@ body{
         cursor: pointer;
     }
 
-  .sb-btn{
+
+
+ 
+   /* sidebar */
+   .sb-btn{
     @apply flex items-center justify-start w-full rounded-[10px];
     margin:1rem 0rem; font-size: var(--fns-down-1);
   } 
+    .sb-btn:hover{
+        background:linear-gradient(to left,var(--ptl-greena),var(--pal2-whitea),var(--pal2-whitea));
+    }
 
   .svg-icons{
     margin: 0.5rem 0rem 0rem var(--dis-0-6) ;
+}
+    .logout-choices{
+        padding:0.3rem 1rem;
+    }
+
+  
+  
+  /* numbers*/  
+  .data_boxes{
+    @apply h-full w-full flex items-center justify-center rounded-[20px];
+    box-shadow: 5px 5px 20px 1px var(--shad-alpha-e);
   }
-
-
-
-
 
   /* workspace */
-
-
-
-
-  .logout-btn{
-    margin-top: 4rem;
-  }
+  

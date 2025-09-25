@@ -43,7 +43,8 @@ export const loginUser = async (req, res) => {
     const accessToken = generateAccessToken(user);
     const refreshToken = generateRefreshToken(user);
     const deviceInfo = getDeviceInfo(req);
-
+    
+    
     const token = await authModels.insertRefreshToken(userId,{refresh_token: refreshToken, 
                                                               device: deviceInfo });
       

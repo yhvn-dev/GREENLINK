@@ -41,7 +41,6 @@ export const deleteAllRefreshToken = async (user_id) =>{
 
     try{
         const { rows } = await query("DELETE FROM tokens WHERE user_id = $1 RETURNING *",[user_id])
-
         return rows[0];
 
     }catch(err){
@@ -52,18 +51,22 @@ export const deleteAllRefreshToken = async (user_id) =>{
 
 
 
-export const deleteRefreshTokenByDevice = async (user_id, device) => {
+export const deleteRefreshTokenByDevice = async (user_id, device_id) => {
   try {
     const { rows } = await query(
-      "DELETE FROM tokens WHERE user_id = $1 AND device = $2 RETURNING *",
-      [user_id, device]
+      "DELETE FROM tokens WHERE user_id = $1 AND device_id = $2 RETURNING *",
+      [user_id,device_id]
     );
+
+    console.log(rows[0])
     return rows[0];
   } catch (err) {
     console.log("MODELS: Error Deleting Token By Device", err);
     throw err;
   }
 };
+
+
 
 
 

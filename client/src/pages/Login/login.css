@@ -103,7 +103,12 @@
 }
 
 
-
+/* CONTAINERS */
+.form-svg{
+    position: absolute;
+    right:1%;
+    top:28%;
+}
 
 
 .formMsg_box{

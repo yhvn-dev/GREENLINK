@@ -17,8 +17,8 @@ router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 router.post("/users", verifyAccessToken, userController.insertUsers);
 router.put("/users/:user_id", verifyAccessToken, userController.updateUser);
 router.delete("/users/logout-all",verifyRefreshToken, authController.logoutAllDevices)
+router.delete("/users/logout",verifyRefreshToken,authController.logoutFromThisDevice)
 router.delete("/users/:user_id", verifyAccessToken, userController.deleteUser);
-
 
 
 export default router

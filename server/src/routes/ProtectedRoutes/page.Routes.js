@@ -10,7 +10,10 @@ const router = express.Router()
         }
     );
 
+    router.get("/users",verifyAccessToken)
 
+
+    
 export default router;
 
 
