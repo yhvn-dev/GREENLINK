@@ -64,11 +64,15 @@
     --color-danger-a: hsl(355, 100%, 70%);
     --color-danger-b: hsl(355,100%, 85%);
     --color-danger-c:hsl(353, 40%, 90%);
-    --color-warning: hsl(35, 80%, 70%);
+    --color-warning-a: hsl(35, 80%, 70%);
+    --color-warning-b: hsl(35, 80%, 80%);
+    --color-warning-c: hsl(35, 80%, 90%);  
     --color-success-a: hsl(125, 85%, 60%);
     --color-success-a-soft: hsl(110, 58%, 90%);
     --color-success-c: hsl(160,60%, 70%);
     --color-success-d:hsl(150, 80%, 80%);
+
+
  
 
     /* SHADOWS */
@@ -109,20 +113,12 @@
     --dis-2-6:2.617rem;
     --dis-4-2:4.23rem;
     --dis-6-8:6.84rem;
-
-   /* Gradient*/
-    --gd-a: (to left, --pal2-greena)
-
 }
-
-
-
 
 body{
     margin: 0;
     padding: 0;
 }
-
 .dashboard{
     display: grid;
     grid-template-columns: 12fr 88fr;
@@ -133,37 +129,46 @@ body{
     row-gap: 0rem;
     overflow-y: auto;
 }
-
     button{
         cursor: pointer;
     }
-
-
-
  
-   /* sidebar */
+
+
+   /* SIDEBAR ======= ======= ======= ======= ======= ======= ======= ======= ======= =======  */
    .sb-btn{
     @apply flex items-center justify-start w-full rounded-[10px];
     margin:1rem 0rem; font-size: var(--fns-down-1);
   } 
     .sb-btn:hover{
-        background:linear-gradient(to left,var(--ptl-greena),var(--pal2-whitea),var(--pal2-whitea));
+        @apply bg-[var(--pal2-whiteb)] ;
     }
 
   .svg-icons{
     margin: 0.5rem 0rem 0rem var(--dis-0-6) ;
 }
     .logout-choices{
-        padding:0.3rem 1rem;
+        padding:0.3rem var(--dis-0-6);
     }
 
   
   
-  /* numbers*/  
+  /* NUMBERS ======= ======= ======= ======= ======= ======= ======= ======= ======= ======= */  
   .data_boxes{
     @apply h-full w-full flex items-center justify-center rounded-[20px];
     box-shadow: 5px 5px 20px 1px var(--shad-alpha-e);
   }
+    .data_boxes:nth-child(1){
+        background:linear-gradient(to left,white,white,var(--ptl-greena))
+    }
+    .data_boxes:nth-child(2){
+        background:linear-gradient(to left,white,white,var(--white-blple--))
+    }
+    .data_boxes:nth-child(3){
+        background:linear-gradient(to left,white,white,var(--color-warning-c))
+    }
+
+
+
 
   /* workspace */
-  

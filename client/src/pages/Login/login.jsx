@@ -85,11 +85,11 @@ function Login() {
               {/* Nav group */}
               <div 
                 className={`links_box w-full  ${showNav ? "flex" : "hidden"} md:flex`} >
+                    
+                  <Link to="/" className="btnl links ">Home</Link>
+                  <Link to="" className="btnl links">About</Link>
+                  <Link to="/contacts" className="btnl links">Contacts</Link>  
                   
-                <Link to="/" className="btnl links ">Home</Link>
-                <Link to="" className="btnl links">About</Link>
-                <Link to="/contacts" className="btnl links">Contacts</Link>  
-                
               </div>
 
             </>  

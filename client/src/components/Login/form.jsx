@@ -65,7 +65,7 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
                 <label>Password</label>
                 <svg className="form-svg"><Lock size={16} color={colors.accDarkc}/></svg>
                 </div>
-                <ol className="formMsg_box flex">
+                <ol className="formMsg_box flex m-t">
                     {errorMsg.password && <p className="formMsg errMsg justify-start">{errorMsg.password}</p>} 
                 </ol>
             
@@ -73,7 +73,7 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
                 <div className="form_box btn_box">
                 <button  className="btn-p-full" type="submit">Login</button>
                 </div>
-                <ol className="formMsg_box successMsgBox">
+                <ol className="formMsg_box successMsgBox m-t">
                     {errorMsg.server && <p className="formMsg errMsg justify-start">{errorMsg.server}</p>}
                     {successMsg && <p className="formMsg succMsg">{successMsg}</p>}
                 </ol>

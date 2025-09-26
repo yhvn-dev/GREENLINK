@@ -2,14 +2,14 @@ import React from 'react'
 import { Wp_header } from './wp_header'
 import {Map} from "react-feather"
 
+
 export function Workspace() {
   return (
 
-        <section className='workspace grid h-full 
-        grid-rows-[1fr_9fr] grid-cols-[0.8fr_8.6fr_0.8fr] rounded-[10px] overflow-y-auto ' > 
+        <section className='workspace grid h-full
+                grid-rows-[1fr_9fr] grid-cols-[0.8fr_8.6fr_0.8fr] rounded-[10px] overflow-y-auto ' > 
 
                 <Wp_header
-                
                     left={<>
                         <span className='title_text flex items-center justify-start '>
                              <svg className="svg-icons"><Map size={16} /></svg>  
@@ -18,7 +18,7 @@ export function Workspace() {
                     </>}
 
                     right={<>
-                        
+                
                     </>}
                 />
 
@@ -95,9 +95,7 @@ export function Workspace() {
 
                 </div>
 
-                
-                        
-                        
+                           
             </section>
 
   )

@@ -1,6 +1,7 @@
-@import "tailwindcss";
 
 :root{
+
+    
 
     /* [PL1] FOUNDATIONS */
     --main-white--: hsl(258, 44%, 93%);
@@ -14,11 +15,23 @@
 
 
         /* [PL2]Accueil1 */
-    --acc-greena-: hsl(84, 39%, 37%);
+    --acc-greena: hsl(84, 39%, 37%);
     --acc-greenb: hsl(82, 56%, 47%);
     --acc-darka: hsl(165, 9%, 15%);
     --acc-darkb: hsl(180, 3%, 29%);
     --acc-darkc: hsl(180, 2%, 43%);
+
+
+    
+    --ptl-greena:#b7efc5;
+    --ptl-greenb:#92e6a7;
+    --ptl-greenc:#6ede8a;
+    --ptl-greend:#2dc653;
+    --ptl-greene:#25a244;
+    --ptl-greenf:#208b3a;
+    --ptl-greeng:#1a7431;
+    --ptl-greenh:#155d27;
+    --ptl-greenj:#10451d;
 
     
         /* [PAL2] PALLETA GREEN */
@@ -43,7 +56,6 @@
     --dark-variant: hsl(220, 7%, 19%);
     --dark-variantb: hsl(0, 0%, 21%);
     --color-dark-blue: hsl(210, 29%, 15%);
-
 
     /* SIGNS */
     --color-danger-a: hsl(355, 100%, 70%);
@@ -96,64 +108,26 @@
     --dis-6-8:6.84rem;
 }
 
-
-.text_box .text:nth-child(2){
-    margin-top: var(--dis-0-6);
-  
+.users{
+    display: grid;
+    grid-template-columns: 12fr 88fr;
+    grid-template-rows:8fr 40fr 52fr;    
+    height: 100vh;
+    width: 100%; 
+    column-gap: 1rem;
+    overflow-y: hidden;
+}   
+.u_th{ 
+    @apply bg-[var(--acc-darkb)] p-[var(--dis-0-6)] text-[var(--pal2-whitea)]  h-[10%];
 }
 
-
-/* CONTAINERS */
-.form-svg{
-    position: absolute;
-    right:1%;
-    top:28%;
+.u_td {
+   @apply p-[1rem] text-[0.9rem] text-start wrap brea;
 }
-
-
-.formMsg_box{
-    @apply flex items-center justify-start w-[85%];
-    margin: var(--dis-0-6) 0rem;
+.u_tr:nth-child(odd){
+    @apply bg-[var(--pal2-whitea)]
 }
-    .formMsg_box .formMsg{
-       font-size: var(--fns-down-1); padding:0.1rem var(--dis-0-6);  ;border-radius: 8px;
-        width: 100%;
-    }
-    .formMsg_box .errMsg{   
-        background: var(--color-danger-c); 
-    }
-    
-    .formMsg_box.successMsgBox{
-        margin-top: 1rem;
-    }
-    .formMsg_box .succMsg {
-        border: 1px solid var(--color-success-a);
-        background-color: var(--color-success-a-soft); display: flex; justify-content: center; padding: var(--dis-0-6) var(--dis-1);
+.u_btn{
+    @apply rounded-[10px] text-[0.9rem] text-[var(--acc-darkb)];
+    padding: 0rem var(--dis-0-6);
 }
-
-
-.form_box{
-    @apply flex flex-col items-center justify-center relative w-[85%];
-    margin-top: 2rem;
-}
-.form-inp{
-    @apply w-full; padding:0.2rem 1.8rem 0.2rem  var(--dis-0-6); 
-    border-radius: 10px; border: 2px solid var(--acc-darkc);
-}
-
-.form_box label{
-    @apply pointer-events-none left-[2%] bg-white;
-    transition: ease 0.4s; padding: 0rem var(--dis-0-6);
-    position: absolute; font-size: var(--fns-down-1); color:var(--acc-darkc);
-}
-
-.form_box input:focus + label,
-.form_box input:not(:placeholder-shown) + label{
-    transform: translateY(-100%); font-size: var(--fns-default-down-0-6);
-}
-
-
-
-
-
-

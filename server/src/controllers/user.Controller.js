@@ -76,9 +76,10 @@ export const loginUser = async (req, res) => {
           profile_picture: user.profile_picture
         },
       });
+      
+  console.log("TOKEN DATA FROM CONTROLLER ----------------------------------- ---------------",token)
+  console.log("DATA FROM LOGIN CONTROLLER ----------------------------------- ---------------",user,accessToken)
 
-  console.log("DATA FROM LOGIN CONTROLLER:",token)
-  
   } catch (err) { 
     console.error("CONTROLLER:", err);
     return res

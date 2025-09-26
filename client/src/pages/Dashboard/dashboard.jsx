@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
-import { Sidebar } from "../../components/Dashboard/sidebar"
-import { Header } from "../../components/Dashboard/header"
+import { Sidebar } from "../../components/Global/sidebar"
+import { Db_Header } from "../../components/Global/db_header"
 import { Numbers } from "../../components/Dashboard/numbers" 
 import { Workspace } from "../../components/Dashboard/workspace"
 import {Grid,Activity,User} from "react-feather"
@@ -39,27 +39,26 @@ function Dashboard() {
     <>
         <section className="page dashboard  bg-white overflow-y-auto relative">
 
-            <Header 
-                left={
-                    <>
-                    </>
-                }   
-                user={user}       
-            />
-   
+          <Db_Header
+            left={
+                <>
+                </>
+            }   
+            user={user}       
+          />
+         
             <Sidebar
-
               // btn div a
               btn_div_a={ <>
                 <Link className="sb-btn btn-a "> 
                   <svg className="svg-icons"><Grid size={16}/></svg>Dashboard     
                 </Link>
-                <Link className="sb-btn">  
-                 <svg className="svg-icons" ><Activity size={16}/></svg>  Reports
-                </Link>
                 <Link className="sb-btn" to="/users">
                   <svg className="svg-icons"><User size={16}/></svg>  
                    Users
+                </Link>       
+                 <Link className="sb-btn">  
+                 <svg className="svg-icons" ><Activity size={16}/></svg>  Reports
                 </Link>
                 </>
                 }
@@ -67,12 +66,12 @@ function Dashboard() {
 
           {/* NUMBER CONTAINER */}
           <Numbers
-
             data_box={
               <>
-                <ol class="data_boxes">a</ol>
-                <ol class="data_boxes">b</ol>
-                <ol class="data_boxes">c</ol>
+                <ol class="data_boxes moisture-box">a
+                </ol>
+                <ol class="data_boxes ph-level-box">b</ol>
+                <ol class="data_boxes ">c</ol>
               </>
             }                
 

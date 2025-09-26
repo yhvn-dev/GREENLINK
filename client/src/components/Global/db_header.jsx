@@ -1,10 +1,8 @@
 
 
-
-import React from 'react'
 import Bush from "../../assets/Images/Bush 1.png"
 
-export function Header({left,user}) {
+export function Db_Header({left,user}) {
   return (
 
     <section className="container header flex items-center justify-center">
@@ -25,3 +23,4 @@ export function Header({left,user}) {
   )
 }
 
+    
