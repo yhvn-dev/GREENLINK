@@ -172,6 +172,7 @@ export const deleteUser = async (req, res) => {
     const userId = req.params.user_id; 
     const user = await userModels.deleteUser(userId);
 
+    console.log("User to delete:", userId);
     res.status(200).json({message: `CONTROLLER: User Deleted Succesfully`,user});
     console.log("CONTROLLER: User Deleted Successfully");
   } catch (err) {

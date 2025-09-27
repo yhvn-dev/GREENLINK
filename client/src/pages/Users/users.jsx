@@ -31,7 +31,7 @@ function Users() {
   },[token])
 
   return (
-    <section className="page users">
+    <section className="page users relative">
 
       <Db_Header
       left={<></>}  

@@ -2,59 +2,74 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "http://localhost:5000",
-  withCredentials: true
+  withCredentials: true, // send cookies
 });
 
+// Track refresh state
+let isRefreshing = false;
+let refreshSubscribers = [];
 
- api.interceptors.request.use((config) => {
-    const token = localStorage.getItem("accessToken");
+// Function to notify all waiting requests once refresh is done
+const onRefreshed = (newToken) => {
+  refreshSubscribers.forEach((cb) => cb(newToken));
+  refreshSubscribers = [];
+};
 
-    if(token){
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
- })
+// Add request interceptor
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
 
-
-
- api.interceptors.response.use(
+// Add response interceptor
+api.interceptors.response.use(
   (response) => response,
   async (error) => {
-
-    console.log("❗ Interceptor caught error:", error?.response?.status, error?.response?.data);
-
     const originalRequest = error.config;
 
-        // kugn may mali sa response
-        if(error.response && error.response.status === 401 && !originalRequest._retry){
+    if (
+      error.response &&
+      (error.response.status === 401 || error.response.status === 403) &&
+      !originalRequest._retry
+    ) {
+      originalRequest._retry = true;
 
-            console.warn("⚠️ Access token expired, attempting refresh...");
-                
+      // If already refreshing → wait
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          refreshSubscribers.push((token) => {
+            originalRequest.headers["Authorization"] = `Bearer ${token}`;
+            resolve(api(originalRequest));
+          });
+        });
+      }
 
-            originalRequest._retry = true;
+      // Start refreshing
+      isRefreshing = true;
+      try {
+        const { data } = await api.post("/auth/refresh-token");
+        const newToken = data.accessToken;
 
-            try{
-  
-                const { data } = await api.post("http://localhost:5000/auth/refresh-token",{})
-                
-                // iset ulit sa local storage ang acess token na genearted ng refresh token
-                localStorage.setItem("accessToken",data.accessToken);
-                console.log("🔄 Access token refreshed at:", new Date());
+        localStorage.setItem("accessToken", newToken);
+        isRefreshing = false;
+        onRefreshed(newToken);
 
+        originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+        return api(originalRequest);
+      } catch (err) {
+        
+        isRefreshing = false;
+        refreshSubscribers = [];
+        localStorage.removeItem("accessToken");
+        window.location.href = "/login";
+      }
+    }
 
-                // update header sa original request
-                originalRequest.headers["Authorization"] = `Bearer ${data.accessToken}`
-                return api(originalRequest);
-            
-            }catch(err){
-                console.error("Refresh Failed,Redirecting To Login");
-                window.location.href = "/";
-            }
-
-        }
-       return Promise.reject(error);
-
-} )
-
+    return Promise.reject(error);
+  }
+);
 
 export default api;

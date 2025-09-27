@@ -30,7 +30,7 @@ export function Workspace() {
                 </nav>
 
             
-                <div class="content_box flex flex-col justify-start items-center w-full h-full
+                <div className="content_box flex flex-col justify-start items-center w-full h-full
                     row-start-2 col-start-2 col-end-3 
                     overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
                 
@@ -87,7 +87,7 @@ export function Workspace() {
                 </div>      
 
                 {/* water level div */}
-                <div class="water_level_div  rounded-tl-[10px]
+                <div className="water_level_div  rounded-tl-[10px]
                 rounded-bl-[10px]  bg-[var(--pal2-whiteb)]
                 shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
                 col-start-33 col-end-3 row-start-2 row-end-2">

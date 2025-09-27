@@ -11,7 +11,7 @@ export function Db_Header({left,user}) {
         <div className="right_header half flex-row-reverse">
 
             <img src={user?.profile_image || Bush} className='profile-img'></img>
-            <ul class="col_text ">
+            <ul className="col_text ">
               <p className='name-txt'>{user?.username || "Guest"}</p>
               <p className='role-txt text-[0.8rem] text-[var(--acc-darkc)]'>{user?.role || "Viewer"}</p>
             </ul>

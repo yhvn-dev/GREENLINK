@@ -68,23 +68,20 @@ function Dashboard() {
           <Numbers
             data_box={
               <>
-                <ol class="data_boxes moisture-box">a
+                <ol className="data_boxes moisture-box">a
                 </ol>
-                <ol class="data_boxes ph-level-box">b</ol>
-                <ol class="data_boxes ">c</ol>
+                <ol className="data_boxes ph-level-box">b</ol>
+                <ol className="data_boxes ">c</ol>
               </>
             }                
 
           />
 
 
-
-
              {/* WORKSPACE */}
             <Workspace      
             />
             
-
 
           </section>
     
