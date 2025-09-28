@@ -95,6 +95,7 @@ export const deleteUser = async (user_id) =>{
 }
 
 
+
 export const searchUser = async (term) => {
   try {
     const { rows } = await query(

@@ -50,7 +50,6 @@ export const deleteAllRefreshToken = async (user_id) =>{
 }
 
 
-
 export const deleteRefreshTokenByDevice = async (user_id, device_id) => {
   try {
     const { rows } = await query(

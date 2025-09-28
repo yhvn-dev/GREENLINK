@@ -169,17 +169,29 @@ export const updateUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const userId = req.params.user_id; 
+  
+    const userId = req.params.user_id;  
+
+    // 1. Delete tokens first
+    const deletedTokens = await authModels.deleteAllRefreshToken(userId);
     const user = await userModels.deleteUser(userId);
 
     console.log("User to delete:", userId);
-    res.status(200).json({message: `CONTROLLER: User Deleted Succesfully`,user});
+
+    res.status(200).json({
+      message: "CONTROLLER: User and tokens deleted successfully",
+      user,
+      deletedTokensCount: deletedTokens ? deletedTokens.length || 0 : 0
+    });
+
     console.log("CONTROLLER: User Deleted Successfully");
   } catch (err) {
-    console.error(`CONTROLLER:`, err);
-    res.status(500).json({ message: `CONTROLLER: Error Deleting User`, err });
+    console.error("CONTROLLER: Error deleting user", err);
+    res.status(500).json({ message: "Error deleting user", err });
   }
 };
+
+
 
 
 
