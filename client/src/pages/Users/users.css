@@ -118,7 +118,7 @@
     overflow-y: hidden;
 }   
 .u_th{ 
-    @apply bg-[var(--acc-darkb)] p-[var(--dis-0-6)] text-[var(--pal2-whitea)]  h-[10%];
+    @apply bg-[var(--acc-darkb)] p-[0.4rem] text-[var(--pal2-whitea)] h-[10%] min-h-[10%] max-h-[10%];
 }
 
 .u_td {

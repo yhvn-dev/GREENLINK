@@ -29,7 +29,6 @@
      },[])
 
 
-
     const handleUpdate = async (data) =>{
       try{
         
@@ -61,7 +60,7 @@
           console.error("No user selected for delete");
           return;
         }
-
+    
         await api.delete(`/users/${selectedUser.user_id}`);
 
         console.log("User Deleted Successfully");
@@ -74,8 +73,7 @@
 
         setOpen(false);
       } catch (err) {
-        console.error(
-          "Error Deleting Users:",
+        console.error("Error Deleting Users:",
           err.response?.data || err.message
         );
       }
@@ -87,10 +85,10 @@
     return (
       <>
 
-      <table className="table table-fixed  max-w-[100%] w-[100%] h-full ">
+      <table className="table table-fixed max-w-[100%] w-[100%] h-[100%] ">
 
-        <tbody>
-          <tr className="h-[10%]">
+        <tbody className="bg-red-600">
+          <tr className="bg-transparent">
               <th className="u_th w-[5%] "><input type="checkbox"/></th>
               <th className="u_th w-[20%]">Fullname</th>
               <th className="u_th w-[15%]">Username</th>
@@ -102,8 +100,6 @@
           </tr>
         </tbody>
       
-
-
         {/*    */}
         <tbody className="userTbody">
           {allUsers.map((u) => (   
@@ -128,10 +124,9 @@
                   className="u_btn bg-[var(--color-danger-b)]">Delete</button>
               </td> 
           </tr>    
-
           ))}
-
         </tbody>
+
 
       </table>
 
