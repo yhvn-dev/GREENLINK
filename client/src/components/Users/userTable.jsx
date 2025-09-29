@@ -1,93 +1,11 @@
-  import { useState,useEffect} from "react"
-  import axios from "axios"
-  import api from "../../utils/api"
 
-  import {Modal} from "../Users/modal"
-
-  export function UserTable() {
-    const [allUsers,setAllUsers] = useState([])
-    const [selectedUser,setSelectedUser] = useState(null)
-    const [open,setOpen] = useState(false);
-    const [mode,setMode] = useState("")
-    
-    // Fetch All User    
-
-    const fetchAllUsers = async () => {
-      try{
-
-        const res = await api.get("/users")
-        setAllUsers(res.data)
-        console.log(res.data)
-
-      }catch(err){
-        console.error("Error Fetching Users",err)
-      }
-    }
-    
-     useEffect(() =>{
-        fetchAllUsers()
-     },[])
-
-
-    const handleUpdate = async (data) =>{
-      try{
-        
-        if(!selectedUser?.user_id){
-          console.error("No user selected for update");
-        }
-
-        await api.put(`/users/${selectedUser.user_id}`,data)
-       
-        setAllUsers((prev) =>
-          prev.map((u) =>
-            u.user_id === selectedUser.user_id ? {...u, ...data} : u)
-        )
-
-        await fetchAllUsers()
-        console.log("UPDATE:",selectedUser)
-        setOpen(false)
-
-      }catch(err){
-        console.error("Error Updating Users",err)
-      }
-    }
-
-    const handleDelete = async () => {
-      try {
-        console.log("Deleting user:", selectedUser); // Debug
-
-        if (!selectedUser?.user_id) {
-          console.error("No user selected for delete");
-          return;
-        }
-    
-        await api.delete(`/users/${selectedUser.user_id}`);
-
-        console.log("User Deleted Successfully");
-
-        setAllUsers((prev) =>
-          prev.filter((u) => u.user_id !== selectedUser.user_id)
-        );
-
-        await fetchAllUsers()
-
-        setOpen(false);
-      } catch (err) {
-        console.error("Error Deleting Users:",
-          err.response?.data || err.message
-        );
-      }
-    };
-
-
-
+  export function UserTable({users,setOpen, setMode, setSelectedUser}) {
 
     return (
       <>
-
       <table className="table table-fixed max-w-[100%] w-[100%] h-[100%] ">
 
-        <tbody className="bg-red-600">
+        <tbody className="">
           <tr className="bg-transparent">
               <th className="u_th w-[5%] "><input type="checkbox"/></th>
               <th className="u_th w-[20%]">Fullname</th>
@@ -102,7 +20,7 @@
       
         {/*    */}
         <tbody className="userTbody">
-          {allUsers.map((u) => (   
+          {users.map((u) => (   
               
           <tr className="u_tr" key={u.user_id}>
               <td className=""></td>
@@ -130,14 +48,7 @@
 
       </table>
 
-      {open && <Modal 
-      isOpen={open}
-      onClose={() => setOpen(false)}
-      mode={mode} 
-      handleSubmit={mode === "update" ? handleUpdate : handleDelete}
-      userData={selectedUser}
-      />}
-
       </>
+
     )
   }

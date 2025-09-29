@@ -246,7 +246,7 @@ body{
 }
 
 
-/* CONTAINERS */
+/* SUCCESS MESSAGE! */
 .form-svg{
     position: absolute;
     right:1%;
@@ -259,12 +259,10 @@ body{
     margin: var(--dis-0-6) 0rem;
 }
     .formMsg_box .formMsg{
-       font-size: var(--fns-down-1); padding:0.1rem var(--dis-0-6);  ;border-radius: 8px;
+        font-size: var(--fns-down-1); padding:0.1rem var(--dis-0-6);  ;border-radius: 8px;
         width: 100%;
     }
-    .formMsg_box .errMsg{   
-        background: var(--color-danger-c); 
-    }
+    .errMsg{padding:0.1rem var(--dis-0-6);  ;border-radius: 8px; background: var(--color-danger-c);  width: 85;}
     
     .formMsg_box.successMsgBox{
         margin-top: 1rem;
@@ -275,6 +273,8 @@ body{
 }
 
 
+
+/* FORM CONTAINERS */
 .form_box{
     @apply flex flex-col items-center justify-center relative w-[85%];
     margin-top: 2rem;

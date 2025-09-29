@@ -13,11 +13,9 @@ export const generateAccessToken = (user) => {
       token_version:user.token_version    
     },    
      process.env.ACCESS_TOKEN_SECRET,         // secret
-    { expiresIn: "1m" }                 
+    { expiresIn: "60d" }                 
   );
 };
-
-
 
 
 export const generateRefreshToken = (user) => {
@@ -30,7 +28,7 @@ export const generateRefreshToken = (user) => {
    }, 
 
      process.env.REFRESH_TOKEN_SECRET, 
-   { expiresIn: "30d" }                     
+   { expiresIn: "60d" }                     
   );
 };
 

@@ -75,6 +75,7 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
                 </div>
                 <ol className="formMsg_box successMsgBox m-t">
                     {errorMsg.server && <p className="formMsg errMsg justify-start">{errorMsg.server}</p>}
+                    {errorMsg.message && <p className="formMsg errMsg justify-start">{errorMsg.message}</p>}
                     {successMsg && <p className="formMsg succMsg">{successMsg}</p>}
                 </ol>
 

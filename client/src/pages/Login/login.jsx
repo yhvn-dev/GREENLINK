@@ -98,11 +98,9 @@ function Login() {
         />
 
         {/* hero */}        
-    
           <Hero
-          
-             children={<Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} />}
-
+        
+            children={<Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} />}
           />
         
     </section>

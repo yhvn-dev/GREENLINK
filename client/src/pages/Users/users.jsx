@@ -26,7 +26,7 @@ function Users() {
       }catch(err){
         console.error("Error Fetching Users")
       }
-    }
+    } 
     fetchUser()
   },[token])
 

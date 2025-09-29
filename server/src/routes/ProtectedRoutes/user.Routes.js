@@ -1,6 +1,8 @@
 import * as userController from '../../controllers/user.controller.js'
 import { verifyAccessToken, verifyRefreshToken } from '../../middlewares/authMiddleware.js';
 import * as authController  from "../../controllers/auth.Controller.js" 
+import * as userValidation from "../../middlewares/userValidation.js"
+
 import express from "express"
 
 
@@ -14,8 +16,8 @@ router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 
 
 
-router.post("/users", verifyAccessToken, userController.insertUsers);
-router.put("/users/:user_id", verifyAccessToken, userController.updateUser);
+router.post("/users", verifyAccessToken,userValidation.insertUserValidation, userController.insertUsers);
+router.put("/users/:user_id", verifyAccessToken, userValidation.insertUserValidation, userController.updateUser);
 router.delete("/users/logout-all",verifyRefreshToken, authController.logoutAllDevices)
 router.delete("/users/logout",verifyRefreshToken,authController.logoutFromThisDevice)
 router.delete("/users/:user_id", verifyAccessToken, userController.deleteUser);
