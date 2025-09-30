@@ -61,9 +61,9 @@ function Users() {
         data_boxes={
           <>
 
-            <div className='num_card'><Chart/></div>
+            <div className='num_card'></div>
             <div className='num_card'>b</div>
-            <div className='num_card'>c</div>
+            <div className='num_card'><Chart/></div>
 
           </>
         }

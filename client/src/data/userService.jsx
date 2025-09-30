@@ -14,7 +14,6 @@ export const fetchAllUsers = async () => {
 export const getUsersCount = async () =>{
     try{
         const res = await api.get("/users/count")
-        console.log("User Service: User Count is",res)
         return res.data
     }catch(err){
         console.err("Error Fetching Users",err);
@@ -25,7 +24,6 @@ export const getUsersCount = async () =>{
 export const getUsersCountByRole = async () =>{
     try{
         const res = await api.get("/users/roles")
-        console.log("User Service: User Count is",res)
         return res.data
     }catch(err){
         console.err("Error Fetching Users",err);

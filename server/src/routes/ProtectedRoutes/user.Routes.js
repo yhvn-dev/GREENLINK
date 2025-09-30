@@ -12,8 +12,8 @@ const router = express.Router()
 
 router.get("/users/search", verifyAccessToken, userController.searchUser);
 router.get("/users", verifyAccessToken, userController.getUsers);
-router.get("/users/count",userController.getUsersCount)
-router.get("/users/roles",userController.getUserCountByRole)
+router.get("/users/count",verifyAccessToken, userController.getUsersCount)
+router.get("/users/roles",verifyAccessToken, userController.getUserCountByRole)
 router.get("/users/me",verifyAccessToken,userController.getLoggedUser)
 router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 
