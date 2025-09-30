@@ -128,11 +128,17 @@
     @apply bg-[var(--pal2-whitea)]
 }
 .u_btn{
-    @apply rounded-[10px] text-[0.9rem] text-[var(--acc-darkb)];
+    @apply rounded-[8px] text-[0.9rem] text-[var(--acc-darkb)];
     padding: 0rem var(--dis-0-6);
 }
 
 
 input{
     @apply rounded-[10px] w-full;  
+}
+
+.num_card{
+    @apply flex items-center justify-center rounded-[10px];
+    background-color: white;
+    box-shadow:5px 5px 10px 1px var(--shad-alpha-e);
 }

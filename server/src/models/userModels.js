@@ -14,6 +14,26 @@ export const findUser = async(loginInput) =>{
     }
 }
 
+export const countAllUsers = async() =>{
+    try {
+        
+        const { rows } = await query("SELECT COUNT(*) AS total_users FROM users");
+        return rows[0];
+
+    } catch (err) {
+        console.log(`MODELS: Error Counting Users ${err}`)
+    }
+}
+
+export const countUserByRole = async () => {
+  try {
+    const { rows } = await query(`
+      SELECT role, COUNT(*) AS total_users FROM users GROUP BY role ORDER BY role;`);
+    return rows; // will return an array, not just one row
+  } catch (err) {
+    console.log(`MODELS: Error Counting Users By Roles ${err}`);
+  }
+};
                 
 
 export const getUsers = async() =>{
@@ -36,7 +56,6 @@ export const selectUser = async(user_id) => {
         throw err
     }   
 }
-
 
 export const insertUsers = async(userData) => {    
     try{

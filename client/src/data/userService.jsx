@@ -1,5 +1,6 @@
 import api from "../utils/api";
 
+
 export const fetchAllUsers = async () => {
     try{
         const res = await api.get("/users");
@@ -9,6 +10,30 @@ export const fetchAllUsers = async () => {
         throw err
     }
 }
+
+export const getUsersCount = async () =>{
+    try{
+        const res = await api.get("/users/count")
+        console.log("User Service: User Count is",res)
+        return res.data
+    }catch(err){
+        console.err("Error Fetching Users",err);
+        throw err
+    }
+}
+
+export const getUsersCountByRole = async () =>{
+    try{
+        const res = await api.get("/users/roles")
+        console.log("User Service: User Count is",res)
+        return res.data
+    }catch(err){
+        console.err("Error Fetching Users",err);
+        throw err
+    }
+}
+
+
 
 export const insertUsers = async (data) =>{
     try{

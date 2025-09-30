@@ -50,7 +50,8 @@ api.interceptors.response.use(
       // Start refreshing
       isRefreshing = true;
       try {
-        const { data } = await api.post("/auth/refresh-token");
+        const { data } = await axios.post("http://localhost:5000/auth/refresh-token",{},{withCredentials:true});
+
         const newToken = data.accessToken;
 
         localStorage.setItem("accessToken", newToken);
@@ -59,6 +60,7 @@ api.interceptors.response.use(
 
         originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
         return api(originalRequest);
+
       } catch (err) {
         
         isRefreshing = false;

@@ -4,6 +4,7 @@ import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
 import { Workspace } from "../../components/Users/workspace"
 import { Numbers } from "../../components/Users/numbers"
+import { Chart } from "../../components/Users/chart"
 
 import { Link} from "react-router-dom"
 import {Grid,Activity,User} from "react-feather"
@@ -59,7 +60,11 @@ function Users() {
       <Numbers
         data_boxes={
           <>
-            <p>Numbers</p>
+
+            <div className='num_card'><Chart/></div>
+            <div className='num_card'>b</div>
+            <div className='num_card'>c</div>
+
           </>
         }
       />

@@ -72,7 +72,7 @@ export function Workspace({show}) {
             </>}
 
             right={<>
-                <button className="btn-p" 
+                <button className="btn-p m-x" 
                 onClick={() => 
                 {setMode("insert");
                 setSelectedUser(null);

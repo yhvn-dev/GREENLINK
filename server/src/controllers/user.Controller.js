@@ -22,6 +22,34 @@ export const getUsers = async (req, res) => {
 
 
 
+export const getUsersCount = async (req,res) =>{
+  try{
+
+    const users = await userModels.countAllUsers()
+    res.status(200).json(users)
+    console.log(users)
+
+  }catch(err){
+    return res.status(500).json({message:"CONTROLLER: Error Counting Users"})
+  }
+}
+
+
+export const getUserCountByRole = async(req,res) =>{
+   try{
+
+    const users = await userModels.countUserByRole()
+    res.status(200).json(users)
+    console.log(users)
+
+  }catch(err){
+    return res.status(500).json({message:"CONTROLLER: Error Counting Users"})
+  }
+}
+
+
+
+
 export const loginUser = async (req, res) => {
 
   try {

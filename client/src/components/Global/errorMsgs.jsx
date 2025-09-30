@@ -14,8 +14,10 @@ export function Unauthorized() {
 
 export function InputError(error){
    return (
-      <div className='border-b border-[var(--color-danger-c)] text-[0.8rem] flex justify-center items-center w-[85%] rounded-[10px]'>
-            <p className=''>{error}</p>
+      <div className='error-box text-[0.8rem] 
+      flex justify-center items-center rounded-[10px] absolute right-[0px] top-[1%]
+      pointer-events-none z-10'> 
+            <p>{error}</p>
       </div>
    )
 }

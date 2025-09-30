@@ -31,7 +31,7 @@
               <td className="u_td">{u.role}</td>
               <td className="u_td"> 
                   <ol className="status_box flex items-center justify-start h-full w-full">
-                      <div className={`w-[0.8rem] h-[0.8rem] rounded-full m-r ${u.status === "active" ? "bg-green-400" : "bg-[var(--acc-darkc)]" }`}></div>
+                      <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-green-400" : "bg-[var(--acc-darkc)]" }`}></div>
                       {u.status}         
                   </ol>
               </td>

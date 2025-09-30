@@ -44,7 +44,7 @@ export function LogoutModal({isOpen,onClose}) {
          w-[450px] h-[250px] relative">
           
           <button className='logout-btn cancel-btn absolute top-[20px] right-[20px]' onClick={onClose}>
-            <svg><X/></svg>
+            <div className="close_icons"><X/></div>
           </button>
           
           <ul className='flex justify-start items-center'> 

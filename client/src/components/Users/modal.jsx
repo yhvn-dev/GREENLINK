@@ -60,9 +60,9 @@
 
       }
 
-  
 
-      
+
+
       const handleClose = (e) =>{
         e.preventDefault()
         setErrors({});
@@ -78,9 +78,9 @@
             rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals `}>
             
               <button className='cancel-btn absolute top-[20px] right-[20px] ' onClick={handleClose}>
-                <svg><X/></svg>
+                <div className='close_icons'><X/></div>
               </button>
-              
+      
               {mode === "delete" ? (
                 <>
                     <p className="text-[1.5rem] mb-4">Delete User</p>
@@ -106,73 +106,78 @@
                 <form onSubmit={onFormSubmit} className="flex flex-col justify-evenly items-center  w-[100%]"> 
 
                   {/* username */}
-                  <ul className="input_box form_box">
-                    <input type="text" placeholder='' 
+                  <ul className="input_box form_box relative">
+                    <input type="text" placeholder="" name='username'
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    className="form-inp"/>
+                    className="form-inp username"/>
                     <label >Username</label>
+                    {errors && errorMsg.InputError(errors.username) }
                   </ul>
-                  {errors && errorMsg.InputError(errors.username) }
+              
 
                   {/* fullname */}
-                  <ul className="input_box form_box ">
-                    <input type="text" placeholder=''
+                  <ul className="input_box form_box relative">
+                    <input type="text" placeholder='' name='fullname'
                     value={fullname}
                     onChange={(e) => setFullname(e.target.value)} 
-                    className="form-inp"/>
+                    className="form-inp fullname"/>
                     <label >Fullname</label>
+                     {errors && errorMsg.InputError(errors.fullname) }   
                   </ul>
-                  {errors && errorMsg.InputError(errors.fullname) }
+                 
 
                   {/* email */}
-                  <ul className="input_box form_box">
-                    <input type="text" placeholder=''
+                  <ul className="input_box form_box relative">
+                    <input type="text" placeholder='' name='email'
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="form-inp"/>
+                    className="form-inp email"/>
                     <label >Email</label>
+                    {errors.email && errorMsg.InputError(errors.email)}
                   </ul>
-                  {errors.email && errorMsg.InputError(errors.email)}
                 
-                  <ul className="input_box form_box">
-                    <input type="text" placeholder='' 
+                
+                  <ul className="input_box form_box relative">
+                    <input type="text" placeholder='' name='phone_number'
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="form-inp"
+                    className="form-inp phone_number"
                     />
                     <label >Phone Number</label>
                   </ul>
             
-                  <ul className="input_box form_box">
-                    <input type="text" placeholder='' 
+                  <ul className="input_box form_box relative">
+                    <input type="text" placeholder=''name='password'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="form-inp"                
+                    className="form-inp password"                
                     />
                     <label >Password</label>
+                    {errors && errorMsg.InputError(errors.password)}
                   </ul>
-                  {errors && errorMsg.InputError(errors.password)}
+                
                 
                
                   {/* Role */}
                   <ul className="input_box w-[85%] flex justify-between items-center m-t">
 
-                      <select name="roles" value={role} onChange={(e) => setRole(e.target.value)} >
+                      <select name="roles" className="roles relative" value={role} onChange={(e) => setRole(e.target.value)} >
                         <option value="">Select Role</option>
                         <option value="owner">Owner</option>
                         <option value="admin">Admin</option>
                         <option value="viewer">Viewer</option>
                       </select>
 
-                      <select name="status" value={status} onChange={(e) => setStatus(e.target.value)}>
+                      <select name="status" className="status relative" value={status} onChange={(e) => setStatus(e.target.value)}>
                         <option value="">Select Status</option>
                         <option value="active">Active</option>
                         <option value="inactive">Inactive</option>          
                       </select>
                   </ul>
-  
-                   {errors && errorMsg.InputError(errors.statRole )}
+              
+                  {errors.role && errorMsg.InputError(errors.role)}
+                  {errors.status && errorMsg.InputError(errors.status)}
         
                 <ul className="form_box">
                   <button 
