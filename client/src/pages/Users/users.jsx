@@ -56,7 +56,6 @@ function Users() {
           }
         />
 
-
       {/* Data like graphs and charts */}
       <Numbers        
         bg_boxes={

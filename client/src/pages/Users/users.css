@@ -149,11 +149,19 @@ input{
     box-shadow:5px 5px 10px 1px var(--shad-alpha-e);
 }                   
 
+    .input-error {
+        border: 1px solid var(--color-danger-b);
+    }
+    .input-normal {
+        border: 2px solid var(--acc-darkc); 
+    }
+
+
     .gd{
         @apply  w-[40%] h-[40%] absolute;
         border-radius:50%;
     }
-
     .user-chart-icon {
         margin-top: 0.5rem;
     }
+    

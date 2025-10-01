@@ -1,12 +1,12 @@
     import React, { useEffect, useState } from 'react'
     import * as errorMsg from "../Global/errorMsgs"
     import * as validate from "../../utils/userValidations"
-    import {X} from "react-feather"
+    import {X,Edit,Plus} from "react-feather"
 
     export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
     if(!isOpen) return null
 
-      const [errors,setErrors] = useState("")
+      const [errors,setErrors] = useState({})
       const [username, setUsername] = useState("");
       const [fullname, setFullname] = useState("");
       const [email, setEmail] = useState("");
@@ -60,141 +60,194 @@
 
       }
 
-
-
-
       const handleClose = (e) =>{
         e.preventDefault()
         setErrors({});
         onClose()
       }
 
- 
-
       return (
         <>
-        <div className="modal_backdrop flex items-center justify-center h-full w-full g-transparent-[20%] backdrop-blur-[10px]  top-0 left-0 absolute">
-            <div className={`  ${mode === "delete" ? "h-auto" : "h-auto"} flex flex-col items-center justify-center  w-[450px]
-            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals `}>
+
+        <div className="modal_backdrop flex items-center justify-center h-full w-full 
+        g-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute">
+
+            <div className={`${mode === "delete" ? "h-auto" : "h-[500px]"} flex flex-col items-center justify-center  w-[800px]
+            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`}>
             
-              <button className='cancel-btn absolute top-[20px] right-[20px] ' onClick={handleClose}>
+              <button className='cancel-btn absolute top-[20px] right-[20px]' onClick={handleClose}>
                 <div className='close_icons'><X/></div>
               </button>
-      
+              
               {mode === "delete" ? (
                 <>
                     <p className="text-[1.5rem] mb-4">Delete User</p>
                     <p>Are you sure you want to delete user "{fullname}" ?</p>
-                    <div className="flex down w-[100%]">
-                    
-                      <button onClick={() => handleSubmit(userData)}
-                        className="w-full h-[100%] btn-p-full-s bg-[var(--color-danger-b)]">
-                        Delete
+                    <div className="flex down w-[100%]">                  
+                      <button onClick={() => handleSubmit(userData)} type="button"
+                        className="w-full h-[100%] btn-p-full-s bg-[var(--color-danger-b)]">Delete
                       </button>
-              
                     </div>
                 </>
 
             ) : (
               <>
+
+                <div className='flex items-c enterjustify-center '>
+                    <svg className="m-01 modal">{mode === "insert" ? <Plus  size={30}/> : <Edit size={30}/> }</svg>
+                    <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
+                </div>
               
-    
-                  <p className="flex items-center justify-start text-[1.5rem] mb-4 w-[80%]">
-                  {mode === "insert" ? "Add User" : "Update User"}
-                  </p>       
+                <form onSubmit={onFormSubmit} className="flex flex-col justify-center items-centers
+                w-[100%]"> 
 
-                <form onSubmit={onFormSubmit} className="flex flex-col justify-evenly items-center  w-[100%]"> 
+                  <div className="input_part_div left flex justify-center items-center">
 
-                  {/* username */}
-                  <ul className="input_box form_box relative">
-                    <input type="text" placeholder="" name='username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="form-inp username"/>
-                    <label >Username</label>
-                    {errors && errorMsg.InputError(errors.username) }
-                  </ul>
-              
+                      <section className='form_part left w-1/2 flex flex-col items-center justify-center'>
 
-                  {/* fullname */}
-                  <ul className="input_box form_box relative">
-                    <input type="text" placeholder='' name='fullname'
-                    value={fullname}
-                    onChange={(e) => setFullname(e.target.value)} 
-                    className="form-inp fullname"/>
-                    <label >Fullname</label>
-                     {errors && errorMsg.InputError(errors.fullname) }   
-                  </ul>
-                 
+                            {/* username */}
+                            <ul className="input_box form_box relative">
+                              <input 
+                                type="text" 
+                                placeholder="" 
+                                name='username'
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                className={`form-inp username ${errors.username ? "input-error" : "input-normal"}`}
+                              />
+                              <label>Username</label>
 
-                  {/* email */}
-                  <ul className="input_box form_box relative">
-                    <input type="text" placeholder='' name='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="form-inp email"/>
-                    <label >Email</label>
-                    {errors.email && errorMsg.InputError(errors.email)}
-                  </ul>
-                
-                
-                  <ul className="input_box form_box relative">
-                    <input type="text" placeholder='' name='phone_number'
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    className="form-inp phone_number"
-                    />
-                    <label >Phone Number</label>
-                  </ul>
-            
-                  <ul className="input_box form_box relative">
-                    <input type="text" placeholder=''name='password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="form-inp password"                
-                    />
-                    <label >Password</label>
-                    {errors && errorMsg.InputError(errors.password)}
-                  </ul>
-                
-                
-               
-                  {/* Role */}
-                  <ul className="input_box w-[85%] flex justify-between items-center m-t">
+                              {errors.username && !username && (                     
+                                <p className='error-txt'>{errors.username}</p>
+                              )}
+                            </ul>
 
-                      <select name="roles" className="roles relative" value={role} onChange={(e) => setRole(e.target.value)} >
-                        <option value="">Select Role</option>
-                        <option value="owner">Owner</option>
-                        <option value="admin">Admin</option>
-                        <option value="viewer">Viewer</option>
-                      </select>
+                            {/* fullname */}
+                            <ul className="input_box form_box relative">
+                              <input 
+                                type="text" 
+                                placeholder='' 
+                                name='fullname'
+                                value={fullname}
+                                onChange={(e) => setFullname(e.target.value)} 
+                                className="form-inp fullname"/>
+                              <label>Fullname</label>       
 
-                      <select name="status" className="status relative" value={status} onChange={(e) => setStatus(e.target.value)}>
-                        <option value="">Select Status</option>
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>          
-                      </select>
-                  </ul>
-              
-                  {errors.role && errorMsg.InputError(errors.role)}
-                  {errors.status && errorMsg.InputError(errors.status)}
-        
-                <ul className="form_box">
-                  <button 
-                    type="submit"
-                    className={`btn-p-full-s ${mode === "update" ? "bg-[var(--white-blple--)]" : "bg-[var(--ptl-greenb)]"}`}
-                  >
-                    {mode === "update" ? "Save Changes" : "Insert User"}
-                  </button>
-                </ul>
+                              {errors.fullname && !fullname && (
+                                <p className='error-txt'>{errors.fullname}</p>
+                              )}
+                            </ul>
 
-                </form>
-              
-              </>
-          
+                            {/* email */}
+                            <ul className="input_box form_box relative">
+                              <input 
+                                type="text" 
+                                placeholder='' 
+                                name='email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="form-inp email"
+                              />
+                              <label>Email</label> 
+
+                              {errors.email && !email && (
+                                  <p className="error-txt">{errors.email}</p>                           
+                                )}   
+
+                              {errors.email && email && (                            
+                                  <p className="error-txt">{errors.email}</p>         
+                                )}   
+                            </ul>
+
+                            {/* phone number */}
+                            <ul className="input_box form_box relative">
+                              <input 
+                                type="text" 
+                                placeholder='' 
+                                name='phone_number'
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                className="form-inp phone_number"
+                              />
+                              <label>Phone Number</label>
+                            </ul>
+
+                            {/* password */}
+                            <ul className="input_box form_box relative">
+                              <input 
+                                type="text" 
+                                placeholder='' 
+                                name='password'
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="form-inp password"
+                              />
+                              <label>Password</label>
+
+                              {errors.password && !password && (
+                                <p className="error-txt">{errors.password}</p>                             
+                              )}        
+                            </ul>
+
+                          </section>
+
+                          <section className='form_part right w-1/2 flex flex-col items-center justify-center '>
+                            {/* Role & Status */}
+                            <ul className="input_box w-[85%] flex justify-between items-center 
+                            m-t p-1 relative ">
+                              <select 
+                                name="roles" 
+                                className="roles rounded-[10px] p-h-0-6 nav-com" 
+                                value={role} 
+                                onChange={(e) => setRole(e.target.value)}>
+                                <option value="">Select Role</option>
+                                <option value="owner">Owner</option>
+                                <option value="admin">Admin</option>
+                                <option value="viewer">Viewer</option>
+                              </select>
+
+                              <select 
+                                name="status" 
+                                className="status rounded-[10px] p-h-0-6 nav-com" 
+                                value={status} 
+                                onChange={(e) => setStatus(e.target.value)}>
+                                <option value="">Select Status</option>
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>          
+                              </select>
+                            </ul>
+
+                            {errors.role && !role && (   
+                              <p className='right error-txt'>{errors.role}</p>
+                            )}                              
+                            {errors.status && !status && (
+                              <p className='right error-txt'>{errors.status}</p>
+                            )}         
+
+                          </section>
+
+
+                  </div>
+
+                  <div class="btn_div flex items-center justify-center col-start-1 col-end-3">
+
+                      <ul className="form_box">
+                        <button 
+                          type="submit"
+                          className={`btn-p ${mode === "update" ? "bg-[var(--white-blple--)]" : "bg-[var(--ptl-greenb)]"}`}
+                        >
+                          {mode === "update" ? "Save Changes" : "Insert User"}
+                        </button>
+                      </ul>
+                  </div>
+
+                </form>    
+              </>  
             )}          
           </div>
+
         </div>
+
         </>
       ) 
     }
