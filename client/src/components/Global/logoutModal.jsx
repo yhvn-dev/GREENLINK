@@ -38,7 +38,7 @@ export function LogoutModal({isOpen,onClose}) {
 
 
     <section className="modal_bg flex items-center justify-center h-full w-full absolute
-    top-0 left-0 bg-transparent-[20%]  backdrop-blur-[10px] ">
+    top-0 left-0 bg-transparent-[20%]  backdrop-blur-[10px] z-[1]">
 
         <div className="modals logout_modal 
          w-[450px] h-[250px] relative">
@@ -49,7 +49,7 @@ export function LogoutModal({isOpen,onClose}) {
           
           <ul className='flex justify-start items-center'> 
           
-            <p className="text-[1.5rem]">  Logout Your Account?</p>
+            <p className="text-[1.5rem]">Logout Your Account?</p>
             </ul>
  
           <ul className="btn_box w-full flex items-center justify-between p-t">

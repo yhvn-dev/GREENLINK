@@ -56,15 +56,26 @@ function Users() {
           }
         />
 
+
       {/* Data like graphs and charts */}
-      <Numbers
+      <Numbers        
+        bg_boxes={
+          <>
+           <div className='flex items-center justify-center relative'>
+                <ol className='gd bg-green-100 top- left-0'></ol>
+                <ol className='gd bg-[var(--ptl-greenb)]  bottom-10 right-0'></ol>
+            </div>      
+            <div className='flex items-center justify-center bg-white relative'>
+                <ol className='gd bg-[var(--ptl-greena)] top-5 left-0'></ol>
+                <ol className='gd bg-[var(--ptl-greenb)] bottom-5 right-0'></ol>
+            </div>       
+          </>
+        }
+
         data_boxes={
           <>
-
-            <div className='num_card'></div>
-            <div className='num_card'>b</div>
-            <div className='num_card'><Chart/></div>
-
+            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[100px]'></div>
+            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[80px]'><Chart/></div>
           </>
         }
       />

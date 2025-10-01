@@ -137,8 +137,23 @@ input{
     @apply rounded-[10px] w-full;  
 }
 
-.num_card{
+.bd_card{
     @apply flex items-center justify-center rounded-[10px];
-    background-color: white;
     box-shadow:5px 5px 10px 1px var(--shad-alpha-e);
 }
+.bd_gradient{
+    background: linear-gradient(45deg,white,var(--ptl-greena));
+}
+.num_card{
+    @apply flex items-center justify-center rounded-[10px];
+    box-shadow:5px 5px 10px 1px var(--shad-alpha-e);
+}                   
+
+    .gd{
+        @apply  w-[40%] h-[40%] absolute;
+        border-radius:50%;
+    }
+
+    .user-chart-icon {
+        margin-top: 0.5rem;
+    }

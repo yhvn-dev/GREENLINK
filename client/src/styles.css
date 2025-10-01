@@ -134,7 +134,7 @@
 
 svg{
     width: var(--fns-default-up1-6);  height:var(--fns-default-up1-6);
-    @apply rounded-[10px] cursor-pointer flex items-center justify-center; 
+    @apply cursor-pointer flex items-center justify-center; 
 }
 .close_icons{
     @apply rounded-[10px] p-[0.1rem];
@@ -217,7 +217,14 @@ body{
     border-radius: 0px;
 }
 
+.bg-p{
+    @apply bg-[var(--pal2-whiteb)] p-[0.3rem];
 
+}
+
+.bg-g{
+    @apply bg-[var(--ptl-greena)];
+}
 
 /* profiles*/
 .profile-img{
@@ -241,8 +248,11 @@ body{
 .descrp{
     font-size: var(--fns-down-1); color:var(--acc-darkc); 
 }
-
-
+.t-p{
+    color:var(--acc-darkb);
+    font-size: var(--fns-down-1);
+}
+.t-s{ color:var(--acc-darka);}
 
 
 .text_box .text:nth-child(2){
