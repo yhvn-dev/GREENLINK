@@ -366,3 +366,21 @@ select{
 .p-x{ padding: 0rem 1rem; } .p-t{ padding: 1rem 0rem}; .p-1{ padding:1rem} 
 .p-0-6{padding:var(--dis-0-6)};
 .p-h-0-6{ padding:0.2rem var(--dis-0-6)};
+
+
+.viewer_color{
+    background-color: var(--acc-darkc);
+    color:white;
+    border-radius:10px;
+    padding: 0.1rem 0.3rem;
+}
+.admin_color{
+    background-color: var(--color-warning);
+    border-radius:10px;
+    padding: 0.1rem 0.3rem;
+}
+.owner_color{
+    background-color: var(--color-danger-b);
+    border-radius:10px;
+    padding: 0.1rem 0.3rem;
+}

@@ -31,11 +31,9 @@ export function UserChartLegend({roleCount,colors}){
 export function Chart({chartData}) {
  const { count, roleCount } = chartData || {};
  
-  const ownerColor = color.colors.dangerB
-  const adminColor = color.colors.warning
-  const viewerColor = color.colors.accDarkc
-  const colors = [ownerColor,adminColor,viewerColor];
-
+  const colors = [color.setRoleColor.ownerColor,
+                  color.setRoleColor.adminColor,
+                  color.setRoleColor.viewerColor];
 
   return (
     <div className="flex  items-center justify-center w-full h-full relative">
@@ -62,8 +60,8 @@ export function Chart({chartData}) {
         nameKey="role"
         cx="50%"
         cy="50%"
-        innerRadius={50}
-        outerRadius={80}
+        innerRadius={40}
+        outerRadius={82}
         label={({ role, total_users }) => `${role}: ${total_users}`}>
           
         {Array.isArray(roleCount) && roleCount.map((entry, index) => (

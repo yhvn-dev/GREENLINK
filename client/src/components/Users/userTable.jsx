@@ -28,7 +28,20 @@
               <td className="u_td">{u.username}</td>
               <td className="u_td">{u.email}</td>
               <td className="u_td">{u.phone_number}</td>
-              <td className="u_td">{u.role}</td>
+              <td  className="u_td flex justify-center items-center">
+                <p
+                  className={`${
+                    u.role === "owner"
+                      ? "owner_color"
+                      : u.role === "admin"
+                      ? "admin_color"
+                      : "viewer_color"
+                  }`}
+                >
+                  {u.role}
+                </p>
+              </td>
+                
               <td className="u_td"> 
                   <ol className="status_box flex items-center justify-start h-full w-full">
                       <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-green-400" : "bg-[var(--acc-darkc)]" }`}></div>

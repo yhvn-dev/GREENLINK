@@ -1,3 +1,12 @@
+
+export const setRoleColor = {
+  
+  ownerColor: colors.dangerB,
+  adminColor: colors.warning,
+  viewerColor: colors.accDarkc,
+
+}
+
 export const colors = {
   // Foundations
   mainWhite: 'hsl(258, 44%, 93%)',

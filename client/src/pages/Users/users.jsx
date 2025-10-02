@@ -66,9 +66,8 @@ function Users() {
   return (
     <section className="page users relative">
 
-      <Db_Header
-      left={<></>}  
-      user={user}
+      <Db_Header  left={<></>} 
+       user={user}
       />
   
       <Sidebar
