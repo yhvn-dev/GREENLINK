@@ -1,7 +1,4 @@
 "use client";
-import * as userService from "../../data/userService";
-
-import { useEffect, useState } from "react";
 import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { User } from "react-feather";
 
@@ -31,37 +28,14 @@ export function UserChartLegend({roleCount,colors}){
 
 
 
-export function Chart() {
-  const [count, setCount] = useState([]);
-  const [roleCount, setRoleCount] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [userCount, userCountByRole] = await Promise.all([
-          userService.getUsersCount(),
-          userService.getUsersCountByRole(),
-        ]);
-
-        setCount(userCount);
-        setRoleCount(
-          userCountByRole.map(rc => ({...rc,total_users: Number(rc.total_users)}))
-        );
-
-        console.log("Total User Count:", userCount);
-        console.log("Total Count Based On Role:", userCountByRole);
-      } catch (err) {
-        console.error("Error Fetching user Data", err);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+export function Chart({chartData}) {
+ const { count, roleCount } = chartData || {};
+ 
   const ownerColor = color.colors.dangerB
   const adminColor = color.colors.warning
   const viewerColor = color.colors.accDarkc
   const colors = [ownerColor,adminColor,viewerColor];
+
 
   return (
     <div className="flex  items-center justify-center w-full h-full relative">
@@ -72,7 +46,7 @@ export function Chart() {
       </ul>
       
       <ul className="flex items-center justify-center absolute rounded-full "s>
-          <p className="num_data ">{count.total_users}</p>
+          <p className="num_data ">{count?.total_users ?? 0}</p>
       </ul>
 
       <PieChart width={450} height={230}>
@@ -82,26 +56,32 @@ export function Chart() {
           </filter>
         </defs>
 
-        <Pie
-          data={roleCount}
-          dataKey="total_users"
-          nameKey="role"
-          cx="50%"
-          cy="50%"
-          innerRadius={50}
-          outerRadius={80}
-          label={({ name, value }) => `${name}: ${value}`}>
-          {roleCount.map((entry, index) => (
-            <Cell 
-              key={`cell-${index}`} 
-              fill={colors[index % colors.length]}
-              filter="url(#shadow)"
-              />
-          ))}
-        </Pie>
+       <Pie
+        data={roleCount}
+        dataKey="total_users"
+        nameKey="role"
+        cx="50%"
+        cy="50%"
+        innerRadius={50}
+        outerRadius={80}
+        label={({ role, total_users }) => `${role}: ${total_users}`}>
+          
+        {Array.isArray(roleCount) && roleCount.map((entry, index) => (
+          <Cell
+            key={`cell-${index}`}
+            fill={colors[index % colors.length]}
+            filter="url(#shadow)"
+          />
+        ))}
+
+
+      </Pie>
+      
         <Tooltip />
       </PieChart>
       
     </div>
   );
+
+  
 }

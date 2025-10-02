@@ -165,10 +165,23 @@ export const insertUsers = async (req, res) => {
   try {
     
     const userData = req.body;
+    const {username,email} = req.body
+
+    const usernameExists = await userModels.findUser(username)
+    if(usernameExists){
+      return res.status(400).json({message:"Username Already Exist"})
+    }
+
+    const emailExists = await userModels.findUser(email)
+    if(emailExists) {
+      return res.status(400).json({message:"Email Already Exist"})
+    }
+  
     const user = await userModels.insertUsers(userData);
 
     res.status(201).json(user);
     console.log("User inserted:", user);
+
   } catch (err) {
     console.error("CONTROLLER: Error Inserting Users", err);
     res

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Modal } from "./modal"
 import * as userService from "../../data/userService"
 
-export function Workspace({show}) {
+export function Workspace({show,chartData,refreshChart}) {
   const [open,setOpen] = useState(false)
   const [mode,setMode] = useState("")
   const [selectedUser,setSelectedUser] = useState(null)
@@ -13,7 +13,7 @@ export function Workspace({show}) {
   useEffect(() =>{
     renderUsers();
   },[])
-
+  
   const renderUsers = async () =>{
     try{
         const users = await userService.fetchAllUsers();
@@ -27,6 +27,7 @@ export function Workspace({show}) {
     try {
         const newUser = await userService.insertUsers(data);
         await renderUsers()
+        await refreshChart()
         console.log("NEW USER:",newUser)
         setOpen(false)
     } catch (err) {
@@ -41,6 +42,7 @@ export function Workspace({show}) {
        if(!selectedUser?.user_id) return;
        const updatedUser = await userService.updateUsers(selectedUser.user_id,data,setAllUsers)
        await renderUsers();
+       await refreshChart()
        setOpen(false)
 
       console.log(updatedUser)
@@ -54,6 +56,7 @@ export function Workspace({show}) {
       if(!selectedUser?.user_id) return;
       await userService.deleteUsers(selectedUser.user_id,setAllUsers)
       await renderUsers();
+      await refreshChart()
       setOpen(false)
     }catch(err){
       console.error("Error Deleting Users",err)

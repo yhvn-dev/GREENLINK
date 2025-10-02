@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
+
+import * as userService from "../../data/userService"
+
 import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
 import { Workspace } from "../../components/Users/workspace"
@@ -13,22 +16,51 @@ import "./users.css"
 
 function Users() {
   const [user,setUser] = useState(false)
+  const [chartData,setChartData] = useState({count: { total_users: 0}, roleCount: []})
   const token = localStorage.getItem("accessToken")
 
   // Fetch Login User
-  useEffect(() =>{
-    const fetchUser =  async () =>{
-      try{
-        const res = await axios.get("http://localhost:5000/users/me",
-          {headers:{Authorization:`Bearer ${token}`}})
+  const fetchUser =  async () =>{
+    try{
+      const res = await axios.get("http://localhost:5000/users/me",
+        {headers:{Authorization:`Bearer ${token}`}})
         console.log(res.data)
         setUser(res.data)
 
-      }catch(err){
-        console.error("Error Fetching Users")
-      }
-    } 
-    fetchUser()
+    }catch(err){
+      console.error("Error Fetching Users")
+    }
+  } 
+
+  // fetch chart data
+  const fetchChartData = async () =>{
+    try {
+        const [userCount,userCountByRole] = await Promise.all([
+          userService.getUsersCount(),
+          userService.getUsersCountByRole()
+        ]);
+        
+        setChartData({
+          count:userCount,
+          roleCount:userCountByRole.map(rc => 
+            ({ 
+              role:rc.role,
+              total_users:Number(rc.total_users)
+            }))
+        })
+
+        console.log("User Count:",userCount.total_users)
+        console.log("User Roles:",userCountByRole.map((rc) => rc.role))
+        console.log("User Count By Role:",userCountByRole.map((rc) => rc.total_users))
+
+    } catch (err) {
+        console.error("Error Fetching Chart")
+    }
+  }
+
+  useEffect(() =>{
+    fetchUser();
+    fetchChartData();
   },[token])
 
   return (
@@ -74,13 +106,13 @@ function Users() {
         data_boxes={
           <>
             <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[100px]'></div>
-            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[80px]'><Chart/></div>
+            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[80px]'><Chart chartData={chartData}/></div>
           </>
         }
       />
 
       {/* Users Table with navigations and filters */}
-      <Workspace />
+      <Workspace chartData={chartData} refreshChart={fetchChartData} />
 
     </section>
   )
