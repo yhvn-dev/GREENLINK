@@ -16,11 +16,9 @@ export const loginValidation = ({ loginInput, password }) => {
   return errors;
 };
 
-
-
 export const validateUserEmptyFields = (payload, password, mode) => {
   let errors = {};
-  console.log(mode)
+
   const requireFields = mode === "insert";
 
   // Username
@@ -50,6 +48,7 @@ export const validateUserEmptyFields = (payload, password, mode) => {
 
   // Password rules
   if (mode === "insert") {
+    // Insert: required
     if (!password || password.trim() === "") {
       errors.password = "Password is required";
     } else if (password.trim().length < 6) {
@@ -57,8 +56,9 @@ export const validateUserEmptyFields = (payload, password, mode) => {
     } else {
       payload.password = password.trim();
     }
-
   } else if (mode === "update") {
+    
+    // Update: optional
     if (password && password.trim() !== "") {
       if (password.trim().length < 6) {
         errors.password = "Password must be at least 6 characters";
@@ -70,8 +70,7 @@ export const validateUserEmptyFields = (payload, password, mode) => {
     }
   }
 
-
-
+  
   // Role & Status
   if (mode === "insert") {
     if (!payload.role || payload.role.trim() === "" ||

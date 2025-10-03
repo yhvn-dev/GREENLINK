@@ -2,13 +2,13 @@ import * as userController from '../../controllers/user.controller.js'
 import { verifyAccessToken, verifyRefreshToken } from '../../middlewares/authMiddleware.js';
 import * as authController  from "../../controllers/auth.Controller.js" 
 import * as userValidation from "../../middlewares/userValidation.js"
-
-
+import multer from "multer"
 import express from "express"
 
 
 
 const router = express.Router()
+const upload = multer({dest: "uploads/"})
 
 router.get("/users/search", verifyAccessToken, userController.searchUser);
 router.get("/users", verifyAccessToken, userController.getUsers);
@@ -18,9 +18,8 @@ router.get("/users/me",verifyAccessToken,userController.getLoggedUser)
 router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 
 
-
-router.post("/users", verifyAccessToken,userValidation.insertUserValidation, userController.insertUsers);
-router.put("/users/:user_id", verifyAccessToken,userValidation.updateUserValidation, userController.updateUser);
+router.post("/users", verifyAccessToken,upload.single("profile_picture"),userValidation.insertUserValidation,userController.insertUsers);
+router.put("/users/:user_id", verifyAccessToken,upload.single("profile_picture"),userValidation.updateUserValidation, userController.updateUser);
 router.delete("/users/logout-all",verifyRefreshToken, authController.logoutAllDevices)
 router.delete("/users/logout",verifyRefreshToken,authController.logoutFromThisDevice)
 router.delete("/users/:user_id", verifyAccessToken, userController.deleteUser);

@@ -35,8 +35,11 @@ export const getUsersCountByRole = async () =>{
 
 export const insertUsers = async (data) =>{
     try{
-        const res = await api.post("/users/",data)
-        console.log("User Added Succesfully")    
+        const isFormData = data instanceof FormData;
+        const res = await api.post("/users/",data,{
+            headers: isFormData ? {"Content-Type":"multipart/form-data"} :{},})
+
+        console.log("User Added Succesfully! | ",res)    
         return res.data        
     }catch(err){
         console.error("Error Inserting Users",err);
@@ -56,7 +59,11 @@ export const updateUsers = async (selectedUser,data,setAllUsers) =>{
 
     try{
          
-        const res = await api.put(`/users/${selectedUser}`,data)
+        const isFormData = data instanceof FormData;
+        const res = await api.put(`/users/${selectedUser}`,data,{
+            headers: isFormData ? {"Content-Type":"multipart/form-data"} :{},
+        })
+        console.log("User Updated Sucessfully! | ",res)
         setAllUsers((prev) =>
             prev.map(u => u.user_id === selectedUser ? res.data : u)
         )

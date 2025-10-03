@@ -10,10 +10,10 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
       const [username, setUsername] = useState("");
       const [fullname, setFullname] = useState("");
       const [email, setEmail] = useState("");
-      const [phone, setPhone] = useState("");
+      const [phoneNumber, setPhoneNumber] = useState("");
       const [password,setPassword] = useState("");
       const [role, setRole] = useState("");
-      const [status, setStatus] = useState("");
+      const [status, setStatus] = useState("") ;
       const [profile_picture,setProfilePicture] = useState("");
 
       useEffect(() => {
@@ -21,56 +21,60 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
           setUsername(userData.username)
           setFullname(userData.fullname)
           setEmail(userData.email)
-          setPhone(userData.phone_number || "")
+          setPhoneNumber(userData.phone_number || "")
           setRole(userData.role)
-          setStatus(userData.status)
+          setStatus(userData?.status || "active")
           setProfilePicture(userData.profile_picture)
         } 
-        
       },[userData])
 
         const onFormSubmit = async (e) =>{
           e.preventDefault()
 
-          const payload ={
-            username,
-            fullname,
-            email,
-            phone_number:phone,
-            role,
-            status,
-            profile_picture
-        }
+        
+          const formData = new FormData();
 
-        // Only include password if user typed one
-        if (mode === "insert" || password.trim() !== "") {
-          payload.password = password;
+          // append the data on form data
+          formData.append("username", username);
+          formData.append("fullname", fullname);
+          formData.append("email", email);
+          formData.append("phone_number", phoneNumber);
+          formData.append("role", role);
+          formData.append("status", status);
+                  
+         
+          // Only include password if user typed one
+          if (mode === "insert" || password.trim() !== "") {
+              formData.append('password',password)  ;
+          }
+        
+        // 4. Append profile picture if uploaded
+          if (profile_picture) {
+            formData.append("profile_picture", profile_picture);
+          }
+
+          // 5. Validate before sending
+          const payload = {username,fullname,email,phone:phoneNumber,role,status};
+          const { errors } = validate.validateUserEmptyFields(payload,password, mode);
+          if (Object.keys(errors).length > 0) {
+            setErrors(errors);
+            return;
+          }
+
+          try{
+            await handleSubmit(formData)
+            setErrors({});
+            onClose()
+          }catch(err){
+            console.error("User Error",err)
+          }
         }
         
-        const {payload:validatedPayload, errors } = 
-        validate.validateUserEmptyFields(payload, password ,mode);
-
-        // front end error
-        if (Object.keys(errors).length > 0) {
-          setErrors(errors)
-          return;
-        }
-        
-        try{
-          await handleSubmit(validatedPayload)
+        const handleClose = (e) =>{
+          e.preventDefault()
           setErrors({});
           onClose()
-
-        }catch(err){
-          console.error("User Error",err)
         }
-      }
-      
-      const handleClose = (e) =>{
-        e.preventDefault()
-        setErrors({});
-        onClose()
-      }
 
       return (
         <>
@@ -98,7 +102,7 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
               ):(
 
                 <>
-                <div className='flex items-c enterjustify-center '>
+                <div className='flex items-center enterjustify-center '>
                     <svg className="m-01 modal">{mode === "insert" ? <Plus  size={30}/> : <Edit size={30}/> }</svg>
                     <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
                 </div>
@@ -157,12 +161,9 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                         <label>Email</label> 
 
                         {errors.email && !email && (
-                            <p className="error-txt">{errors.email}</p>                           
-                          )}   
+                          <p className="error-txt">{errors.email}</p>
+                        )}
 
-                        {errors.email && email && (                            
-                            <p className="error-txt">{errors.email}</p>         
-                          )}   
                       </ul>
 
                       {/* phone number */}
@@ -171,8 +172,8 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                           type="text" 
                           placeholder='' 
                           name='phone_number'
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
+                          value={phoneNumber}
+                          onChange={(e) => setPhoneNumber(e.target.value)}
                           className="form-inp phone_number"
                         />
                         <label>Phone Number</label>
@@ -205,12 +206,14 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                         <ul className="input_box flex flex-col items-center justify-center 
                           h-[70%] w-[80%]">
                           <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
-                              <img src={Pfp} className='border-[3px]  
+                              <img src={profile_picture ? URL.createObjectURL(profile_picture) : Pfp} className='border-[3px]  
                               border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
                           </div>
                               
                          <label className="custom-file m-t">
-                            <input type="file" className="profile_picture" name="profile_picture" />
+                            <input type="file" className="profile_picture" name="profile_picture"
+                            onChange={(e) => setProfilePicture(e.target.files[0])}
+                            />
                             <span className="flex items-center justify-center"> 
                               <svg className="upload_icon"><Upload size={20}/></svg>
                               Upload Photo
