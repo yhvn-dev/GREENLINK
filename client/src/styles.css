@@ -69,6 +69,7 @@
     --color-success-a-soft: hsl(110, 58%, 90%);
     --color-success-c: hsl(160,60%, 70%);
     --color-success-d:hsl(150, 80%, 80%);
+    --color-sign-disabled:hsl(0, 0%, 90%);
  
 
     /* SHADOWS */
@@ -193,7 +194,7 @@ body{
 
 .btn-p{
     background-color: var(--ptl-greenb);  
-    box-shadow: 0px 5px 10px 1px var(--shad-alpha-e); border-radius: 10px;
+    box-shadow: 0px 5px 20px 1px var(--ptl-greena); border-radius: 10px;
     color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
 }
 .btn-p-full-s{
@@ -206,8 +207,21 @@ body{
     color: white; cursor:pointer; padding: 0.3rem var(--dis-0-6); width: 100%;
 }
 
-/*  */
+.btn-p-update{
+    background-color: var(--purpluish--);
+    box-shadow: 0px 5px 20px 1px var(--purpluish--); border-radius: 10px;
+    color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
+}
+.btn-p-delete{
+    background-color: var(--color-danger-b) ;
+    box-shadow: 0px 5px 20px 1px var(--purpluish--); border-radius: 10px;
+    color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
+}
 
+
+
+
+/*  */
 .btn-a{
     @apply bg-[var(--pal2-whiteb)] ;
 }
@@ -230,6 +244,9 @@ body{
 .bg-g{
     @apply bg-[var(--ptl-greena)];
 }
+
+
+
 
 /* NAVIGATED COMPONENTS */
 
@@ -307,11 +324,11 @@ body{
     absolute left-1/2 bottom-[-30%] text-[var(--color-danger-a)];
     padding: 0rem var(--dis-0-6);
 }
-    .right.error-txt{
-        @apply text-[0.8rem] pointer-events-none z-10 bg-white 
-        absolute  text-[var(--color-danger-a)];
-        padding: 0rem var(--dis-0-6);
-    }
+.error-nav-txt{
+      @apply text-[0.8rem] pointer-events-none z-10 bg-white 
+    absolute bottom-[10%] text-[var(--color-danger-a)] bottom-0;
+    padding: 0rem var(--dis-0-6);
+}
 
 
 
@@ -369,18 +386,17 @@ select{
 
 
 .viewer_color{
-    background-color: var(--acc-darkc);
-    color:white;
+    background-color:hsl(0, 0%, 90%);
     border-radius:10px;
     padding: 0.1rem 0.3rem;
 }
 .admin_color{
-    background-color: var(--color-warning);
+    background-color: var(--color-warning-c);
     border-radius:10px;
     padding: 0.1rem 0.3rem;
 }
 .owner_color{
-    background-color: var(--color-danger-b);
+    background-color: var(--color-danger-c);
     border-radius:10px;
     padding: 0.1rem 0.3rem;
 }

@@ -22,7 +22,7 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
             <span> GREENLINK</span>
             </div>
 
-            <div class="text_box down items-center text-center">
+            <div className="text_box down items-center text-center">
 
             <span className="text descr font-semibold text-[1rem]">Control your garden anytime anywhere</span>
             <p className="text descrp">
@@ -39,13 +39,13 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
 
         <ul className="form_part down right  w-1/2 h-full bg-white rounded-[10px] ">
             {/* right */}                            
-            <div class="form_box title_box h-[20%] w-full">
+            <div className="form_box title_box h-[20%] w-full">
                 <span className="title form_title" >LOGIN</span>
                 <p className="descrp">Water Your Plants Login Here</p>
             </div>
 
 
-            <ul class="input_box_frame down justify-center w-full h-[80%]">
+            <ul className="input_box_frame down justify-center w-full h-[80%]">
 
                 {/* username */}
                 <div className="form_box input_box">

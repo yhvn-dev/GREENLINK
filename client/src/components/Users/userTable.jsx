@@ -8,8 +8,8 @@
         <tbody className="">
           <tr className="bg-transparent">
               <th className="u_th w-[5%] "><input type="checkbox"/></th>
-              <th className="u_th w-[20%]">Fullname</th>
               <th className="u_th w-[15%]">Username</th>
+              <th className="u_th w-[20%]">Fullname</th>
               <th className="u_th">Email</th>
               <th className="u_th">Phone Number</th>
               <th className="u_th w-[10%]">Role</th>
@@ -24,8 +24,8 @@
               
           <tr className="u_tr" key={u.user_id}>
               <td className=""></td>
-              <td className="u_td">{u.fullname}</td>
               <td className="u_td">{u.username}</td>
+              <td className="u_td">{u.fullname}</td>
               <td className="u_td">{u.email}</td>
               <td className="u_td">{u.phone_number}</td>
               <td  className="u_td flex justify-center items-center">
@@ -44,7 +44,7 @@
                 
               <td className="u_td"> 
                   <ol className="status_box flex items-center justify-start h-full w-full">
-                      <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-green-400" : "bg-[var(--acc-darkc)]" }`}></div>
+                      <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-[var(--ptl-greenb)]" : "bg-[var(--acc-darkc)]" }`}></div>
                       {u.status}         
                   </ol>
               </td>

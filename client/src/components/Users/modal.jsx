@@ -1,7 +1,7 @@
     import React, { useEffect, useState } from 'react'
-    import * as errorMsg from "../Global/errorMsgs"
+    import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
     import * as validate from "../../utils/userValidations"
-    import {X,Edit,Plus} from "react-feather"
+    import {X,Edit,Plus,Upload} from "react-feather"
 
     export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
     if(!isOpen) return null
@@ -72,7 +72,7 @@
         <div className="modal_backdrop flex items-center justify-center h-full w-full 
         g-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute">
 
-            <div className={`${mode === "delete" ? "h-auto" : "h-[500px]"} flex flex-col items-center justify-center  w-[800px]
+            <div className={`${mode === "delete" ? "w-[500px]" : "h-[500px]"} flex flex-col items-center justify-center 
             rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`}>
             
               <button className='cancel-btn absolute top-[20px] right-[20px]' onClick={handleClose}>
@@ -102,9 +102,9 @@
                 w-[100%]"> 
 
                   <div className="input_part_div left flex justify-center items-center">
-
                       <section className='form_part left w-1/2  flex flex-col items-center 
                       justify-evenly'>
+
 
                       {/* username */}
                       <ul className="input_box form_box relative">
@@ -113,8 +113,8 @@
                           placeholder="" 
                           name='username'
                           value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          className={`form-inp username ${errors.username ? "input-error" : "input-normal"}`}
+                          onChange={(e) => setUsername(e.target.value)} 
+                          className={`form-inp username`}
                         />
                         <label>Username</label>
 
@@ -198,64 +198,79 @@
       
                         <ul className="input_box flex flex-col items-center justify-center 
                           h-[70%] w-[80%]">
-                          <div className='img-holder cntr h-[80%] w-[80%] rounded-[25px] bg-[var(--pal2-whiteb)]'>
-                            img holder  
+                          <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
+                              <img src={Pfp} className='border-[3px]  
+                              border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
                           </div>
                               
-                          <input type="file" className='cntr p-5 w-fit m-t'></input>  
+                         <label className="custom-file m-t">
+                            <input type="file" className="profile_picture" name="profile_picture" />
+                            <span className="flex items-center justify-center">
+                              <svg className=''><Upload size={20}/></svg>
+                            </span>
+                        </label>
                   
                         </ul>
                     
                           {/* Role & Status */}
-                          <ul className="input_box w-[85%] flex justify-between items-center 
-                          m-t p-1 relative">
+                          <ul className="input_box w-full flex justify-evenly items-center 
+                          m-t h-1/2">
 
-                            
+                            <div className="status_box  flex items-center justify-center relative p-t h-full">
 
-                            <select 
-                              name="roles" 
-                              className="roles rounded-[10px] p-h-0-6 nav-com" 
-                              value={role} 
-                              onChange={(e) => setRole(e.target.value)}>
-                              <option value="">Select Role</option>
-                              <option value="owner">Owner</option>
-                              <option value="admin">Admin</option>
-                              <option value="viewer">Viewer</option>
-                            </select>
+                                <select 
+                                  name="status" 
+                                  className="status rounded-[10px] p-h-0-6 nav-com w-[80%]" 
+                                  value={status} 
+                                  onChange={(e) => setStatus(e.target.value)}>
+                                  <option value="">Select Status</option>
+                                  <option value="active">Active</option>
+                                  <option value="inactive">Inactive</option>          
+                                </select>
 
-                            <select 
-                              name="status" 
-                              className="status rounded-[10px] p-h-0-6 nav-com" 
-                              value={status} 
-                              onChange={(e) => setStatus(e.target.value)}>
-                              <option value="">Select Status</option>
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>          
-                            </select>
+                                {errors.status && !status && (
+                                <p className='error-nav-txt'>{errors.status}</p>
+                              )}                               
+                            </div>
+
+                            <div className="role_box flex items-center justify-center relative p-t h-full">
+
+                              <select 
+                                name="roles" 
+                                className="roles rounded-[10px] p-h-0-6 nav-com  w-[80%]" 
+                                value={role} 
+                                onChange={(e) => setRole(e.target.value)}>
+                                <option value="">Select Role</option>
+                                <option value="owner">Owner</option>
+                                <option value="admin">Admin</option>
+                                <option value="viewer">Viewer</option>
+                              </select>
+
+                                {errors.role && !role && (
+                                  <p className="error-nav-txt">{errors.role}</p>                             
+                              )}       
+
+                            </div>              
                           </ul>
 
-                          {errors.role && !role && (   
-                            <p className='right error-txt'>{errors.role}</p>
-                          )}                              
-                          {errors.status && !status && (
-                            <p className='right error-txt'>{errors.status}</p>
-                          )}         
+                        
+
+                      
 
                         </section>
 
                   </div>
 
                   <div className="btn_div flex items-center justify-center col-start-1 col-end-3">
-
                       <ul className="form_box">
                         <button 
                           type="submit"
-                          className={`btn-p ${mode === "update" ? "bg-[var(--white-blple--)]" : "bg-[var(--ptl-greenb)]"}`}
-                        >
+                          className={`${mode === "update" ? "btn-p-update" : "btn-p"}`}>
                           {mode === "update" ? "Save Changes" : "Insert User"}
                         </button>
                       </ul>
                   </div>
+
 
                 </form>    
               </>  

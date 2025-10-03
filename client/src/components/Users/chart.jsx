@@ -31,8 +31,8 @@ export function UserChartLegend({roleCount,colors}){
 export function Chart({chartData}) {
  const { count, roleCount } = chartData || {};
  
-  const colors = [color.setRoleColor.ownerColor,
-                  color.setRoleColor.adminColor,
+  const colors = [color.setRoleColor.adminColor,
+                  color.setRoleColor.ownerColor,
                   color.setRoleColor.viewerColor];
 
   return (
@@ -43,7 +43,7 @@ export function Chart({chartData}) {
           <p>User Roles</p>
       </ul>
       
-      <ul className="flex items-center justify-center absolute rounded-full "s>
+      <ul className="flex items-center justify-center absolute rounded-full ">
           <p className="num_data ">{count?.total_users ?? 0}</p>
       </ul>
 

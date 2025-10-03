@@ -73,11 +73,11 @@ export const validateUserEmptyFields = (payload, password, mode = "insert") => {
 
   if (mode === "insert") {
 
-  // insert: both required
+   // insert: both required
     if (!payload.role || payload.role.trim() === "" || 
         !payload.status || payload.status.trim() === "") {
-      errors.role = "Role is required";
-      errors.status = "Status is required";
+        errors.role = "Role is required";
+        errors.status = "Status is required";
     } else {
       payload.role = payload.role.trim();
       payload.status = payload.status.trim();

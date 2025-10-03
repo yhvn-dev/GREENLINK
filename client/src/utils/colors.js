@@ -1,11 +1,4 @@
 
-export const setRoleColor = {
-  
-  ownerColor: colors.dangerB,
-  adminColor: colors.warning,
-  viewerColor: colors.accDarkc,
-
-}
 
 export const colors = {
   // Foundations
@@ -83,3 +76,12 @@ export const colors = {
   fnsDefaultUp42: '4.23rem',
   fnsDefaultUp68: '6.84rem'
 };
+
+
+export const setRoleColor = {
+  
+  ownerColor: colors.dangerB,
+  adminColor: colors.warning,
+  viewerColor: colors.accDarkc,
+
+}
