@@ -1,6 +1,5 @@
 
   export function UserTable({users,setOpen, setMode, setSelectedUser}) {
-
     return (
       <>
       <table className="table table-fixed max-w-[100%] w-[100%] h-[100%] ">
@@ -20,42 +19,47 @@
       
         {/*    */}
         <tbody className="userTbody">
-          {users.map((u) => (   
-              
+
+          <>
+          
+          {users.map((u) => (        
           <tr className="u_tr" key={u.user_id}>
-              <td className=""></td>
-              <td className="u_td">{u.username}</td>
-              <td className="u_td">{u.fullname}</td>
-              <td className="u_td">{u.email}</td>
-              <td className="u_td">{u.phone_number}</td>
-              <td  className="u_td flex justify-center items-center">
-                <p
-                  className={`${
-                    u.role === "owner"
-                      ? "owner_color"
-                      : u.role === "admin"
-                      ? "admin_color"
-                      : "viewer_color"
-                  }`}
-                >
-                  {u.role}
-                </p>
-              </td>
-                
-              <td className="u_td"> 
-                  <ol className="status_box flex items-center justify-start h-full w-full">
-                      <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-[var(--ptl-greenb)]" : "bg-[var(--acc-darkc)]" }`}></div>
-                      {u.status}         
-                  </ol>
-              </td>
-              <td className="flex items-center justify-around h-full w-full">
-                  <button onClick={() => {setSelectedUser(u); setOpen(true); setMode("update")}}    
-                  className="u_btn bg-[var(--white-blple--)]">Update</button>
-                  <button onClick={() => {setSelectedUser(u); setOpen(true); setMode("delete") }}     
-                  className="u_btn bg-[var(--color-danger-b)]">Delete</button>
-              </td> 
-          </tr>    
+        
+            <td className=""></td>
+            <td className="u_td">{u.username}</td>
+            <td className="u_td">{u.fullname}</td>
+            <td className="u_td">{u.email}</td>
+            <td className="u_td">{u.phone_number}</td>
+            <td  className="u_td flex justify-center items-center">
+              <p
+                className={`${
+                  u.role === "owner"
+                    ? "owner_color"
+                    : u.role === "admin"
+                    ? "admin_color"
+                    : "viewer_color"
+                }`}
+              >
+                {u.role}
+              </p>
+            </td>
+              
+            <td className="u_td"> 
+                <ol className="status_box flex items-center justify-start h-full w-full">
+                    <div className={`w-[0.7rem] h-[0.7rem] rounded-full m-r ${u.status === "active" ? "bg-[var(--ptl-greenb)]" : "bg-[var(--acc-darkc)]" }`}></div>
+                    {u.status}         
+                </ol>
+            </td>
+            <td className="flex items-center justify-around h-full w-full">
+                <button onClick={() => {setSelectedUser(u); setOpen(true); setMode("update")}}    
+                className="u_btn bg-[var(--white-blple--)] text-white">UPDATE</button>
+                <button onClick={() => {setSelectedUser(u); setOpen(true); setMode("delete") }}     
+                className="u_btn bg-[var(--color-danger-b)] text-white  ">DELETE</button>
+            </td> 
+        </tr>    
           ))}
+        </>
+
         </tbody>
 
 

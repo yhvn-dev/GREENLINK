@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Modal } from "./modal"
 import * as userService from "../../data/userService"
 
-export function Workspace({show,chartData,refreshChart}) {
+export function Workspace({show,refreshChart}) {
   const [open,setOpen] = useState(false)
   const [mode,setMode] = useState("")
   const [selectedUser,setSelectedUser] = useState(null)
@@ -45,7 +45,7 @@ export function Workspace({show,chartData,refreshChart}) {
        await refreshChart()
        setOpen(false)
 
-      console.log(updatedUser)
+      console.log("UPDATED USER:",updatedUser)
     } catch (err) {
       console.error("Error Updating Users",err)
     }

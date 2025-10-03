@@ -24,7 +24,6 @@ function Users() {
     try{
       const res = await axios.get("http://localhost:5000/users/me",
         {headers:{Authorization:`Bearer ${token}`}})
-        console.log(res.data)
         setUser(res.data)
 
     }catch(err){
@@ -49,9 +48,9 @@ function Users() {
             }))
         })
 
-        console.log("User Count:",userCount.total_users)
-        console.log("User Roles:",userCountByRole.map((rc) => rc.role))
-        console.log("User Count By Role:",userCountByRole.map((rc) => rc.total_users))
+        // console.log("User Count:",userCount.total_users)
+        // console.log("User Roles:",userCountByRole.map((rc) => rc.role))
+        // console.log("User Count By Role:",userCountByRole.map((rc) => rc.total_users))
 
     } catch (err) {
         console.error("Error Fetching Chart")

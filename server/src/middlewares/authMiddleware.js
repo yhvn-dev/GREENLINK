@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken"
 import * as userModels from "../models/userModels.js" 
 
 
+
 export const verifyAccessToken = async (req, res, next) => {
   try {
     const authHeader = req.headers["authorization"];
@@ -27,7 +28,6 @@ export const verifyAccessToken = async (req, res, next) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 };
-
 
 
 

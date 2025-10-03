@@ -81,23 +81,34 @@ export const updateUser = async(user_id,userData) => {
     try{
 
       const {username,fullname,email,phone_number,password,role,status} = userData
-      const hashedPassword = await utils.hashedPass(password)
 
-      console.log("Updating Users:", userData)
-      console.log("Data:",userData)
+      if(password && password.trim() !== ""){
+        const hashedPassword = await utils.hashedPass(password)
 
-      const { rows } = await query(`UPDATE users SET 
+          const { rows } = await query(`UPDATE users SET 
                        username = $1,fullname = $2, email = $3,phone_number = $4,
                        password_hash = $5,role = $6, status = $7 WHERE user_id = $8 
                        RETURNING *`,
                        [username,fullname,email,phone_number,hashedPassword,role,status,user_id])
-     
-      return rows[0]
 
+        return rows[0]
+
+      }else{
+
+        const { rows } = await query(
+        `UPDATE users  SET username = $1,
+         fullname = $2, email = $3, phone_number = $4, role = $5, status = $6 
+         WHERE user_id = $7 RETURNING *`,
+        [username, fullname, email, phone_number, role, status, user_id]);
+
+         return rows[0];
+      }
+      
     }catch(err){
         console.log(`MODELS: Error Updating Users ${err}`)
         throw err
     }
+
 }
 
 

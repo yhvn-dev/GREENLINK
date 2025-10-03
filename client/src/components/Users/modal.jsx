@@ -3,7 +3,7 @@
     import * as validate from "../../utils/userValidations"
     import {X,Edit,Plus,Upload} from "react-feather"
 
-    export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
+export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
     if(!isOpen) return null
 
       const [errors,setErrors] = useState({})
@@ -14,6 +14,7 @@
       const [password,setPassword] = useState("");
       const [role, setRole] = useState("");
       const [status, setStatus] = useState("");
+      const [profile_picture,setProfilePicture] = useState("");
 
       useEffect(() => {
         if(userData){
@@ -23,6 +24,7 @@
           setPhone(userData.phone_number || "")
           setRole(userData.role)
           setStatus(userData.status)
+          setProfilePicture(userData.profile_picture)
         } 
         
       },[userData])
@@ -35,12 +37,18 @@
             fullname,
             email,
             phone_number:phone,
-            password,
             role,
-            status
+            status,
+            profile_picture
         }
 
-        const { payload:validatedPayload, errors } = validate.validateUserEmptyFields(payload, password);
+        // Only include password if user typed one
+        if (mode === "insert" || password.trim() !== "") {
+          payload.password = password;
+        }
+        
+        const {payload:validatedPayload, errors } = 
+        validate.validateUserEmptyFields(payload, password ,mode);
 
         // front end error
         if (Object.keys(errors).length > 0) {
@@ -56,10 +64,8 @@
         }catch(err){
           console.error("User Error",err)
         }
-
-
       }
-
+      
       const handleClose = (e) =>{
         e.preventDefault()
         setErrors({});
@@ -72,7 +78,7 @@
         <div className="modal_backdrop flex items-center justify-center h-full w-full 
         g-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute">
 
-            <div className={`${mode === "delete" ? "w-[500px]" : "h-[500px]"} flex flex-col items-center justify-center 
+            <div className={`${mode === "delete" ? "w-[500px]" : "w-[700px]"} flex flex-col items-center justify-center 
             rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`}>
             
               <button className='cancel-btn absolute top-[20px] right-[20px]' onClick={handleClose}>
@@ -85,14 +91,13 @@
                     <p>Are you sure you want to delete user "{fullname}" ?</p>
                     <div className="flex down w-[100%]">                  
                       <button onClick={() => handleSubmit(userData)} type="button"
-                        className="w-full h-[100%] btn-p-full-s bg-[var(--color-danger-b)]">Delete
+                        className="btn-p-delete">Delete User
                       </button>
                     </div>
                 </>
+              ):(
 
-            ) : (
-              <>
-
+                <>
                 <div className='flex items-c enterjustify-center '>
                     <svg className="m-01 modal">{mode === "insert" ? <Plus  size={30}/> : <Edit size={30}/> }</svg>
                     <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
@@ -184,10 +189,11 @@
                           className="form-inp password"
                         />
                         <label>Password</label>
+                        
+                        {errors.password && (
+                            <p className="error-txt">{errors.password}</p>
+                        )}
 
-                        {errors.password && !password && (
-                          <p className="error-txt">{errors.password}</p>                             
-                        )}        
                       </ul>
 
                     </section>
@@ -205,62 +211,55 @@
                               
                          <label className="custom-file m-t">
                             <input type="file" className="profile_picture" name="profile_picture" />
-                            <span className="flex items-center justify-center">
-                              <svg className=''><Upload size={20}/></svg>
+                            <span className="flex items-center justify-center"> 
+                              <svg className="upload_icon"><Upload size={20}/></svg>
+                              Upload Photo
                             </span>
                         </label>
                   
                         </ul>
                     
                           {/* Role & Status */}
-                          <ul className="input_box w-full flex justify-evenly items-center 
-                          m-t h-1/2">
-
-                            <div className="status_box  flex items-center justify-center relative p-t h-full">
-
-                                <select 
-                                  name="status" 
-                                  className="status rounded-[10px] p-h-0-6 nav-com w-[80%]" 
-                                  value={status} 
-                                  onChange={(e) => setStatus(e.target.value)}>
-                                  <option value="">Select Status</option>
-                                  <option value="active">Active</option>
-                                  <option value="inactive">Inactive</option>          
-                                </select>
-
-                                {errors.status && !status && (
-                                <p className='error-nav-txt'>{errors.status}</p>
-                              )}                               
-                            </div>
-
-                            <div className="role_box flex items-center justify-center relative p-t h-full">
-
-                              <select 
-                                name="roles" 
-                                className="roles rounded-[10px] p-h-0-6 nav-com  w-[80%]" 
-                                value={role} 
-                                onChange={(e) => setRole(e.target.value)}>
-                                <option value="">Select Role</option>
-                                <option value="owner">Owner</option>
-                                <option value="admin">Admin</option>
-                                <option value="viewer">Viewer</option>
-                              </select>
-
-                                {errors.role && !role && (
-                                  <p className="error-nav-txt">{errors.role}</p>                             
-                              )}       
-
-                            </div>              
+                          <ul className="input_box w-full flex justify-evenly items-center m-t h-1/2 ">
+      
+                            <select 
+                              name="status" 
+                              className="status rounded-[10px] p-h-0-6 nav-com w-full m-x-6" 
+                              value={status} 
+                              onChange={(e) => setStatus(e.target.value)}>
+                              <option value="">Select Status</option>
+                              <option value="active">Active</option>
+                              <option value="inactive">Inactive</option>          
+                            </select>
+                                  
+                            <select 
+                              name="roles" 
+                              className="roles rounded-[10px] p-h-0-6 nav-com  w-full m-x-6" 
+                              value={role} 
+                              onChange={(e) => setRole(e.target.value)}>
+                              <option value="">Select Role</option>
+                              <option value="owner">Owner</option>
+                              <option value="admin">Admin</option>
+                              <option value="viewer">Viewer</option>
+                            </select>
+                                               
                           </ul>
 
+                          {/* FORM MSG BOX */}
+                          <div className="flex items-center justify-around h-[2rem]  w-full">
+                            {errors.status && !status && (
+                              <p className='error-nav-txt'>{errors.status}</p>
+                            )}
+                            {errors.role && !role && (
+                              <p className="error-nav-txt">{errors.role}</p>                             
+                            )}       
+                          </div>
                         
-
-                      
-
                         </section>
 
                   </div>
-
+                      
+                  {/* Button Div */}
                   <div className="btn_div flex items-center justify-center col-start-1 col-end-3">
                       <ul className="form_box">
                         <button 
@@ -274,7 +273,8 @@
 
                 </form>    
               </>  
-            )}          
+            )}     
+
           </div>
 
         </div>

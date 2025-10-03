@@ -20,7 +20,7 @@ router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 
 
 router.post("/users", verifyAccessToken,userValidation.insertUserValidation, userController.insertUsers);
-router.put("/users/:user_id", verifyAccessToken, userValidation.insertUserValidation, userController.updateUser);
+router.put("/users/:user_id", verifyAccessToken,userValidation.updateUserValidation, userController.updateUser);
 router.delete("/users/logout-all",verifyRefreshToken, authController.logoutAllDevices)
 router.delete("/users/logout",verifyRefreshToken,authController.logoutFromThisDevice)
 router.delete("/users/:user_id", verifyAccessToken, userController.deleteUser);

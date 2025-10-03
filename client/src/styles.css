@@ -155,7 +155,9 @@ body{
     padding: 0rem;
 }
 
-
+button{
+    transition: 0.4s;
+}
 
 /* CONTAINER ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 .down{
@@ -192,32 +194,45 @@ body{
 
 /* BUTTONS  ================================================================================  */
 
+
+/* primary button */
 .btn-p{
     background-color: var(--ptl-greenb);  
-    box-shadow: 0px 5px 20px 1px var(--ptl-greena); border-radius: 10px;
+    box-shadow: 0px 5px 10px 1px var(--ptl-greena); border-radius: 10px;
     color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
 }
+.btn-p:hover{
+    box-shadow: 0px 5px 20px 1px var(--ptl-greenb);
+    }
+
+
 .btn-p-full-s{
     box-shadow: 0px 5px 10px 1px var(--shad-alpha-e); border-radius: 10px;
     color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6); width:100%;
 }
 .btn-p-full{
     background-color: var(--ptl-greenb); 
-    box-shadow: 0px 5px 10px 1px var(--shad-alpha-d); border-radius: 10px;
+    box-shadow: 0px 5px 10px 1px var(--ptl-greena); border-radius: 10px;
     color: white; cursor:pointer; padding: 0.3rem var(--dis-0-6); width: 100%;
 }
 
 .btn-p-update{
-    background-color: var(--purpluish--);
-    box-shadow: 0px 5px 20px 1px var(--purpluish--); border-radius: 10px;
-    color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
+    background-color:var(--white-blple--);
+    box-shadow: 0px 5px 10px 1px var(--white-blple--); border-radius: 10px;
+    color: var(--pal2-whitea); cursor:pointer; padding: 0.2rem var(--dis-0-6);
 }
+    .btn-p-update:hover{
+        box-shadow:0px 5px 20px 1px var(--purpluish--);
+    }
+
 .btn-p-delete{
     background-color: var(--color-danger-b) ;
-    box-shadow: 0px 5px 20px 1px var(--purpluish--); border-radius: 10px;
+    box-shadow: 0px 5px 10px 1px var(--color-danger-b);; border-radius: 10px;
     color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
-}
-
+}   
+    .btn-p-delete:hover{
+        box-shadow:0px 5px 20px 1px var(--color-danger-b);
+    }
 
 
 
@@ -244,31 +259,26 @@ body{
 .bg-g{
     @apply bg-[var(--ptl-greena)];
 }
-
+/* END OF BUTTONS  ================================================================================  *
 
 
 
 /* NAVIGATED COMPONENTS */
-
 .nav-com{
     @apply bg-[var(--pal2-whiteb)];
     box-shadow: 5px 5px 10px 1px var(--shad-alpha-d);
 }   
-
-
-
-
 /* profiles*/
 .profile-img{
     @apply rounded-full w-[2.5rem] h-auto border-[1px] border-[var(--acc-darkc)];
     margin: 0rem 1rem;
 }
 
+/* END OF NAVIGATED COMPONENTS */
 
 
 
-
-/* texts ================================================================================ */
+/* TEXT AND TITLES ================================================================== */
 .title{
     font-size: var(--fns-default-up1-6); font-weight: 600; color:var(--acc-dark);
 }
@@ -287,10 +297,11 @@ body{
 }
 .t-s{ color:var(--acc-darka);}
 
-
 .text_box .text:nth-child(2){
     margin-top: var(--dis-0-6);  
 }
+/* TEXT AND TITLES ================================================================== */
+
 
 
 /* SUCCESS MESSAGE! */
@@ -321,13 +332,13 @@ body{
 
 .error-txt{
     @apply text-[0.8rem] pointer-events-none z-10 bg-white 
-    absolute left-1/2 bottom-[-30%] text-[var(--color-danger-a)];
-    padding: 0rem var(--dis-0-6);
+    absolute left-[40%] bottom-[-30%] text-[var(--color-danger-a)];
+    padding: 0rem var(--dis-0-6); 
 }
 .error-nav-txt{
       @apply text-[0.8rem] pointer-events-none z-10 bg-white 
-    absolute bottom-[10%] text-[var(--color-danger-a)] bottom-0;
-    padding: 0rem var(--dis-0-6);
+      bottom-0 text-[var(--color-danger-a)];
+      padding: 0rem var(--dis-0-6);
 }
 
 
@@ -364,9 +375,6 @@ select{
 
 
 
-
-
-
 /* imgs */
 .bushes{
     width: 40%;
@@ -378,6 +386,7 @@ select{
 
 .m-x{ margin: 0rem 1rem; } .m-y{ margin:1rem 0rem} .m-t{ margin-top:1rem; }; .m-1{margin:1rem} .m-r{margin-right:0.6rem};
 .m-01{ margin: 0.1rem 0rem};
+.m-x-6{ margin: 0rem 0.6rem}
 
 
 .p-x{ padding: 0rem 1rem; } .p-t{ padding: 1rem 0rem}; .p-1{ padding:1rem} 

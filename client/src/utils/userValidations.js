@@ -1,5 +1,4 @@
 
-
 export const loginValidation = ({ loginInput, password }) => {
   let errors = {};
 
@@ -19,15 +18,16 @@ export const loginValidation = ({ loginInput, password }) => {
 
 
 
-export const validateUserEmptyFields = (payload, password, mode = "insert") => {
+export const validateUserEmptyFields = (payload, password, mode) => {
   let errors = {};
-
+  console.log(mode)
   const requireFields = mode === "insert";
+
   // Username
   if (payload.username && payload.username.trim() !== "") {
-      payload.username = payload.username.trim();
+    payload.username = payload.username.trim();
   } else if (requireFields) {
-      errors.username = "Username is required";
+    errors.username = "Username is required";
   }
 
   // Fullname
@@ -35,22 +35,18 @@ export const validateUserEmptyFields = (payload, password, mode = "insert") => {
     payload.fullname = payload.fullname.trim();
   } else if (requireFields) {
     errors.fullname = "Fullname is required";
-
   }
 
   // Email
   if (payload.email && payload.email.trim() !== "") {
     payload.email = payload.email.trim();
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(payload.email)) {
       errors.email = "Invalid email format";
     }
-
   } else if (requireFields) {
-     errors.email = "Email is required";
-}
-
+    errors.email = "Email is required";
+  }
 
   // Password rules
   if (mode === "insert") {
@@ -62,40 +58,42 @@ export const validateUserEmptyFields = (payload, password, mode = "insert") => {
       payload.password = password.trim();
     }
 
-  } else if (mode === "update" && password && password.trim() !== "") {
-    if (password.trim().length < 6) {
-      errors.password = "Password must be at least 6 characters";
+  } else if (mode === "update") {
+    if (password && password.trim() !== "") {
+      if (password.trim().length < 6) {
+        errors.password = "Password must be at least 6 characters";
+      } else {
+        payload.password = password.trim();
+      }
     } else {
-      payload.password = password.trim();
+      delete payload.password;
     }
   }
 
 
-  if (mode === "insert") {
 
-   // insert: both required
-    if (!payload.role || payload.role.trim() === "" || 
+  // Role & Status
+  if (mode === "insert") {
+    if (!payload.role || payload.role.trim() === "" ||
         !payload.status || payload.status.trim() === "") {
+      if (!payload.role || payload.role.trim() === "") {
         errors.role = "Role is required";
+      }
+      if (!payload.status || payload.status.trim() === "") {
         errors.status = "Status is required";
+      }
     } else {
       payload.role = payload.role.trim();
       payload.status = payload.status.trim();
     }
-
-} else if (mode === "update") {
-
-  // update: only validate if provided
+  } else if (mode === "update") {
     if (payload.role && payload.role.trim() === "") {
       errors.role = "Role is required";
     }
     if (payload.status && payload.status.trim() === "") {
       errors.status = "Status is required";
     }
-
   }
 
-
   return { payload, errors };
-
 };
