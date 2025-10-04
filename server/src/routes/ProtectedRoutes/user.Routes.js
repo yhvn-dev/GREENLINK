@@ -6,7 +6,6 @@ import multer from "multer"
 import express from "express"
 
 
-
 const router = express.Router()
 const upload = multer({dest: "uploads/"})
 
@@ -14,7 +13,7 @@ router.get("/users/search", verifyAccessToken, userController.searchUser);
 router.get("/users", verifyAccessToken, userController.getUsers);
 router.get("/users/count",verifyAccessToken, userController.getUsersCount)
 router.get("/users/roles",verifyAccessToken, userController.getUserCountByRole)
-router.get("/users/me",verifyAccessToken,userController.getLoggedUser)
+router.get("/users/me",verifyAccessToken,userController.getLoggedUser)              
 router.get("/users/:user_id", verifyAccessToken, userController.selectUser);
 
 

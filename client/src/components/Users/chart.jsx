@@ -43,8 +43,9 @@ export function Chart({chartData}) {
           <p>User Roles</p>
       </ul>
       
-      <ul className="flex items-center justify-center absolute rounded-full ">
-          <p className="num_data ">{count?.total_users ?? 0}</p>
+      <ul className="flex flex-col items-center justify-center absolute rounded-full ">
+          <p className="t-gray">Total</p>
+          <p className="num_data">{count?.total_users ?? 0}</p>
       </ul>
 
       <PieChart width={450} height={230}>

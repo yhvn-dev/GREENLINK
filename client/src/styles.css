@@ -259,6 +259,14 @@ button{
 .bg-g{
     @apply bg-[var(--ptl-greena)];
 }
+
+/* MOBILE BTNS */
+.m-btn-p{
+    @apply bg-[var(--ptl-greenb)];
+}
+
+
+
 /* END OF BUTTONS  ================================================================================  *
 
 
@@ -296,6 +304,9 @@ button{
     font-size: var(--fns-down-1);
 }
 .t-s{ color:var(--acc-darka);}
+.t-gray{
+    color:gray;
+}
 
 .text_box .text:nth-child(2){
     margin-top: var(--dis-0-6);  

@@ -14,7 +14,8 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
       const [password,setPassword] = useState("");
       const [role, setRole] = useState("");
       const [status, setStatus] = useState("") ;
-      const [profile_picture,setProfilePicture] = useState("");
+      const [profile_picture,setProfilePicture] = useState(null);
+      const [preview,setPreview] = useState(null)
 
       useEffect(() => {
         if(userData){
@@ -24,57 +25,71 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
           setPhoneNumber(userData.phone_number || "")
           setRole(userData.role)
           setStatus(userData?.status || "active")
-          setProfilePicture(userData.profile_picture)
+
+          setPreview(userData.profile_picture || null)
+          setProfilePicture(null)
         } 
+
       },[userData])
 
-        const onFormSubmit = async (e) =>{
-          e.preventDefault()
-
-        
-          const formData = new FormData();
-
-          // append the data on form data
-          formData.append("username", username);
-          formData.append("fullname", fullname);
-          formData.append("email", email);
-          formData.append("phone_number", phoneNumber);
-          formData.append("role", role);
-          formData.append("status", status);
-                  
-         
-          // Only include password if user typed one
-          if (mode === "insert" || password.trim() !== "") {
-              formData.append('password',password)  ;
-          }
-        
-        // 4. Append profile picture if uploaded
-          if (profile_picture) {
-            formData.append("profile_picture", profile_picture);
-          }
-
-          // 5. Validate before sending
-          const payload = {username,fullname,email,phone:phoneNumber,role,status};
-          const { errors } = validate.validateUserEmptyFields(payload,password, mode);
-          if (Object.keys(errors).length > 0) {
-            setErrors(errors);
-            return;
-          }
-
-          try{
-            await handleSubmit(formData)
-            setErrors({});
-            onClose()
-          }catch(err){
-            console.error("User Error",err)
-          }
+      const handleFileChanges = (e) => {
+        const file = e.target.files[0];
+        if(file){
+          setProfilePicture(file); 
+          setPreview(URL.createObjectURL(file)); 
         }
+      }
+
+      
+
+
+      const onFormSubmit = async (e) =>{
+        e.preventDefault()
+
+      
+        const formData = new FormData();
+
+        // append the data on form data
+        formData.append("username", username);
+        formData.append("fullname", fullname);
+        formData.append("email", email);
+        formData.append("phone_number", phoneNumber);
+        formData.append("role", role);
+        formData.append("status", status);
+                
         
-        const handleClose = (e) =>{
-          e.preventDefault()
+        // Only include password if user typed one
+        if (mode === "insert" || password.trim() !== "") {
+            formData.append('password',password)  ;
+        }
+      
+       // 4. Append profile picture if uploaded
+        if (profile_picture) {
+          formData.append("profile_picture", profile_picture); // real file
+        }
+
+        // 5. Validate before sending
+        const payload = {username,fullname,email,phone:phoneNumber,role,status};
+        const { errors } = validate.validateUserEmptyFields(payload,password, mode);
+        if (Object.keys(errors).length > 0) {
+          setErrors(errors);
+          return;
+        }
+
+        try{
+          await handleSubmit(formData)
           setErrors({});
           onClose()
+        }catch(err){
+          console.error("User Error",err)
         }
+      }
+      
+      const handleClose = (e) =>{
+        e.preventDefault()
+        setErrors({});
+        onClose()
+      }
 
       return (
         <>
@@ -206,19 +221,19 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                         <ul className="input_box flex flex-col items-center justify-center 
                           h-[70%] w-[80%]">
                           <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
-                              <img src={profile_picture ? URL.createObjectURL(profile_picture) : Pfp} className='border-[3px]  
+                              <img src={preview || Pfp} className='border-[3px]  
                               border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
                           </div>
                               
                          <label className="custom-file m-t">
                             <input type="file" className="profile_picture" name="profile_picture"
-                            onChange={(e) => setProfilePicture(e.target.files[0])}
+                            onChange={handleFileChanges}
                             />
                             <span className="flex items-center justify-center"> 
                               <svg className="upload_icon"><Upload size={20}/></svg>
                               Upload Photo
                             </span>
-                        </label>
+                          </label>
                   
                         </ul>
                     
