@@ -1,7 +1,7 @@
-    import React, { useEffect, useState } from 'react'
-    import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
-    import * as validate from "../../utils/userValidations"
-    import {X,Edit,Plus,Upload} from "react-feather"
+import React, { useEffect, useState } from 'react'
+import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
+import * as validate from "../../utils/userValidations"
+import {X,Edit,Plus,Upload} from "react-feather"
 
 export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
     if(!isOpen) return null
@@ -40,15 +40,11 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
         }
       }
 
-      
-
-
-      const onFormSubmit = async (e) =>{
+        const onFormSubmit = async (e) =>{
         e.preventDefault()
 
       
         const formData = new FormData();
-
         // append the data on form data
         formData.append("username", username);
         formData.append("fullname", fullname);
@@ -57,19 +53,18 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
         formData.append("role", role);
         formData.append("status", status);
                 
-        
-        // Only include password if user typed one
+          // Only include password if user typed one
         if (mode === "insert" || password.trim() !== "") {
             formData.append('password',password)  ;
         }
-      
+    
        // 4. Append profile picture if uploaded
         if (profile_picture) {
           formData.append("profile_picture", profile_picture); // real file
         }
 
         // 5. Validate before sending
-        const payload = {username,fullname,email,phone:phoneNumber,role,status};
+        const payload = {username,fullname ,email,phone:phoneNumber,role,status};
         const { errors } = validate.validateUserEmptyFields(payload,password, mode);
         if (Object.keys(errors).length > 0) {
           setErrors(errors);

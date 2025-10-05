@@ -61,13 +61,13 @@ export const selectUser = async(user_id) => {
 export const insertUsers = async(userData) => {    
     try{
 
-        const {username,fullname,email,phone_number,password,role,status} = userData
+        const {username,fullname,email,phone_number,password,role,status,profile_picture} = userData
         const hashedPassword = await utils.hashedPass(password)
 
         const { rows } = await query(`INSERT INTO users 
-                (username,fullname,email,phone_number,password_hash,role,status) 
-                VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,[username,fullname,email,phone_number,hashedPassword,role,status])
-                
+          (username,fullname,email,phone_number,password_hash,role,status,profile_picture) 
+          VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,[username,fullname,email,phone_number,hashedPassword,role,status,profile_picture])
+          
         return rows[0]
 
     }catch(err){
@@ -80,26 +80,26 @@ export const insertUsers = async(userData) => {
 export const updateUser = async(user_id,userData) => {
     try{
 
-      const {username,fullname,email,phone_number,password,role,status} = userData
-
+      const {username,fullname,email,phone_number,password,role,status,profile_picture} = userData
+      // IF THERES A PASSWORD
       if(password && password.trim() !== ""){
         const hashedPassword = await utils.hashedPass(password)
 
           const { rows } = await query(`UPDATE users SET 
                        username = $1,fullname = $2, email = $3,phone_number = $4,
-                       password_hash = $5,role = $6, status = $7 WHERE user_id = $8 
+                       password_hash = $5,role = $6, status = $7, profile_status = $8 WHERE user_id = $9 
                        RETURNING *`,
-                       [username,fullname,email,phone_number,hashedPassword,role,status,user_id])
+                       [username,fullname,email,phone_number,hashedPassword,role,status,profile_picture,user_id])
 
         return rows[0]
 
       }else{
-
+        // IF THERES NO PASSWORD
         const { rows } = await query(
         `UPDATE users  SET username = $1,
-         fullname = $2, email = $3, phone_number = $4, role = $5, status = $6 
-         WHERE user_id = $7 RETURNING *`,
-        [username, fullname, email, phone_number, role, status, user_id]);
+         fullname = $2, email = $3, phone_number = $4, role = $5, status = $6, profile_picture = $7
+         WHERE user_id = $8 RETURNING *`,
+        [username, fullname, email, phone_number, role, status, profile_picture,user_id]);
 
          return rows[0];
       }

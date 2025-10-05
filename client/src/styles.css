@@ -137,6 +137,10 @@ svg{
     width: var(--fns-default-up1-6);  height:var(--fns-default-up1-6);
     @apply cursor-pointer flex items-center justify-center; 
 }
+
+img{
+    object-fit: cover;
+}
 .close_icons{
     @apply rounded-[10px] p-[0.1rem];
 }
@@ -154,7 +158,6 @@ body{
     margin: 0rem;
     padding: 0rem;
 }
-
 button{
     transition: 0.4s;
 }

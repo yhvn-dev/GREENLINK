@@ -4,10 +4,24 @@ import * as authController  from "../../controllers/auth.Controller.js"
 import * as userValidation from "../../middlewares/userValidation.js"
 import multer from "multer"
 import express from "express"
+import path from "path"
 
 
 const router = express.Router()
-const upload = multer({dest: "uploads/"})
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Folder where files will be saved
+  },
+  filename: (req, file, cb) => {
+    // Keep original extension (.jpg, .png, etc.)
+    const uniqueName = `${Date.now()}-${Math.round(Math.random() * 1E9)}${path.extname(file.originalname)}`;
+    cb(null, uniqueName);
+  },
+});
+
+export const upload = multer({ storage });
+
 
 router.get("/users/search", verifyAccessToken, userController.searchUser);
 router.get("/users", verifyAccessToken, userController.getUsers);

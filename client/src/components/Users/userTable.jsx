@@ -25,13 +25,13 @@ import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
           <>
           {users.map((u) => (        
           <tr className="u_tr" key={u.user_id}>
-        
             <td className=""></td>
             <td className="u_td">{u.username}</td>
             <td className="u_td flex justify-start items-center">
-               <img src={u.profile_picture ? u.profile_picture : Pfp} className="max-w-[25px] max-h-[25px] w-auto h-auto rounded-full object-cover border-gray-400 m-x"/>
-                 <p>{u.fullname}</p>
-              </td>
+              <img src={u.profile_picture || Pfp } className="max-w-[2rem] max-h-[2rem] h-[3rem] w-[3rem]
+              object-cover rounded-full m-x"/>
+              <p>{u.fullname}</p>
+            </td>
             <td className="u_td ">{u.email}</td>
             <td className="u_td">{u.phone_number}</td>
             <td  className="u_td flex justify-start items-start">
@@ -61,6 +61,7 @@ import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
             </td> 
         </tr>    
           ))}
+
         </>
 
         </tbody>

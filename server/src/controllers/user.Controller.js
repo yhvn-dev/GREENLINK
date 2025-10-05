@@ -11,8 +11,18 @@ import bcrypt from "bcrypt";
 export const getUsers = async (req, res) => {
   try {
     const users = await userModels.getUsers();
-    res.status(200).json(users);
-    console.log(users);
+
+      // Build full URL for each user's profile picture
+    const updatedUsers = users.map(user => ({
+      ...user, 
+      profile_picture: user.profile_picture
+        ? `${req.protocol}://${req.get("host")}/uploads/${user.profile_picture}`
+        : null, 
+    }));
+    
+    res.status(200).json(updatedUsers);
+    console.log("USER FROM CONTROLLER:",updatedUsers);
+
   } catch (err) {
     console.error(`CONTROLLER:`, err);
     res.status(500).json({ message: "CONTROLLER: Error Getting Users" });
@@ -160,7 +170,7 @@ export const selectUser = async (req, res) => {
 
 };
 
-  export const insertUsers = async (req, res) => {
+export const insertUsers = async (req, res) => {
 
     try {
       
@@ -171,15 +181,15 @@ export const selectUser = async (req, res) => {
       if(usernameExists){
         return res.status(400).json({message:"Username Already Exist"})
       }
-
       const emailExists = await userModels.findUser(email)
       if(emailExists) {
         return res.status(400).json({message:"Email Already Exist"})
       }
-
-      let profilePicture = null;
+      
       if (req.file) {
-        profilePicture = req.file.filename; // or req.file.path if you want full path
+        userData.profile_picture = req.file.filename; // or req.file.path if you want full path
+      }else{
+        userData.profile_picture = null;
       }
     
       const user = await userModels.insertUsers(userData);
@@ -201,8 +211,15 @@ export const selectUser = async (req, res) => {
       
       const userId = req.params.user_id; 
       const userData = req.body;
-      const user = await userModels.updateUser(userId, userData);
 
+      const existingUser = await userModels.selectUser(userId);
+      if (req.file) {
+        userData.profile_picture = req.file.filename;
+      }else{
+        userData.profile_picture = existingUser.profile_picture
+      }
+
+      const user = await userModels.updateUser(userId, userData);
       res.status(200).json(user);
       console.log(user);
       
