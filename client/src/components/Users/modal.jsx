@@ -122,7 +122,7 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                     <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
                 </div>
               
-                <form onSubmit={onFormSubmit} className="flex flex-col justify-center items-centers
+                <form onSubmit={onFormSubmit} className="userForm flex flex-col justify-center items-centers
                 w-[100%]"> 
 
                   <div className="input_part_div left flex justify-center items-center">
@@ -217,63 +217,63 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                     <section className='form_part right w-1/2 flex flex-col items-center 
                     justify-evenly h-full'>
 
-      
-                        <ul className="input_box flex flex-col items-center justify-center 
-                          h-[70%] w-[80%]">
-                          <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
-                              <img src={preview || Pfp} className='border-[3px]  
-                              border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
-                          </div>
-                              
-                         <label className="custom-file m-t">
-                            <input type="file" className="profile_picture" name="profile_picture"
-                            onChange={handleFileChanges}
-                            />
-                            <span className="flex items-center justify-center"> 
-                              <svg className="upload_icon"><Upload size={20}/></svg>
-                              Upload Photo
-                            </span>
-                          </label>
+                      <ul className="input_box flex flex-col items-center justify-center 
+                        h-[70%] w-[80%]">
+                        <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
+                            <img src={preview || Pfp} className='border-[3px]  
+                            border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
+                        </div>
+                            
+                        <label className="custom-file m-t">
+                          <input type="file" className="profile_picture" name="profile_picture"
+                          onChange={handleFileChanges}
+                          />
+                          <span className="flex items-center justify-center"> 
+                            <svg className="upload_icon"><Upload size={20}/></svg>
+                            Upload Photo
+                          </span>
+                        </label>
+                
+                      </ul>
                   
-                        </ul>
-                    
-                          {/* Role & Status */}
-                          <ul className="input_box w-full flex justify-evenly items-center m-t h-1/2 ">
-      
-                            <select 
-                              name="status" 
-                              className="status rounded-[10px] p-h-0-6 nav-com w-full m-x-6" 
-                              value={status} 
-                              onChange={(e) => setStatus(e.target.value)}>
-                              <option value="">Select Status</option>
-                              <option value="active">Active</option>
-                              <option value="inactive">Inactive</option>          
-                            </select>
-                                  
-                            <select 
-                              name="roles" 
-                              className="roles rounded-[10px] p-h-0-6 nav-com  w-full m-x-6" 
-                              value={role} 
-                              onChange={(e) => setRole(e.target.value)}>
-                              <option value="">Select Role</option>
-                              <option value="owner">Owner</option>
-                              <option value="admin">Admin</option>
-                              <option value="viewer">Viewer</option>
-                            </select>
-                                               
-                          </ul>
+                  
+                      {/* Role & Status */}
+                      <ul className="input_box w-full 
+                      flex justify-evenly items-center m-y-2 h-1/2 ">
+  
+                        <select 
+                          name="status" 
+                          className="status rounded-[10px] p-h-0-6 nav-com w-full m-x-6" 
+                          value={status} 
+                          onChange={(e) => setStatus(e.target.value)}>
+                          <option value="">Select Status</option>
+                          <option value="active">Active</option>
+                          <option value="inactive">Inactive</option>          
+                        </select>
+                              
+                        <select 
+                          name="roles" 
+                          className="roles rounded-[10px] p-h-0-6 nav-com  w-full m-x-6" 
+                          value={role} 
+                          onChange={(e) => setRole(e.target.value)}>
+                          <option value="">Select Role</option>
+                          <option value="owner">Owner</option>
+                          <option value="admin">Admin</option>
+                          <option value="viewer">Viewer</option>
+                        </select>
+                                            
+                      </ul>
 
-                          {/* FORM MSG BOX */}
-                          <div className="flex items-center justify-around h-[2rem]  w-full">
-                            {errors.status && !status && (
-                              <p className='error-nav-txt'>{errors.status}</p>
-                            )}
-                            {errors.role && !role && (
-                              <p className="error-nav-txt">{errors.role}</p>                             
-                            )}       
-                          </div>
-                        
-                        </section>
+                        {/* FORM MSG BOX */}
+                        <div className="flex items-center justify-around h-[2rem]  w-full">
+                          {errors.status && !status && (
+                            <p className='error-nav-txt'>{errors.status}</p>
+                          )}
+                          {errors.role && !role && (
+                            <p className="error-nav-txt">{errors.role}</p>                             
+                          )}       
+                        </div>       
+                      </section>
 
                   </div>
                       

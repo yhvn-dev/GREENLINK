@@ -5,7 +5,7 @@ import Bush from "../../assets/Images/Bush 1.png"
 export function Db_Header({left,user}) {
   return (
 
-    <section className="container header flex items-center justify-center">
+    <section className="container col-start-2 col-end-4 header flex items-center justify-center">
 
         <div className="left_header half">{left}</div>
         <div className="right_header half flex-row-reverse">

@@ -103,20 +103,26 @@
     .home{
         position:relative;
     }
-
     .btn_nav svg{
-        display: flex;
-        margin-left:  0.4rem;
+        display: flex; margin-left:  0.4rem;
     }
-    
-        .links_box {
-            @apply fixed flex items-center justify-center bottom-[0px] left-[0px] 
-            w-full h-[15%] rounded-[10px];
-         }
-        .btn_nav .links{
-            @apply flex flex-col-reverse items-center justify-center;
-            padding: 1rem;
-        }   
+    .links_box {
+        @apply fixed flex items-center justify-center bottom-[0px] left-[0px] 
+        w-full h-[15%] rounded-[10px] z-2; border: 2px solid var(--pal2-whiteb);
+        background-color: white;
+    }
+    .btn_nav .links{
+        @apply flex flex-col-reverse items-center justify-center; padding: var(--dis-0-6);
+    }   
+
+    .lg-form-left{
+        display: none;
+    }
+        
+    .lg-form-right{
+        @apply w-full
+    }
+
 }
 
 

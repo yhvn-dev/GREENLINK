@@ -6,7 +6,7 @@ import {Map} from "react-feather"
 export function Workspace() {
   return (
 
-        <section className='workspace grid h-full
+        <section className='db workspace grid h-full col-start-2 col-end-2 row-start-3 row-end-3
                 grid-rows-[1fr_9fr] grid-cols-[0.8fr_8.6fr_0.8fr] rounded-[10px] overflow-y-auto ' > 
 
                 <Wp_header

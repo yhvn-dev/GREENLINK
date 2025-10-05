@@ -7,6 +7,9 @@ import { Form } from "../../components/Login/form"
 import { Hero } from "../../components/Global/hero.jsx"
 import { Header } from "../../components/Global/header.jsx" 
 
+import {Home as HomeIcon} from "react-feather"
+import {Phone,Info} from "react-feather"
+
 import * as validate from "../../utils/userValidations"
 import "./login.css"
 
@@ -70,26 +73,25 @@ function Login() {
         
           navChildren={
 
-            <>
-
-              { /* Hamburger icon */}
-                <div 
-                className="links icon_frame hamburger md:hidden" 
-                onClick={() => setShowNav(prev => !prev)}>
-                <svg className="icons" xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"/>
-                </svg> 
-              </div>          
-              
+            <>     
               {/* Nav group */}
               <div 
-                className={`links_box w-full  ${showNav ? "flex" : "hidden"} md:flex`} >
+                className={`links_box w-full flex items-center justify-center`} >
                     
-                  <Link to="/" className="btnl links ">Home</Link>
-                  <Link to="" className="btnl links">About</Link>
-                  <Link to="/contacts" className="btnl links">Contacts</Link>  
+                  <Link to="/" className="links">  
+                      <p>Home</p>
+                      <svg className='home-icons'><HomeIcon size={18}/></svg>
+                  </Link>
                   
+                  <Link to="" className="links">
+                      <p>About</p>
+                      <svg className='home-icons'><Phone size={18}/></svg>
+                  </Link>
+
+                  <Link to="/contacts" className="links">     
+                      <p>Contact</p>
+                      <svg className='home-icons'><Info size={18}/></svg>
+                  </Link>    
               </div>
 
             </>  
@@ -99,7 +101,6 @@ function Login() {
 
         {/* hero */}        
           <Hero
-        
             children={<Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} />}
           />
         

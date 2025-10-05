@@ -1,4 +1,3 @@
-
 :root{
 
     
@@ -110,84 +109,49 @@
     --dis-6-8:6.84rem;
 }
 
-body{
-    padding: 0;
-    margin: 0;
- 
-}
-.users{
-    display: grid;
-    grid-template-columns: 12fr 40fr 48fr;
-    grid-template-rows:8vh 40vh 52vh;    
-    height: 100vh;
-    max-width:100%;
-    column-gap: 1rem;
-    overflow-y: hidden;
-}   
-.u_th{ 
-    @apply bg-[var(--acc-darkb)] p-[0.4rem] text-[var(--pal2-whitea)] h-[10%] min-h-[10%] max-h-[10%];
-}
 
-.u_tr{
-    @apply rounded-[10px];
-}
-.u_td {
-   @apply p-[1rem] text-[0.9rem] text-start break-words ;
-}
-
-
-.u_btn{
-    @apply rounded-[8px] text-[0.9rem] text-[var(--acc-darkb)];
-    padding: 0rem var(--dis-0-6);
-    color: white
-}
-
-
-
-
-
-input{
-    @apply rounded-[10px] w-full;  
-}
-
-.bd_card{
-    @apply flex items-center justify-center rounded-[10px];
-    box-shadow:5px 5px 10px 1px var(--shad-alpha-e);
-}
-.bd_gradient{
-    background: linear-gradient(45deg,white,var(--ptl-greena));
-}
-.num_card{
-    @apply flex items-center justify-center rounded-[10px] w-full h-full;
-    box-shadow:0px 5px 5px 2px var(--shad-alpha-c);
-}                   
-
-    .input-error {
-        border: 1px solid var(--color-danger-b);
+@media screen and (max-width:1025px){
+    
+    .users{
+        grid-template-columns: 8fr 92fr;
+       
     }
-    .input-normal {
-        border: 2px solid var(--acc-darkc); 
+    .link-text{
+        display: none;
+    }               
+    .sb-btn{
+        @apply justify-center
+    } 
+}
+
+@media screen and (max-width:950px){
+    .logs_card{
+        @apply col-start-2 col-end-2 row-start-1 row-end-1;
     }
-    .gd{
-        @apply  w-[40%] h-[40%] absolute;
-        border-radius:50%;
+    .chart_card{
+        @apply col-start-1 col-end-1  row-start-1 row-end-1;
     }
-    .user-chart-icon {
-        margin-top: 0.5rem;
+}
+
+
+@media screen and (max-width:800px) {
+    .users{
+        grid-template-rows:8vh 92vh 50vh 50vh;
+        grid-template-columns: 100fr;
+        overflow-y: auto;}
+    .user_con.workspace{ @apply row-start-2 row-end-3;}
+
+    .numbers{
+        @apply flex flex-col items-center justify-center row-start-3 row-end-5 w-full h-full;
     }
     
-.custom-file {
-    @apply bg-[var(--pal2-whiteb)] cursor-pointer rounded-[10px] text-center w-[80%];  
-    padding: 0.1rem 0rem;
-    transition: 0.4s;
-}
-.custom-file:hover {
-    box-shadow: 0px 5px 10px 1px var(--shad-alpha-e);
-}
-
-.custom-file input[type="file"] {
-  display: none; 
-}   
-    .upload_icon{
-        margin:0.3rem 0.4rem 0rem 0.4rem;
+    .u_tr_head {
+        display: none;
     }
+    .u_tr{
+        @apply h-[10rem] flex flex-row items-center justify-center;
+        margin-top: 0rem 5rem;
+        box-shadow: 0px 5px 10px 1px var(--shad-alpha-d);
+    }
+
+}

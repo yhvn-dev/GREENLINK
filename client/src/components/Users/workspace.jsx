@@ -67,8 +67,8 @@ export function Workspace({show,refreshChart}) {
   // ================================================================================
 
   return (
-    <div className="container workspace flex flex-col h-[100%] row-start-3 row-end-3
-    col-start-2 col-end-2 overflow-y-auto">
+    <div className="container user_con workspace flex flex-col h-[100%] w-full row-start-3 row-end-3
+    col-start-2 col-end-4 overflow-y-auto">
         <Wp_header
             left={<>
                 <span className='m-x'>Users</span>
@@ -94,7 +94,7 @@ export function Workspace({show,refreshChart}) {
               setMode={setMode}
               setSelectedUser={setSelectedUser}
             />
-        
+       
         </div>
 
           {open && ( <Modal 

@@ -28,7 +28,7 @@ export function UserChartLegend({roleCount,colors}){
 
 
 
-export function Chart({chartData}) {
+export function RoleChart({chartData}) {
  const { count, roleCount } = chartData || {};
  
   const colors = [color.setRoleColor.adminColor,
@@ -36,7 +36,7 @@ export function Chart({chartData}) {
                   color.setRoleColor.viewerColor];
 
   return (
-    <div className="flex  items-center justify-center w-full h-full relative">
+    <div className="flex  items-center justify-center w-auto max-w-[100%] h-full relative">
 
       <ul className="flex items-center justify-center absolute top-0 left-0 m-1">
         <svg className="svg_icons user-chart-icon flex items-center justify-center"><User size={16}/></svg>
@@ -83,4 +83,9 @@ export function Chart({chartData}) {
   );
 
   
+}
+
+
+export function chartBg({}){
+  <PieChart width={450} height={230}></PieChart>
 }

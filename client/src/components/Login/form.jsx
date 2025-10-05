@@ -1,5 +1,4 @@
 import React, { useState,useRef } from 'react'
-import Bush1 from "../../assets/Images/Bushes 1.png"
 import { User,Lock } from "react-feather";
 import { colors } from "../../utils/colors"
 
@@ -13,23 +12,20 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
         <form onSubmit={handleSubmit} className="forms card bg-[var(--pal2-whiteb)]">
 
         {/* left */}
-        <ul className="form_part flex down left w-1/2 h-full relative">
-    
-            <img className="m-t bushes" src={Bush1}></img>
-            
+        <ul className="loginForm form_part flex down lg-form-left w-1/2 h-full relative">
+        
             <div className="m-[0.5rem] z-[2]">
-            <span>LOGO</span>
-            <span> GREENLINK</span>
+                <span>LOGO</span>
+                <span> GREENLINK</span>
             </div>
 
             <div className="text_box down items-center text-center">
 
-            <span className="text descr font-semibold text-[1rem]">Control your garden anytime anywhere</span>
-            <p className="text descrp">
-                GREENLINK makes plant care effortless with smart, automated watering,
-                Manage your garden through simple and reliable application.
-            </p>
-
+                <span className="text descr font-semibold text-[1rem]">Control your garden anytime anywhere</span>
+                <p className="text descrp">
+                    GREENLINK makes plant care effortless with smart, automated watering,
+                    Manage your garden through simple and reliable application.
+                </p>
 
             </div>            
         
@@ -37,13 +33,12 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
 
 
 
-        <ul className="form_part down right  w-1/2 h-full bg-white rounded-[10px] ">
+        <ul className="loginForm form_part down lg-form-right  w-1/2 h-full bg-white rounded-[10px] ">
             {/* right */}                            
             <div className="form_box title_box h-[20%] w-full">
                 <span className="title form_title" >LOGIN</span>
                 <p className="descrp">Water Your Plants Login Here</p>
             </div>
-
 
             <ul className="input_box_frame down justify-center w-full h-[80%]">
 

@@ -5,11 +5,12 @@ import { Header } from '../../components/Global/header'
 import { Hero } from '../../components/Global/hero'
 
 import { Home as HomeIcon} from "react-feather"
-import {Phone,Info} from "react-feather"
+import {Phone,Info,LogIn} from "react-feather"
 
 
 import "./home.css"
 import "./home.responsive.css"
+import Login from '../Login/login'
 
 function Home() {
   const [showNav, setShowNav] = useState(false); // start hidden
@@ -47,8 +48,8 @@ function Home() {
                   </Link>  
 
                   <Link to="/login" className="links btn-p" >
-                     <p>Login</p>
-                
+                     <p className='text-white'>Login</p>
+                     <svg className='home-icons'><LogIn size={18}/></svg>
                   </Link>
 
                 </div>

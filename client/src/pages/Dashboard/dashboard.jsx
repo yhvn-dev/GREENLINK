@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom"
 import axios from "axios"
 import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
@@ -7,10 +6,11 @@ import { Workspace } from "../../components/Dashboard/workspace"
 import {Grid,Activity,User} from "react-feather"
 
 import "./dashboard.css"
+import "./dashboard_responsive.css"
+
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { useEffect } from "react"
-
 
 function Dashboard() {
   const [user,setUser] = useState(null);
@@ -51,14 +51,16 @@ function Dashboard() {
               // btn div a
               btn_div_a={ <>
                 <Link className="sb-btn btn-a "> 
-                  <svg className="svg-icons"><Grid size={16}/></svg>Dashboard     
+                  <svg className="svg-icons"><Grid size={16}/></svg>
+                  <p className="link-text">Dashboard</p>   
                 </Link>
                 <Link className="sb-btn" to="/users">
-                  <svg className="svg-icons"><User size={16}/></svg>  
-                   Users
+                  <svg className="svg-icons"><User size={16}/></svg>
+                  <p className="link-text">Users</p>               
                 </Link>       
                  <Link className="sb-btn">  
-                 <svg className="svg-icons" ><Activity size={16}/></svg>  Reports
+                 <svg className="svg-icons" ><Activity size={16}/></svg>  
+                 <p className='link-text'>Reports</p>
                 </Link>
                 </>
                 }

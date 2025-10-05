@@ -7,12 +7,12 @@ import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
 import { Workspace } from "../../components/Users/workspace"
 import { Numbers } from "../../components/Users/numbers"
-import { Chart } from "../../components/Users/chart"
+import * as Chart from "../../components/Users/chart"
 
 import { Link} from "react-router-dom"
 import {Grid,Activity,User} from "react-feather"
 import "./users.css"
-
+import "./users_responsive.css"
 
 function Users() {
   const [user,setUser] = useState(false)
@@ -73,14 +73,17 @@ function Users() {
           // btn div a
         btn_div_a={ <>
           <Link className="sb-btn" to="/dashboard"> 
-            <svg className="svg-icons"><Grid size={16}/></svg>Dashboard     
+            <svg className="svg-icons"><Grid size={16}/></svg>
+            <p className='link-text'>Dashboard</p>
           </Link>
           <Link className="sb-btn btn-a" to="/users">
             <svg className="svg-icons"><User size={16}/></svg>  
-              Users
+            <p className='link-text'>Users</p>
+            
           </Link>
            <Link className="sb-btn ">  
-            <svg className="svg-icons" ><Activity size={16}/></svg>  Reports
+            <svg className="svg-icons" ><Activity size={16}/></svg> 
+            <p className='link-text'>Reports</p>
           </Link>
           </>
           }
@@ -88,23 +91,12 @@ function Users() {
 
       {/* Data like graphs and charts */}
       <Numbers        
-        bg_boxes={
-          <>
-           <div className='flex items-center justify-center relative'>
-                <ol className='gd bg-green-100 top- left-0'></ol>
-                <ol className='gd bg-[var(--ptl-greenb)]  bottom-10 right-0'></ol>
-            </div>      
-            <div className='flex items-center justify-center bg-white relative'>
-                <ol className='gd bg-[var(--ptl-greena)] top-5 left-0'></ol>
-                <ol className='gd bg-[var(--ptl-greenb)] bottom-5 right-0'></ol>
-            </div>       
-          </>
-        }
-
         data_boxes={
           <>
-            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[100px]'></div>
-            <div className='num_card flex items-center justify-center bg-transparent backdrop-blur-[80px]'><Chart chartData={chartData}/></div>
+            <div className='num_card logs_card col-start-1 col-end-1
+            bg-transparent backdrop-blur-[100px]'>Logs Card</div>
+            <div className='num_card chart_card col-start-2 col-end-2
+            bg-transparent backdrop-blur-[80px]'><Chart.RoleChart chartData={chartData}/></div>
           </>
         }
       />
