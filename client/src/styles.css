@@ -149,7 +149,7 @@ img{
     transition: 0.4s;
 }
 .modal-icons{
-    width:2rem;  height:2rem;
+   width:2rem;  height:2rem;
 }
 
 
@@ -343,8 +343,9 @@ button{
         margin-top: 1rem;
     }
     .formMsg_box .succMsg {
+        @apply bg-[var(--color-success-a-soft)] flex items-center justify-center;
         border: 1px solid var(--color-success-a);
-        background-color: var(--color-success-a-soft); display: flex; justify-content: center; padding: var(--dis-0-6) var(--dis-1);
+        padding: var(--dis-0-6) var(--dis-1);
 }
 
 .error-txt{
@@ -380,8 +381,11 @@ button{
     transform: translateY(-100%); font-size: var(--fns-default-down-0-6);
 }
 
-
-
+.succes_msg_pro{
+    @apply bg-[var(--color-success-a-soft)] flex items-center justify-center rounded-[10px] m-1;
+    border:2px solid var(--ptl-greenb);
+    padding: var(--dis-0-6);
+}
 
 select{
     @apply rounded-[10px];
@@ -433,3 +437,5 @@ select{
     border-radius:10px;
     padding: 0.1rem 0.3rem;
 }
+
+

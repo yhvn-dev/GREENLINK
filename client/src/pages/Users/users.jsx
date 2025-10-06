@@ -99,10 +99,11 @@ function Users() {
             bg-transparent backdrop-blur-[80px]'><Chart.RoleChart chartData={chartData}/></div>
           </>
         }
+        
       />
 
       {/* Users Table with navigations and filters */}
-      <Workspace chartData={chartData} refreshChart={fetchChartData} />
+      <Workspace chartData={chartData} refreshChart={fetchChartData}/>
 
     </section>
   )

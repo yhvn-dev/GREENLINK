@@ -3,8 +3,8 @@ import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
 import * as validate from "../../utils/userValidations"
 import {X,Edit,Plus,Upload} from "react-feather"
 
-export function Modal({isOpen,onClose,mode,handleSubmit,userData}) { 
-    if(!isOpen) return null
+export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) {    
+      if(!isOpen) return null
 
       const [errors,setErrors] = useState({})
       const [username, setUsername] = useState("");
@@ -25,7 +25,6 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
           setPhoneNumber(userData.phone_number || "")
           setRole(userData.role)
           setStatus(userData?.status || "active")
-
           setPreview(userData.profile_picture || null)
           setProfilePicture(null)
         } 
@@ -43,7 +42,6 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
         const onFormSubmit = async (e) =>{
         e.preventDefault()
 
-      
         const formData = new FormData();
         // append the data on form data
         formData.append("username", username);
@@ -65,7 +63,7 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
 
         // 5. Validate before sending
         const payload = {username,fullname ,email,phone:phoneNumber,role,status};
-        const { errors } = validate.validateUserEmptyFields(payload,password, mode);
+        const { errors } = validate.validateUserEmptyFields(payload,password,mode);
         if (Object.keys(errors).length > 0) {
           setErrors(errors);
           return;
@@ -124,7 +122,6 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                       <section className='form_part left w-1/2  flex flex-col items-center 
                       justify-evenly'>
 
-
                       {/* username */}
                       <ul className="input_box form_box relative">
                         <input 
@@ -136,7 +133,6 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData}) {
                           className={`form-inp username`}
                         />
                         <label>Username</label>
-
                         {errors.username && !username && (                     
                           <p className='error-txt'>{errors.username}</p>
                         )}
