@@ -1,7 +1,10 @@
 
 import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
+import { useMediaQuery } from "../../hooks/useMediaQuery"
   
-  export function UserTable({users,setOpen, setMode, setSelectedUser}) {
+export function UserTable({users,setOpen, setMode, setSelectedUser}) {
+    
+
     return (
       <>
       <table className="table table-fixed max-w-[100%] w-[100%] h-[100%] ">

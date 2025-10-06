@@ -11,8 +11,8 @@ export function LogoutModal({isOpen,onClose}) {
       e.preventDefault();
   
        try {
+
         await axios.delete("http://localhost:5000/users/logout-all",{ withCredentials: true });
-     
         localStorage.removeItem("accessToken")
         navigate("/login");
   

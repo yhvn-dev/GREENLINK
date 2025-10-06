@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import {motion,AnimatePresence} from "framer-motion";
+import { useEffect, useState } from 'react'
 import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
 import * as validate from "../../utils/userValidations"
-import {X,Edit,Plus,Upload} from "react-feather"
+import {X,Edit,Plus,Upload,Trash} from "react-feather"
 
-export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) {    
+export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,setBackendError}) {    
       if(!isOpen) return null
 
       const [errors,setErrors] = useState({})
@@ -51,12 +52,12 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
         formData.append("role", role);
         formData.append("status", status);
                 
-          // Only include password if user typed one
+        // Only include password if user typed one
         if (mode === "insert" || password.trim() !== "") {
             formData.append('password',password)  ;
         }
     
-       // 4. Append profile picture if uploaded
+        // 4. Append profile picture if uploaded
         if (profile_picture) {
           formData.append("profile_picture", profile_picture); // real file
         }
@@ -81,43 +82,55 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
       const handleClose = (e) =>{
         e.preventDefault()
         setErrors({});
+        setBackendError("")
         onClose()
       }
 
       return (
         <>
 
-        <div className="modal_backdrop flex items-center justify-center h-full w-full 
-        g-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute">
+        <motion.div className={`modal_backdrop flex items-center justify-center h-full w-full 
+        bg-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute transition-opacity duration-300
+        ease-out ${isOpen ? "opacity-100" : "opacity-0"}`}>
 
-            <div className={`${mode === "delete" ? "w-[500px]" : "w-[700px]"} flex flex-col items-center justify-center 
-            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`}>
+            <motion.div className={`${mode === "delete" ? "w-[500px]" : "w-[700px]"} flex flex-col items-center justify-center 
+            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`} 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ duration: 0.5 }}>
             
               <button className='cancel-btn absolute top-[20px] right-[20px]' onClick={handleClose}>
                 <div className='close_icons'><X/></div>
               </button>
               
               {mode === "delete" ? (
-                <>
-                    <p className="text-[1.5rem] mb-4">Delete User</p>
-                    <p>Are you sure you want to delete user "{fullname}" ?</p>
-                    <div className="flex down w-[100%]">                  
-                      <button onClick={() => handleSubmit(userData)} type="button"
-                        className="btn-p-delete">Delete User
-                      </button>
-                    </div>
+                <>  
+
+                
+                  <div className="flex w-full">
+                   <svg className="svg-icons center"><Trash className="f-icons" size={20}/></svg>
+                   <p className="text-[1.5rem] center">Delete User</p>
+                  </div>
+                  <p className="">Are you sure you want to delete user "{fullname}" ?</p>
+
+                  <div className="flex down w-[100%]">                  
+                    <button onClick={() => handleSubmit(userData)} type="button"
+                      className="btn-p-delete">Delete User
+                    </button>
+                  </div>
                 </>
               ):(
-
                 <>
-                <div className='flex items-center enterjustify-center '>
-                    <svg className="m-01 modal">{mode === "insert" ? <Plus  size={30}/> : <Edit size={30}/> }</svg>
+                <div className='center'>
+                    <svg className="m-01 modal">{mode === "insert" ?
+                        <Plus className="f-icons" size={24}/> :
+                        <Edit className="f-icons" size={20}/> }</svg>
                     <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
                 </div>
               
                 <form onSubmit={onFormSubmit} className="userForm flex flex-col justify-center items-centers
                 w-[100%]"> 
-
                   <div className="input_part_div left flex justify-center items-center">
                       <section className='form_part left w-1/2  flex flex-col items-center 
                       justify-evenly'>
@@ -133,9 +146,14 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
                           className={`form-inp username`}
                         />
                         <label>Username</label>
+
                         {errors.username && !username && (                     
                           <p className='error-txt'>{errors.username}</p>
                         )}
+                        {backendError && backendError.toLowerCase().includes("username") && (
+                          <p className='error-txt'>{backendError}</p>
+                        )}
+
                       </ul>
 
                       {/* fullname */}
@@ -152,6 +170,7 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
                         {errors.fullname && !fullname && (
                           <p className='error-txt'>{errors.fullname}</p>
                         )}
+                        
                       </ul>
 
                       {/* email */}
@@ -166,11 +185,14 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
                         />
                         <label>Email</label> 
 
-                        {errors.email && !email && (
+                        {errors.email && (
                           <p className="error-txt">{errors.email}</p>
                         )}
-
+                        {backendError && backendError.toLowerCase().includes("email") && (
+                          <p className='error-txt'>{backendError}</p>
+                        )}
                       </ul>
+                      
 
                       {/* phone number */}
                       <ul className="input_box form_box relative">
@@ -210,11 +232,11 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
 
                       <ul className="input_box flex flex-col items-center justify-center 
                         h-[70%] w-[80%]">
-                        <div className='img-holder cntr rounded-full bg-[var(--pal2-whiteb)]'>
-                            <img src={preview || Pfp} className='border-[3px]  
-                            border-[var(--pal2-whiteb)] rounded-full' alt={Pfp} width={120}/>
-                        </div>
-                            
+                  
+                        <img src={preview || Pfp} className='border-[3px]  
+                        border-[var(--pal2-whiteb)] rounded-full profile-img 
+                        max-w-[10rem] max-h-[10rem] h-[8rem] w-[8rem]' alt={Pfp} width={200}/>
+                  
                         <label className="custom-file m-t">
                           <input type="file" className="profile_picture" name="profile_picture"
                           onChange={handleFileChanges}
@@ -284,9 +306,9 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError}) 
               </>  
             )}     
 
-          </div>
+          </motion.div>
 
-        </div>
+        </motion.div>
 
         </>
       ) 

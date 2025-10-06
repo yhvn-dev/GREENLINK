@@ -148,8 +148,9 @@
     .u_tr_head {
         display: none;
     }
+    
     .u_tr{
-        @apply h-[10rem] flex flex-row items-center justify-center;
+        @apply h-[25rem] grid grid-cols-[1fr] grid-rows-4;
         margin-top: 0rem 5rem;
         box-shadow: 0px 5px 10px 1px var(--shad-alpha-d);
     }

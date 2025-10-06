@@ -23,9 +23,9 @@ export function Workspace() {
                 />
 
                 <nav className="beds_nav down rounded-tl-[10px]
-                     rounded-bl-[10px]  bg-[var(--pal2-whiteb)]
+                     rounded-bl-[10px]  bg-[var(--pal2-whitea)]
                      shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
-                     col-start-1 col-end-2 row-start-2 row-end-2">  
+                     col-start-1 col-end-2 row-start-2 row-end-2 ">  
                     
                 </nav>
 
@@ -78,17 +78,15 @@ export function Workspace() {
                             </th>
                         </tr>
 
-
                         </tbody>
-                
-                
+                                
                     </table>
                 
                 </div>      
 
                 {/* water level div */}
                 <div className="water_level_div  rounded-tl-[10px]
-                rounded-bl-[10px]  bg-[var(--pal2-whiteb)]
+                rounded-bl-[10px]  bg-[var(--pal2-whitea)]
                 shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
                 col-start-33 col-end-3 row-start-2 row-end-2">
                     

@@ -58,9 +58,9 @@ function Dashboard() {
                   <svg className="svg-icons"><User size={16}/></svg>
                   <p className="link-text">Users</p>               
                 </Link>       
-                 <Link className="sb-btn">  
+                 <Link className="sb-btn" to="/analytics">  
                  <svg className="svg-icons" ><Activity size={16}/></svg>  
-                 <p className='link-text'>Reports</p>
+                 <p className='link-text'>Analytics</p>
                 </Link>
                 </>
                 }

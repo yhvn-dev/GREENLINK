@@ -65,9 +65,9 @@ export const logoutFromThisDevice = async (req,res) =>{
     if(!device_id) return res.status(404).json({message:"Device ID not found in cookies"})
     const result = await authModels.deleteRefreshTokenByDevice(user_id,device_id)
   
-    console.log("")
-    console.log("-----RESULT--------",result)
-    console.log("")
+    // console.log("")
+    // console.log("-----RESULT--------",result)
+    // console.log("")
 
     if(!result) return res.status(404).json({message:"Device Not Found Already Logged Out!"})
 

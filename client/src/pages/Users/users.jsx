@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+
 import axios from "axios";
 
 import * as userService from "../../data/userService"
@@ -25,7 +26,6 @@ function Users() {
       const res = await axios.get("http://localhost:5000/users/me",
         {headers:{Authorization:`Bearer ${token}`}})
         setUser(res.data)
-
     }catch(err){
       console.error("Error Fetching Users")
     }
@@ -47,11 +47,6 @@ function Users() {
               total_users:Number(rc.total_users)
             }))
         })
-
-        // console.log("User Count:",userCount.total_users)
-        // console.log("User Roles:",userCountByRole.map((rc) => rc.role))
-        // console.log("User Count By Role:",userCountByRole.map((rc) => rc.total_users))
-
     } catch (err) {
         console.error("Error Fetching Chart")
     }
@@ -81,9 +76,9 @@ function Users() {
             <p className='link-text'>Users</p>
             
           </Link>
-           <Link className="sb-btn ">  
+           <Link className="sb-btn" to="/analytics">  
             <svg className="svg-icons" ><Activity size={16}/></svg> 
-            <p className='link-text'>Reports</p>
+            <p className='link-text'>Analytics</p>
           </Link>
           </>
           }
@@ -105,6 +100,8 @@ function Users() {
       {/* Users Table with navigations and filters */}
       <Workspace chartData={chartData} refreshChart={fetchChartData}/>
 
+
+          
     </section>
   )
 }

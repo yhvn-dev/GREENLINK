@@ -86,11 +86,11 @@ export const updateUser = async(user_id,userData) => {
       if(password && password.trim() !== ""){
         const hashedPassword = await utils.hashedPass(password)
 
-          const { rows } = await query(`UPDATE users SET 
-                       username = $1,fullname = $2, email = $3,phone_number = $4,
-                       password_hash = $5,role = $6, status = $7, profile_picture = $8 WHERE user_id = $9 
-                       RETURNING *`,
-                       [username,fullname,email,phone_number,hashedPassword,role,status,profile_picture,user_id])
+        const { rows } = await query(`UPDATE users SET 
+                      username = $1,fullname = $2, email = $3,phone_number = $4,
+                      password_hash = $5,role = $6, status = $7, profile_picture = $8 WHERE user_id = $9 
+                      RETURNING *`,
+                      [username,fullname,email,phone_number,hashedPassword,role,status,profile_picture,user_id])
 
         return rows[0]
 

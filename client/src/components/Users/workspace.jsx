@@ -3,6 +3,7 @@
   import { useEffect, useState } from "react"
   import { Modal } from "./modal"
 
+
   import * as userService from "../../data/userService"
   import {SucessMsgs} from "../../components/Global/sucessMsgs"
 
@@ -13,6 +14,7 @@ export function Workspace({refreshChart}) {
   const [backendError,setBackendError] = useState("");
   const [selectedUser,setSelectedUser] = useState(null)
   const [allUsers,setAllUsers] = useState([]) 
+
 
   const clearMsg = () => setSucessMsg("");
 
@@ -44,9 +46,7 @@ export function Workspace({refreshChart}) {
     } catch (err) {
       console.error("Error Inserting Users",err)
       setBackendError(err.response?.data?.message || err.message || "Error Inserting Users");
-
-      if(typeof err === "object") return err;
-      return {general: "Something went wrong"}
+      throw err
     }
   }
   
@@ -65,13 +65,13 @@ export function Workspace({refreshChart}) {
     } catch (err) {
       console.error("Error Updating Users",err)
       setBackendError(err.response?.data?.message || err.message || "Error Updating Users");
-
-      if(typeof err === "object") return err;
-      return {general: "Something went wrong"}
+      throw err
     }
   }
 
+
   const handleDelete = async () =>{
+    
     try{
       if(!selectedUser?.user_id) return;
       await userService.deleteUsers(selectedUser.user_id,setAllUsers)
@@ -83,6 +83,7 @@ export function Workspace({refreshChart}) {
       console.log("UPDATED USER:",selectedUser) 
     }catch(err){
       console.error("Error Deleting Users",err)
+      throw err
     }
 
   }
@@ -91,42 +92,42 @@ export function Workspace({refreshChart}) {
     return (
       <div className="container user_con workspace flex flex-col h-[100%] w-full row-start-3 row-end-3
       col-start-2 col-end-4 overflow-y-auto">
-          <Wp_header
-              left={<>
-                  <span className='m-x'>Users</span>
-              </>}
-              right={<>
-                  <button className="btn-p m-x" 
-                  onClick={() => 
-                  {setMode("insert");
-                  setSelectedUser(null);
-                  setOpen(true)}}>Add User</button>
-              </>
-              }
+        <Wp_header
+            left={<>
+                <span className='m-x'>Users</span>
+            </>}
+            right={<>
+                <button className="btn-p m-x" 
+                onClick={() => 
+                {setMode("insert");
+                setSelectedUser(null);
+                setOpen(true)}}>Add User</button>
+            </>
+            }
+          />
+
+        <SucessMsgs txt={sucessMsg} clearMsg={clearMsg}/>
+        
+        <div className="table_holder flex flex-col items-center justify-start h-full w-full  overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
+            <UserTable
+              users={allUsers}
+              setOpen={setOpen}
+              setMode={setMode}
+              setSelectedUser={setSelectedUser}
             />
+        </div>
 
-          <SucessMsgs txt={sucessMsg} clearMsg={clearMsg}/>
-          
-          <div className="table_holder flex flex-col items-center justify-start h-full w-full  overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
-              <UserTable
-                users={allUsers}
-                setOpen={setOpen}
-                setMode={setMode}
-                setSelectedUser={setSelectedUser}
-              />
-          </div>
-
-          {open && ( <Modal 
-              isOpen={open}
-              onClose={() => setOpen(false)}
-              mode={mode}
-              handleSubmit={mode === "insert" ? handleInsert :
-                            mode === "update" ? handleUpdate :
-                                                handleDelete
-              }
-              userData={selectedUser}
-              backendError={backendError}
-          />)}       
+        {open && ( <Modal 
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            mode={mode}
+            handleSubmit={mode === "insert" ? handleInsert :
+                          mode === "update" ? handleUpdate :
+                                              handleDelete}
+            userData={selectedUser}
+            backendError={backendError}
+            setBackendError={setBackendError}
+        />)}       
       </div>
 
     )

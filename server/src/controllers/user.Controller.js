@@ -115,8 +115,8 @@ export const loginUser = async (req, res) => {
         },
       });
       
-  console.log("TOKEN DATA FROM CONTROLLER ----------------------------------- ---------------",token)
-  console.log("DATA FROM LOGIN CONTROLLER ----------------------------------- ---------------",user,accessToken)
+  // console.log("TOKEN DATA FROM CONTROLLER ----------------------------------- ---------------",token)
+  // console.log("DATA FROM LOGIN CONTROLLER ----------------------------------- ---------------",user,accessToken)
 
   } catch (err) { 
     console.error("CONTROLLER:", err);
