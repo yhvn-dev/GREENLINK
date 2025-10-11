@@ -11,7 +11,7 @@ export function Workspace() {
   return (
 
         <section className='db workspace 
-        grid h-full col-start-2 col-end-2 row-start-3 row-end-3
+        grid h-full col-start-2  col-end-4 row-start-3 row-end-3
         grid-rows-[1fr_9fr] grid-cols-[1fr_7.5fr_1.5fr] rounded-[10px] overflow-y-auto
         bg-white overflow-hidden ' > 
 
@@ -51,10 +51,12 @@ export function Workspace() {
                         </thead>
                         <tbody>   
                             <tr>
-                             {bed === "bed_1" ? <Beds.Bed_1/> :
-                             bed === "bed_2" ?  <Beds.Bed_2/> :
-                                               <Beds.Bed_3/>
-                             }
+                            <>      
+                                {bed === "bed_1" ? <Beds.Bed_1/> :
+                                bed === "bed_2" ?  <Beds.Bed_2/> :
+                                                <Beds.Bed_3/>
+                                }
+                            </>
                             </tr> 
                        
                         </tbody>      

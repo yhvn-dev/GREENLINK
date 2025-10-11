@@ -8,7 +8,7 @@ import {User} from "react-feather"
 import * as userService from "../../data/userService"
 import {SucessMsgs} from "../../components/Global/sucessMsgs"
 
-export function Workspace({refreshChart}) {
+export function Workspace({refreshChart,searchValue}) {
   const [open,setOpen] = useState(false)
   const [mode,setMode] = useState("")
   const [sucessMsg,setSucessMsg] = useState("");
@@ -17,6 +17,7 @@ export function Workspace({refreshChart}) {
   const [allUsers,setAllUsers] = useState([]) 
   const [filtered,setFiltered] = useState([])
 
+ 
   const clearMsg = () => setSucessMsg("");
 
   useEffect(() =>{
@@ -24,6 +25,7 @@ export function Workspace({refreshChart}) {
   },[])
   
   const renderUsers = async () =>{
+
     try{
         const users = await userService.fetchAllUsers();
         setAllUsers(users)
@@ -31,6 +33,30 @@ export function Workspace({refreshChart}) {
       console.error("Error Rendering Users",err)
     }
   }
+
+  // SEARCH USER
+  useEffect(() =>{
+
+    if (!searchValue || searchValue.trim() === ""){
+      setFiltered([]);
+      return;
+    }
+
+    const handler = setTimeout(() => {
+      const lower = searchValue.toLowerCase();
+      const filteredData = allUsers.filter((u) =>  
+        (u.username?.toLowerCase() || "").includes(lower) ||
+        (u.fullname?.toLowerCase() || "").includes(lower) ||
+        (u.email?.toLowerCase() || "").includes(lower) ||
+        (u.phone_number?.toLowerCase() || "").includes(lower) ||
+        (u.role?.toLowerCase() || "").includes(lower) 
+      )
+      setFiltered(filteredData)
+    },1000)
+
+    return () => clearTimeout(handler)
+
+  },[searchValue,allUsers])
 
   const handleInsert = async (data) =>  {
     try {
@@ -60,7 +86,7 @@ export function Workspace({refreshChart}) {
       await refreshChart()
       setOpen(false)
 
-      setSucessMsg(`${selectedUser.fullname} is now updated `)
+      setSucessMsg(`${selectedUser.fullname} is now updated`)
       console.log("UPDATED USER:",updatedUser)
 
     } catch (err) {
@@ -72,13 +98,11 @@ export function Workspace({refreshChart}) {
 
 
   const handleDelete = async () =>{
-    
     try{
       if(!selectedUser?.user_id) return;
       await userService.deleteUsers(selectedUser.user_id,setAllUsers)
       await renderUsers();
       await refreshChart()
-
       setOpen(false)
       setSucessMsg(`${selectedUser.fullname} is deleted successfully`)
       console.log("UPDATED USER:",selectedUser) 
@@ -86,24 +110,35 @@ export function Workspace({refreshChart}) {
       console.error("Error Deleting Users",err)
       throw err
     }
-
   }
 
   const handleFilter = async (e) =>{
     try {
         const target = e.target.value
-        setFiltered(target)
-        console.log(target)
-
-    } catch (err) {
       
+        if (target === "all") {
+            console.log("Target",target)
+            setFiltered([]);
+            await renderUsers();
+            return;
+        }
+        const filteredData = await userService.filterUsers({filterBy:target})
+        setFiltered(filteredData)
+
+        console.log("Target:",target)
+        console.log("Filtered Data:",filteredData)
+    } catch (err) {
+      console.error("Error Filtering Users",err)
+      throw err
     }
   }
   
+   
     // ================================================================================
     return (
       <div className="container user_con workspace flex flex-col h-[100%] w-full row-start-3 row-end-3
       col-start-2 col-end-4 overflow-y-auto">
+
         <Wp_header
             left={<>
                 <svg className="m-x-6"  ><User size={24}/></svg>
@@ -117,11 +152,14 @@ export function Workspace({refreshChart}) {
                 setSelectedUser(null);
                 setOpen(true)}}>ADD USER</button>
 
-                <select className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl" onChange={(e) => {handleFilter(e)}}>
-                  <option value="" class="options">Filter</option>
+                <select onChange={(e) => {handleFilter(e)}} className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl">
+                  <option value="all" class="options">Filter</option>
                   <option value="username" class="options">Username</option>
                   <option value="fullname" class="options">Fullname</option>
-                  <option value="gmail" class="options">Gmail</option>
+                  <option value="email" class="options">Email</option>
+                  <option value="role" class="options">Role</option>
+                  <option value="status" class="options">Status</option>  
+                  <option value="created_at" class="options">Date</option>  
                 </select>
               
             </>
@@ -132,7 +170,7 @@ export function Workspace({refreshChart}) {
         
         <div className="table_holder flex flex-col items-center justify-start h-full w-full  overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
             <UserTable
-              users={allUsers}
+              users={filtered.length > 0 ? filtered : allUsers}
               setOpen={setOpen}
               setMode={setMode}
               setSelectedUser={setSelectedUser}

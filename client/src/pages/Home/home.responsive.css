@@ -103,22 +103,35 @@
     .home{
         position:relative;
     }
+    .btn_nav{
+        @apply fixed flex items-center justify-between bottom-[50px] left-[0px]
+        w-full h-[12%] rounded-[10px] z-2;
+        padding: var(--dis-0-6) 0rem var(--dis-0-6)   var(--dis-0-6) ;      
+    }
     .btn_nav svg{
-        display: flex; margin-left:  0.4rem;
+        display: flex;  
+        margin: 0rem 0rem 0rem 0.5rem;
     }
-    .links_box {
-        @apply fixed flex items-center justify-center bottom-[0px] left-[0px] 
-        w-full h-[15%] rounded-[10px] z-2; border: 2px solid var(--pal2-whiteb);
-        background-color: white;
-    }
-    .btn_nav .links{
-        @apply flex flex-col-reverse items-center justify-center; padding: var(--dis-0-6);
-    }   
+      .links_box{
+        @apply flex items-center justify-evenly w-full h-full
+         rounded-[10px] border-2 border-[--acc-darkc] py-[2rem];
+      }
+        .lgn-link_box{
+            margin-right:1rem;
+        }
 
+
+
+    .btn_nav .links{
+        @apply relative flex flex-col-reverse items-center justify-center border-0;  
+        padding: 0.4rem var(--dis-1);
+    }   
+        .links p{
+            font-size:var(--fns-down-1);
+        }
     .lg-form-left{
         display: none;
     }
-        
     .lg-form-right{
         @apply w-full
     }

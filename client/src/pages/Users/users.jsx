@@ -8,6 +8,7 @@ import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
 import { Workspace } from "../../components/Users/workspace"
 import { Numbers } from "../../components/Users/numbers"
+import { Welcome_box } from '../../components/Global/welcome_box';
 import * as Chart from "../../components/Users/chart"
 
 import { Link} from "react-router-dom"
@@ -18,6 +19,7 @@ import "./users_responsive.css"
 function Users() {
   const [user,setUser] = useState(false)
   const [chartData,setChartData] = useState({count: { total_users: 0}, roleCount: []})
+  const [searchValue,setSearchValue] = useState("");
   const token = localStorage.getItem("accessToken")
 
   // Fetch Login User
@@ -57,30 +59,36 @@ function Users() {
     fetchChartData();
   },[token])
 
+  const handleSearchChange = async (e) =>{
+      const value = e.target.value
+      setSearchValue(value)
+      console.log("Search Value:",value)
+  }
+
   return (
-    <section className="page users grid grid-cols-[12fr_88fr] grid-rows-[8vh_40vh_52vh] 
+    <section className="page users grid grid-cols-[12fr_30fr_58fr] grid-rows-[8vh_40vh_52vh] 
         h-[100vh] w-[100%] gap-x-4 overflow-y-auto  bg-[var(--pal2-whiteb)]
         relative">
 
+      <Welcome_box
+          text={
+            <>
+              <p className="font-bold ">Manage your Users</p>
+              <p className="text-sm opacity-[0.5]">As an  { user?.role || "Guest"} you can modify your people.</p>
+            </>
+          }
+        />
+
       <Db_Header  
-      left={<>
-      </>}
+  
       input={
-
       <>
-        <input type="text" placeholder='' className='border-1 p-x'/>
-        <label for="">Search For Users</label>
-      </>} 
-
-      middle={<>
-      
-      
-        <div class="form_box scenter h-full">
-          <input type="text" placeholder='' className='border-1 p-x'/>
+        <div class="form_box center h-full">
+          <input onChange={handleSearchChange} type="text" value={searchValue} placeholder='' className='border-1 p-x'/>
           <label for="">Search  For Users</label>
         </div>    
-     
-       </>}
+      </>}
+        
       user={user}
       />
   
@@ -91,7 +99,7 @@ function Users() {
             <svg className="svg-icons"><Grid size={16}/></svg>
             <p className='link-text'>Dashboard</p>
           </Link>
-          <Link className="sb-btn btn-a" to="/users">
+          <Link className="sb-btn btn-a-link" to="/users">
             <svg className="svg-icons"><User size={16}/></svg>  
             <p className='link-text'>Users</p>
             
@@ -118,7 +126,7 @@ function Users() {
       />
 
       {/* Users Table with navigations and filters */}
-      <Workspace chartData={chartData} refreshChart={fetchChartData}/>
+      <Workspace chartData={chartData} refreshChart={fetchChartData} searchValue={searchValue}/>
 
 
           

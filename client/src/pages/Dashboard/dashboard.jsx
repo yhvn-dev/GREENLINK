@@ -3,6 +3,7 @@ import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
 import { Numbers } from "../../components/Dashboard/numbers" 
 import { Workspace } from "../../components/Dashboard/workspace"
+import { Welcome_box } from "../../components/Global/welcome_box"
 import {Grid,Activity,User} from "react-feather"
 
 import "./dashboard.css"
@@ -34,11 +35,21 @@ function Dashboard() {
     fetchUser() 
 
   },[token])
+
   
   return (
     <>
-        <section className="page dashboard grid grid-cols-[12fr_88fr] grid-rows-[8vh_20vh_72vh] 
+        <section className="page dashboard grid grid-cols-[12fr_30fr_58fr] grid-rows-[8vh_30vh_62vh] 
         h-[100vh] w-[100%] gap-x-4 overflow-y-auto bg-[var(--pal2-whiteb)] relative">
+
+          <Welcome_box
+            text={
+              <>
+                <p className="font-bold ">Welcome to GREENLINK</p>
+                <p className="text-sm opacity-[0.5]">Hi{" "}{user?.username || "Guest"} Start Monitoring your plant.</p>
+              </>
+            }
+          />
 
           <Db_Header
             left={
@@ -56,7 +67,7 @@ function Dashboard() {
             <Sidebar
               // btn div a
               btn_div_a={ <>
-                <Link className="sb-btn btn-a "> 
+                <Link className="sb-btn btn-a-link"> 
                   <svg className="svg-icons"><Grid size={16}/></svg>
                   <p className="link-text">Dashboard</p>   
                 </Link>
@@ -82,7 +93,6 @@ function Dashboard() {
                 <ol className="data_boxes ">c</ol>
               </>
             }                
-
           />
 
 

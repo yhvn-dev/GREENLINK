@@ -1,3 +1,4 @@
+import { Return } from "three/tsl";
 import api from "../utils/api";
 
 
@@ -31,6 +32,26 @@ export const getUsersCountByRole = async () =>{
     }
 }
 
+
+export const filterUsers = async ({value = "",filterBy}) => {
+    try {
+        const res = await api.get(`/users/filter?${value ? `value=${value}&` : ""}filterBy=${filterBy}`);
+        return res.data
+    } catch (err) {
+        console.err("Error Fetching Users",err)
+        throw err
+    }
+}
+
+export const searchUsers = async (term) =>{
+    try {
+        const res = await api.get(`/users/search?${term ? `q=${term}` : ""}`)
+        return res.data
+    } catch (err) {
+        console.err("Error Fetching Users",err)
+        throw err
+    }
+}
 
 
 export const insertUsers = async (data) =>{

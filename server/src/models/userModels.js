@@ -57,17 +57,61 @@ export const selectUser = async (user_id) => {
     }   
 }
 
-export const filterUser = async (term) => {
+export const filterUser = async (value,filterBy) => {
   try{
-    
-    const { rows } = await query("SELECT * FROM users ORDERED BY $1",[term])
-    return rows[0]
 
+    const allowedValues = ["owner","admin","viewer","active","inactive"];
+    const allowedColumns = ["username","fullname","email","role","status","created_at"]    
+
+    if(!allowedColumns.includes(filterBy))
+      { throw new Error("Invalid Filter Column")}      
+      
+    if(value && !allowedValues.includes(value)){ // if ung value ay wala sa requirement values
+        throw new Error ("Invalid Users")
+    }
+
+    let queryText;
+    let params = [];
+    
+    if(value && value.trim() !== ""){ // if may value 
+
+      queryText = `SELECT * FROM users WHERE ${filterBy} = $1 ORDER BY ${filterBy} ASC`;  
+      params = [value]
+
+    }else{  
+        queryText = `SELECT * FROM users ORDER BY ${filterBy} ASC`;
+    } 
+  
+    const { rows } = await query(queryText,params)  
+    return rows;
+  
   }catch(err){
     console.log(`MODELS: Error Filtering User ${err}`)
     throw err
   }
+
 }
+
+
+export const searchUser = async (term) => {
+  try {
+    const { rows } = await query(
+      `SELECT * FROM users 
+       WHERE username ILIKE $1 
+       OR fullname ILIKE $1 
+       OR email ILIKE $1 
+       OR phone_number ILIKE $1 
+       OR role ILIKE $1 
+       OR status ILIKE $1`,
+      [`%${term}%`]
+    );
+    return rows; 
+  } catch (err) {
+    console.log(`MODELS: Error SEARCHING Users`, [`%${term}%`]);
+    throw err;
+  }
+};
+
 
 
 
@@ -142,24 +186,6 @@ export const deleteUser = async (user_id) =>{
 
 
 
-export const searchUser = async (term) => {
-  try {
-    const { rows } = await query(
-      `SELECT * FROM users 
-       WHERE username ILIKE $1 
-       OR fullname ILIKE $1 
-       OR email ILIKE $1 
-       OR phone_number ILIKE $1 
-       OR role ILIKE $1 
-       OR status ILIKE $1`,
-      [`%${term}%`]
-    );
-    return rows; 
-  } catch (err) {
-    console.log(`MODELS: Error SEARCHING Users`, [`%${term}%`]);
-    throw err;
-  }
-};
 
 
 

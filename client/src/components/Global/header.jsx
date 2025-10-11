@@ -3,7 +3,7 @@ import { Nav } from "./nav"
 
 export function Header({navChildren}) {
   return (
-    <div className="header ">
+    <div className="header col-start-1 col-end-1 row-start-1 row-end-1 ">
 
       <nav className="flex justify-between items-center h-full">
   

@@ -172,20 +172,34 @@ export const selectUser = async (req, res) => {
 
 export const getFilteredUser = async (req,res) =>{
 
-  try {
-      const term = req.query.q
-      const filteredUser = await userModels.filterUser(term)
+  try   {
 
-      if(!filteredUser){ return res.status(404).json({message: "User Not Found "})}
-      
+      const {value,filterBy} = req.query;
+      const filteredUser = await userModels.filterUser(value,filterBy);
+
+      if(filteredUser.length === 0 ){ return res.status(404).json({message: "User Not Found "})}
       console.log("FILTERED USER:",filteredUser)
       res.status(200).json(filteredUser)
 
   } catch (err) {
     console.error(`CONTROLLER:`, err);
-    res.status(500).json({ message: `CONTROLLER: Error Debugging User` });
+    res.status(500).json({ message: `CONTROLLER: Error Filtering User ` });
   }
 }
+
+
+export const searchUser = async (req, res) => {
+  try {
+    const value = req.query.q;
+    const users = await userModels.searchUser(value);
+    res.status(200).json(users);
+    console.log(`CONTROLLER:`, users);
+  } catch (err) {
+    console.error(`CONTROLLER:`, err);
+    res.status(500).json({ message: `CONTROLLER: Error Searching User`, err });
+  }
+};
+
 
 
 export const insertUsers = async (req, res) => {
@@ -282,22 +296,6 @@ export const deleteUser = async (req, res) => {
   } catch (err) {
     console.error("CONTROLLER: Error deleting user", err);
     res.status(500).json({ message: "Error deleting user", err });
-  }
-};
-
-
-
-
-
-export const searchUser = async (req, res) => {
-  try {
-    const term = req.query.q;
-    const users = await userModels.searchUser(term);
-    res.status(200).json(users);
-    console.log(`CONTROLLER:`, users);
-  } catch (err) {
-    console.error(`CONTROLLER:`, err);
-    res.status(500).json({ message: `CONTROLLER: Error Searching User`, err });
   }
 };
 

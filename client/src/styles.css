@@ -15,15 +15,10 @@
     --color-dark--blue: hsl(225, 15%, 25%);
 
 
-    /* [PL2]Accueil1 */
-    --acc-greena: hsl(84, 39%, 37%);
-    --acc-greenb: hsl(82, 56%, 47%);
+    /* [PL2]Accueil1 */;
     --acc-darka: hsl(165, 9%, 15%);
     --acc-darkb: hsl(180, 3%, 29%);
     --acc-darkc: hsl(180, 2%, 43%);
-
-
-
     
     --ptl-greena:#b7efc5;
     --ptl-greenb:#92e6a7;
@@ -35,13 +30,17 @@
     --ptl-greenh:#155d27;
     --ptl-greenj:#10451d;
 
-    
+    --sancga:#003333;
+    --sancgb:#027c68;
+    --sancgc:#b0e892;
+    --sancgd:#009983;
+
+
+
         /* [PAL2] PALLETA GREEN */
     --pal2-whitea: hsl(60, 7%, 91%);
     --pal2-whiteb: hsl(60, 7%, 91%);
-    --pal2-greena: hsl(82, 30%, 62%);
-    --pal2-greenb: hsl(120, 100%, 20%);
-    
+
     /* DARK MODE PALLETE */
     --metal-dark1: hsl(0, 2%, 14%);
     --metal-dark2: hsl(0, 1%, 25%);
@@ -118,12 +117,16 @@
     src: url("./assets/Fonts/Inter_18pt-Regular.ttf");
 }
 @font-face {
-    font-family: "Inter Reg";
+    font-family: "Inter Med";
     src: url("./assets/Fonts/Inter_18pt-Medium.ttf");
+}
+@font-face {
+    font-family: "Mona Sans";
+    src: url("./assets/Fonts/MonaSans-VariableFont_wdth,wght.ttf");
 }
 
 *{
-    font-family: 'Inter', sans-serif;
+    font-family: 'Mona Sans', sans-serif;
     padding:0rem;
     margin: 0rem;
     color: var(--acc-darkb);
@@ -174,11 +177,9 @@ button{
 }
 
 .card{
-    display: flex; align-items: center; justify-content: center;  box-sizing: border-box; border-radius: 10px; 
-    box-shadow: 5px 5px 20px 1px var(--shad-alpha-e); overflow: hidden;
-    max-width: 80%;    
-    width: clamp(300px,80%, 800px);   
-    height: 80%;                   
+    @apply flex items-center justify-center box-border rounded-[10px] 
+    shadow-[5px_5px_20px_1px_var(--shad-alpha-e)] overflow-hidden h-[80%] max-w-[80%];
+    width: clamp(300px,80%, 800px);                  
 }
 
 .modals{
@@ -187,7 +188,7 @@ button{
     padding:2rem;
 }
 .half{
-    @apply flex items-center h-full w-1/2;
+    @apply flex items-center h-full w-1/2 ;
 }
 
 .center{
@@ -197,18 +198,18 @@ button{
 
 
 
+
 /* BUTTONS  ================================================================================  */
 
 
 /* primary button */
 .btn-p{
-    background-color: var(--ptl-greenb);  
-    box-shadow: 0px 5px 10px 1px var(--ptl-greena); border-radius: 10px;
-    color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6);
+    @apply bg-[var(--sancgb)] shadow-[0px_5px_10px_1px_var(--ptl-greena)]  
+    rounded-[10px] text-white  px-4 py-1;  
+    cursor:pointer; 
 }
-    .btn-p p{
-        @apply text-white;
-    }
+    .btn-p p{ @apply text-white; }
+    
 .btn-p:hover{
     box-shadow: 0px 5px 20px 1px var(--ptl-greenb);
 }
@@ -219,8 +220,7 @@ button{
     color: white; cursor:pointer; padding: 0.2rem var(--dis-0-6); width:100%;
 }
 .btn-p-full{
-    background-color: var(--ptl-greenb); 
-    box-shadow: 0px 5px 10px 1px var(--ptl-greena); border-radius: 10px;
+    @apply bg-[var(--sancgb)] shadow-[0px_5px_10px_1px_var(--ptl-greena)] rounded-[10px] text-white;
     color: white; cursor:pointer; padding: 0.3rem var(--dis-0-6); width: 100%;
 }
 
@@ -232,6 +232,7 @@ button{
     .btn-p-update:hover{
         box-shadow:0px 5px 20px 1px var(--purpluish--);
     }
+
 
 .btn-p-delete{
     background-color: var(--color-danger-b) ;
@@ -245,13 +246,15 @@ button{
 
 
 /*  */
+.btn-a-link{
+    @apply bg-[var(--pal2-whiteb)] border-l-5 border-[var(--ptl-greenb)];
+}
+
 .btn-a{
     @apply bg-[var(--pal2-whiteb)] ;
 }
-.btn-a-hl{
-    background:linear-gradient(to left,var(--pal2-whiteb),var(--ptl-greena)); 
-    transition: 0.2s;
-}
+
+
 .btn-h{
     border: 2px solid var(--acc-darkc);
     border-radius: 10px;
@@ -319,6 +322,9 @@ button{
 /* TEXT AND TITLES ================================================================== */
 
 
+.forms{
+    box-shadow: 5px 5px 20px 1px var(--shad-alpha-d);
+}
 
 /* SUCCESS MESSAGE! */
 .form-svg{
@@ -326,6 +332,7 @@ button{
     right:1%;
     top:28%;
 }
+
 
 
 
@@ -388,7 +395,7 @@ button{
 }
 
 select{
-    @apply rounded-[10px];
+    @apply rounded-[10px] cursor-pointer;
 }
 
 
