@@ -1,7 +1,6 @@
 import {query} from "../config/db.js"
 import * as utils from "../utils/hashPass.js"
 
-
 export const findUser = async (loginInput) =>{
 
     try{
@@ -37,7 +36,7 @@ export const countUserByRole = async () => {
 };
                 
 
-export const getUsers = async() =>{
+export const getUsers = async () =>{
     try{
         const { rows } = await query("SELECT * FROM users");
         return rows
@@ -48,7 +47,7 @@ export const getUsers = async() =>{
 }
 
 
-export const selectUser = async(user_id) => {
+export const selectUser = async (user_id) => {
     try{
         const { rows } = await query("SELECT * FROM users WHERE user_id = $1",[user_id])
         return rows[0] 
@@ -57,6 +56,20 @@ export const selectUser = async(user_id) => {
         throw err
     }   
 }
+
+export const filterUser = async (term) => {
+  try{
+    
+    const { rows } = await query("SELECT * FROM users ORDERED BY $1",[term])
+    return rows[0]
+
+  }catch(err){
+    console.log(`MODELS: Error Filtering User ${err}`)
+    throw err
+  }
+}
+
+
 
 export const insertUsers = async(userData) => {    
     try{

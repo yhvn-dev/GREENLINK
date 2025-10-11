@@ -1,11 +1,12 @@
-  import { Wp_header } from "./wp_header"
-  import { UserTable } from "../../components/Users/userTable"
-  import { useEffect, useState } from "react"
-  import { Modal } from "./modal"
+import { Wp_header } from "./wp_header"
+import { UserTable } from "../../components/Users/userTable"
+import { useEffect, useState } from "react"
+import { Modal } from "./modal"
 
+import {User} from "react-feather"
 
-  import * as userService from "../../data/userService"
-  import {SucessMsgs} from "../../components/Global/sucessMsgs"
+import * as userService from "../../data/userService"
+import {SucessMsgs} from "../../components/Global/sucessMsgs"
 
 export function Workspace({refreshChart}) {
   const [open,setOpen] = useState(false)
@@ -14,7 +15,7 @@ export function Workspace({refreshChart}) {
   const [backendError,setBackendError] = useState("");
   const [selectedUser,setSelectedUser] = useState(null)
   const [allUsers,setAllUsers] = useState([]) 
-
+  const [filtered,setFiltered] = useState([])
 
   const clearMsg = () => setSucessMsg("");
 
@@ -87,6 +88,17 @@ export function Workspace({refreshChart}) {
     }
 
   }
+
+  const handleFilter = async (e) =>{
+    try {
+        const target = e.target.value
+        setFiltered(target)
+        console.log(target)
+
+    } catch (err) {
+      
+    }
+  }
   
     // ================================================================================
     return (
@@ -94,14 +106,24 @@ export function Workspace({refreshChart}) {
       col-start-2 col-end-4 overflow-y-auto">
         <Wp_header
             left={<>
-                <span className='m-x'>Users</span>
+                <svg className="m-x-6"  ><User size={24}/></svg>
+                <span className='text-2xl'>Users</span>
             </>}
             right={<>
-                <button className="btn-p m-x" 
+             
+                <button className="btn-p m-x text-[0.9rem]" 
                 onClick={() => 
                 {setMode("insert");
                 setSelectedUser(null);
-                setOpen(true)}}>Add User</button>
+                setOpen(true)}}>ADD USER</button>
+
+                <select className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl" onChange={(e) => {handleFilter(e)}}>
+                  <option value="" class="options">Filter</option>
+                  <option value="username" class="options">Username</option>
+                  <option value="fullname" class="options">Fullname</option>
+                  <option value="gmail" class="options">Gmail</option>
+                </select>
+              
             </>
             }
           />

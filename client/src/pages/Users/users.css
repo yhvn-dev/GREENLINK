@@ -115,16 +115,7 @@ body{
     margin: 0;
  
 }
-.users{
-    display: grid;
-    grid-template-columns: 12fr 40fr 48fr;
-    grid-template-rows:8vh 40vh 52vh;    
-    height: 100vh;
-    max-width:100%;
-    column-gap: 1rem;
-    overflow-y: hidden;
-    background-color: var(--pal2-whiteb);
-}   
+
 .container{
     @apply bg-[var(--pal2-whitea)];
 }
@@ -163,7 +154,7 @@ input{
 }
 .num_card{
     @apply flex items-center justify-center rounded-[10px] w-full h-full bg-[var(--pal2-whitea)];
-    box-shadow:0px 5px 5px 2px var(--shad-alpha-c);
+    box-shadow:0px 5px 10px 2px var(--shad-alpha-e);
 }                   
 
     .input-error {
@@ -187,8 +178,8 @@ input{
 }
 .custom-file:hover {
     box-shadow: 0px 5px 10px 1px var(--shad-alpha-e);
-}
 
+}
 .custom-file input[type="file"] {
   display: none; 
 }   

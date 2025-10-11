@@ -58,10 +58,30 @@ function Users() {
   },[token])
 
   return (
-    <section className="page users relative">
+    <section className="page users grid grid-cols-[12fr_88fr] grid-rows-[8vh_40vh_52vh] 
+        h-[100vh] w-[100%] gap-x-4 overflow-y-auto  bg-[var(--pal2-whiteb)]
+        relative">
 
-      <Db_Header  left={<></>} 
-       user={user}
+      <Db_Header  
+      left={<>
+      </>}
+      input={
+
+      <>
+        <input type="text" placeholder='' className='border-1 p-x'/>
+        <label for="">Search For Users</label>
+      </>} 
+
+      middle={<>
+      
+      
+        <div class="form_box scenter h-full">
+          <input type="text" placeholder='' className='border-1 p-x'/>
+          <label for="">Search  For Users</label>
+        </div>    
+     
+       </>}
+      user={user}
       />
   
       <Sidebar

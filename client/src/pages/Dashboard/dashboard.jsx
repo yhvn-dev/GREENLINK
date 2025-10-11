@@ -37,13 +37,19 @@ function Dashboard() {
   
   return (
     <>
-        <section className="page dashboard  bg-white overflow-y-auto relative">
+        <section className="page dashboard grid grid-cols-[12fr_88fr] grid-rows-[8vh_20vh_72vh] 
+        h-[100vh] w-[100%] gap-x-4 overflow-y-auto bg-[var(--pal2-whiteb)] relative">
 
           <Db_Header
             left={
                 <>
                 </>
             }   
+              input={               
+                <>
+                <input type="text" placeholder='' className='border-1 p-x'/>
+                <label for="">Search For Readings</label>
+              </>} 
             user={user}       
           />
          

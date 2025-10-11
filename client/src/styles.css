@@ -272,10 +272,8 @@ button{
 .m-btn-p{
     @apply bg-[var(--ptl-greenb)];
 }
-
-
-
 /* END OF BUTTONS  ================================================================================  *
+
 
 
 
@@ -289,7 +287,6 @@ button{
     @apply rounded-full border-[1px] border-[var(--acc-darkc)] object-cover;
     margin: 0rem 1rem;
 }
-
 /* END OF NAVIGATED COMPONENTS */
 
 
@@ -329,6 +326,7 @@ button{
     right:1%;
     top:28%;
 }
+
 
 
 .formMsg_box{
@@ -394,20 +392,18 @@ select{
 }
 
 
+/* TABLE STYLES */
 
-
-
-
-/* imgs */
-.bushes{
-    width: 40%;
-    height: auto;
-    filter: drop-shadow(5px 5px 15px var(--shad-alpha));
+tr:nth-child(odd){
+    @apply bg-green-50;
 }
 
+
+
+/* MEASUREMENTS ===== ===== ===== ===== ===== ===== ===== ===== =====  */
 /* marin 0.6 */
 .m-r-6{margin-right:0.6rem};
-.m-l--6{margin-left:0.6rem}
+.m-l-6{margin-left:0.6rem}
 .m-x-6{ margin: 0rem 0.6rem}
 
 /* margin 1 */
@@ -423,6 +419,8 @@ select{
 .p-0-6{padding:var(--dis-0-6)};
 .p-h-0-6{ padding:0.2rem var(--dis-0-6)};
 
+
+/* ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== =====  */
 
 .viewer_color{
     background-color:hsl(0, 0%, 90%);

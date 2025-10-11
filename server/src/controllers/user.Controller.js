@@ -170,41 +170,59 @@ export const selectUser = async (req, res) => {
 
   };
 
-  export const insertUsers = async (req, res) => {
+export const getFilteredUser = async (req,res) =>{
 
-      try {
-        
-        const userData = req.body;
-        const {username,email} = req.body
+  try {
+      const term = req.query.q
+      const filteredUser = await userModels.filterUser(term)
 
-        const usernameExists = await userModels.findUser(username)
-        if(usernameExists){
-          return res.status(400).json({message:"Username Already Exist"})
-        }
-        const emailExists = await userModels.findUser(email)
-        if(emailExists) {
-          return res.status(400).json({message:"Email Already Exist"})
-        }
-        
-        if (req.file) {
-          userData.profile_picture = req.file.filename; // or req.file.path if you want full path
-        }else{
-          userData.profile_picture = null;
-        }
+      if(!filteredUser){ return res.status(404).json({message: "User Not Found "})}
       
-        const user = await userModels.insertUsers(userData);
+      console.log("FILTERED USER:",filteredUser)
+      res.status(200).json(filteredUser)
 
-        res.status(201).json(user);
-        console.log("User inserted:", user);
+  } catch (err) {
+    console.error(`CONTROLLER:`, err);
+    res.status(500).json({ message: `CONTROLLER: Error Debugging User` });
+  }
+}
 
-      } catch (err) {
-        console.error("CONTROLLER: Error Inserting Users", err);
-        res
-          .status(500)
-          .json({ message: "Error inserting user", error: err.message });
-      }
 
-    };
+export const insertUsers = async (req, res) => {
+
+  try {
+      
+    const userData = req.body;
+    const {username,email} = req.body
+
+    const usernameExists = await userModels.findUser(username)
+    if(usernameExists){
+      return res.status(400).json({message:"Username Already Exist"})
+    }
+    const emailExists = await userModels.findUser(email)
+    if(emailExists) {
+      return res.status(400).json({message:"Email Already Exist"})
+    }
+    
+    if (req.file) {
+      userData.profile_picture = req.file.filename; // or req.file.path if you want full path
+    }else{
+      userData.profile_picture = null;
+    }
+  
+    const user = await userModels.insertUsers(userData);
+
+    res.status(201).json(user);
+    console.log("User inserted:", user);
+
+  } catch (err) {
+    console.error("CONTROLLER: Error Inserting Users", err);
+    res
+      .status(500)
+      .json({ message: "Error inserting user", error: err.message });
+  }
+
+};
 
 export const updateUser = async (req, res) => {
   try {
@@ -282,3 +300,5 @@ export const searchUser = async (req, res) => {
     res.status(500).json({ message: `CONTROLLER: Error Searching User`, err });
   }
 };
+
+
