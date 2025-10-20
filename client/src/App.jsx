@@ -28,8 +28,7 @@ function App() {
               <Route path='/login' element={<Login/>}/>
               <Route path='/dashboard' element={<ProtectedRoute> <Dashboard/> </ProtectedRoute>}/>
               <Route path='/users' element={<ProtectedRoute> <Users/> </ProtectedRoute>} />
-              <Route path='/analytics' element={<ProtectedRoute> <Analytics/> </ProtectedRoute>}/>
-
+              <Route path='/analytics' element={<ProtectedRoute> <Analytics/> </ProtectedRoute>}/>      
             {/* Other Pages */}
           </Routes>
 

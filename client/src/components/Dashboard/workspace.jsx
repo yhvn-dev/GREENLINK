@@ -69,7 +69,7 @@ export function Workspace() {
                 {/* NAVIGATION */}
                 <nav className="beds_nav down rounded-tl-[10px]
                      rounded-bl-[10px]  bg-[var(--pal2-whitea)]
-                     shadow-[0px_0px_10px_1px_rgba(53,53,53,0.1)] 
+                 
                      col-start-3 col-end-3 row-start-2 row-end-2">
 
                     <button onClick={() => setBed("bed_1")}

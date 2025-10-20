@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Droplets, Sun, Wind, Activity, AlertTriangle, TrendingUp, Clock, Leaf } from 'lucide-react';
 
 export function Numbers({data_box}) {
   return (

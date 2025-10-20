@@ -143,19 +143,7 @@ margin:1rem 0rem; font-size: var(--fns-down-1);
   /* NUMBERS ======= ======= ======= ======= ======= ======= ======= ======= ======= ======= */  
   .data_boxes{
     @apply h-full w-full flex items-center justify-center rounded-[20px];
-    box-shadow: 5px 5px 20px 1px var(--shad-alpha-e);
   }
-    .data_boxes:nth-child(1){
-        background:linear-gradient(to left,white,white,var(--ptl-greena))
-    }
-    .data_boxes:nth-child(2){
-        background:linear-gradient(to left,white,white,var(--white-blple--))
-    }
-    .data_boxes:nth-child(3){
-        background:linear-gradient(to left,white,white,var(--color-warning-c))
-    }
-
-
     .db.workspace{
         column-gap: 1rem;
     }

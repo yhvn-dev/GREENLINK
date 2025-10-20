@@ -93,23 +93,6 @@ function Users() {
       />
   
       <Sidebar
-          // btn div a
-        btn_div_a={ <>
-          <Link className="sb-btn" to="/dashboard"> 
-            <svg className="svg-icons"><Grid size={16}/></svg>
-            <p className='link-text'>Dashboard</p>
-          </Link>
-          <Link className="sb-btn btn-a-link" to="/users">
-            <svg className="svg-icons"><User size={16}/></svg>  
-            <p className='link-text'>Users</p>
-            
-          </Link>
-           <Link className="sb-btn" to="/analytics">  
-            <svg className="svg-icons" ><Activity size={16}/></svg> 
-            <p className='link-text'>Analytics</p>
-          </Link>
-          </>
-          }
         />
 
       {/* Data like graphs and charts */}

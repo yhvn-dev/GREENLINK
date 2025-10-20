@@ -65,32 +65,17 @@ function Dashboard() {
           />
          
             <Sidebar
-              // btn div a
-              btn_div_a={ <>
-                <Link className="sb-btn btn-a-link"> 
-                  <svg className="svg-icons"><Grid size={16}/></svg>
-                  <p className="link-text">Dashboard</p>   
-                </Link>
-                <Link className="sb-btn" to="/users">
-                  <svg className="svg-icons"><User size={16}/></svg>
-                  <p className="link-text">Users</p>               
-                </Link>       
-                 <Link className="sb-btn" to="/analytics">  
-                 <svg className="svg-icons" ><Activity size={16}/></svg>  
-                 <p className='link-text'>Analytics</p>
-                </Link>
-                </>
-                }
+    
             />
 
           {/* NUMBER CONTAINER */}
           <Numbers
             data_box={
               <>
-                <ol className="data_boxes moisture-box">a
+                <ol className="w-full h-full bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all moisture-box">a
                 </ol>
-                <ol className="data_boxes ph-level-box">b</ol>
-                <ol className="data_boxes ">c</ol>
+                <ol className="w-full h-full bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all ph-level-box">b</ol>
+                <ol className="w-full h-full bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all temperature-box">c</ol>
               </>
             }                
           />
