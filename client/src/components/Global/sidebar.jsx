@@ -21,10 +21,10 @@ export function Sidebar() {
           to="/Dashboard"
           end
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[10px] my-2 w-full
+            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2 my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-green-400 bg-[var(--pal2-whiteb)] text-green-500"
+                  ? "border-l-4 border-[#009983]"
                   : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
               }`
           }>
@@ -38,10 +38,10 @@ export function Sidebar() {
         <NavLink
           to="/users"
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[10px] my-2 w-full
+            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2  my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-green-400 bg-[var(--pal2-whiteb)] text-green-500"
+                  ? "border-l-4 border-[#009983]"
                   : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
               }`
           }>
@@ -53,25 +53,21 @@ export function Sidebar() {
         <NavLink
           to="/analytics"
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[10px] my-2 w-full
+            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2 my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-green-400 bg-[var(--pal2-whiteb)] text-green-500"
+                  ? "border-l-4 border-[#009983]"
                   : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
               }`
           }
         >
       
           <p className="text-sm">Analytics</p>
-        </NavLink>
-
-
-      
+        </NavLink>      
       </div>
 
-
       {/* Logout Section */}
-      <div className="flex items-center justify-center w-full">
+      <div className="flex items-center justify-start flex-col w-full h-[50%]  ">
         {isOpen && <LogoutModal isOpen={isOpen} onClose={() => setModal(false)} />}
         <Logout onOpen={() => setModal(true)} />
       </div>

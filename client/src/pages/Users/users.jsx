@@ -67,7 +67,7 @@ function Users() {
 
   return (
     <section className="page users grid grid-cols-[12fr_30fr_58fr] grid-rows-[8vh_40vh_52vh] 
-        h-[100vh] w-[100%] gap-x-4 overflow-y-auto  bg-[var(--pal2-whiteb)]
+        h-[100vh] w-[100%] gap-x-4 overflow-y-auto
         relative">
 
       <Welcome_box
@@ -84,7 +84,7 @@ function Users() {
       input={
       <>
         <div class="form_box center h-full">
-          <input onChange={handleSearchChange} type="text" value={searchValue} placeholder='' className='border-1 p-x'/>
+          <input className="border-[1px] border-[var(--acc-darkc)] rounded-2xl px-4" onChange={handleSearchChange} type="text" value={searchValue} placeholder='' />
           <label for="">Search  For Users</label>
         </div>    
       </>}
@@ -99,10 +99,10 @@ function Users() {
       <Numbers        
         data_boxes={
           <>
-            <div className='num_card logs_card col-start-1 col-end-1
-            bg-transparent backdrop-blur-[100px]'>Logs Card</div>
-            <div className='num_card chart_card col-start-2 col-end-2
-            bg-transparent backdrop-blur-[80px]'><Chart.RoleChart chartData={chartData}/></div>
+            <div className='rounded-2xl logs_card col-start-1 col-end-1
+            bg-transparent backdrop-blur-[100px]  shadow-lg'>Logs Card</div>
+            <div className='rounded-2xl chart_card col-start-2 col-end-2
+            bg-transparent backdrop-blur-[80px]  shadow-lg'><Chart.RoleChart chartData={chartData}/></div>
           </>
         }
         

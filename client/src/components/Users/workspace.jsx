@@ -152,15 +152,15 @@ export function Workspace({refreshChart,searchValue}) {
                 setSelectedUser(null);
                 setOpen(true)}}>ADD USER</button>
 
-                <select onChange={(e) => {handleFilter(e)}} className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl">
-                  <option value="all" class="options">Filter</option>
-                  <option value="username" class="options">Username</option>
-                  <option value="fullname" class="options">Fullname</option>
-                  <option value="email" class="options">Email</option>
-                  <option value="role" class="options">Role</option>
-                  <option value="status" class="options">Status</option>  
-                  <option value="created_at" class="options">Date</option>  
-                </select>
+                  <select onChange={(e) => {handleFilter(e)}} className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl">
+                    <option value="all" class="options">Filter</option>
+                    <option value="username" class="options">Username</option>
+                    <option value="fullname" class="options">Fullname</option>
+                    <option value="email" class="options">Email</option>
+                    <option value="role" class="options">Role</option>
+                    <option value="status" class="options">Status</option>  
+                    <option value="created_at" class="options">Date</option>  
+                  </select>
               
             </>
             }

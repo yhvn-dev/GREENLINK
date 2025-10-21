@@ -170,6 +170,8 @@ input{
     .user-chart-icon {
         margin-top: 0.5rem;
     }
+
+
     
 .custom-file {
     @apply bg-[var(--pal2-whiteb)] cursor-pointer rounded-[10px] text-center w-[80%];  
@@ -178,7 +180,6 @@ input{
 }
 .custom-file:hover {
     box-shadow: 0px 5px 10px 1px var(--shad-alpha-e);
-
 }
 .custom-file input[type="file"] {
   display: none; 

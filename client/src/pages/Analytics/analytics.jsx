@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-import { Droplets, Sun, Wind, Activity, AlertTriangle, TrendingUp, Clock, Leaf } from 'lucide-react';
-import {Sidebar} from '../../components/Global/sidebar';
+import { Droplets, Sun, Wind, Activity, AlertTriangle, Thermometer,Waves, TrendingUp, Clock, Leaf } from 'lucide-react';
+import { Sidebar } from '../../components/Global/sidebar';
 import { Db_Header } from '../../components/Global/db_header';
 import { Welcome_box } from '../../components/Global/welcome_box';
 
@@ -41,6 +41,8 @@ const GaugeChart = ({ value, max, label, unit, icon: Icon, color }) => {
   );
 };
 
+
+
 // Alert Component
 const AlertItem = ({ type, message, time }) => {
   const colors = {
@@ -64,6 +66,10 @@ const AlertItem = ({ type, message, time }) => {
     </div>
   );
 };
+
+
+
+
 
 // Main Dashboard
 const Analytics = () => {
@@ -114,29 +120,204 @@ const Analytics = () => {
     { day: 'Sun', usage: 13 }
   ];
   
-  const lightData = [
-    { time: '06:00', lux: 100 },
-    { time: '08:00', lux: 350 },
-    { time: '10:00', lux: 600 },
-    { time: '12:00', lux: 850 },
-    { time: '14:00', lux: 780 },
-    { time: '16:00', lux: 520 },
-    { time: '18:00', lux: 250 },
-    { time: '20:00', lux: 50 }
-  ];
+  // const lightData = [
+  //   { time: '06:00', lux: 100 },
+  //   { time: '08:00', lux: 350 },
+  //   { time: '10:00', lux: 600 },
+  //   { time: '12:00', lux: 850 },
+  //   { time: '14:00', lux: 780 },
+  //   { time: '16:00', lux: 520 },
+  //   { time: '18:00', lux: 250 },
+  //   { time: '20:00', lux: 50 }
+  // ];
   
   const pumpLogs = [
     { time: '08:15 AM', duration: '3m 45s', status: 'Completed' },
     { time: '02:30 PM', duration: '4m 12s', status: 'Completed' },
     { time: '06:45 PM', duration: '3m 58s', status: 'Completed' }
   ];
+
+  const metricsData = {
+    moisture: {
+      current: 68,
+      average: 65.5,
+      min: 58,
+      max: 75,
+      unit: '%',
+      status: 'Optimal'
+    },
+    ph: {
+      current: 6.7,
+      average: 6.6,
+      min: 6.3,
+      max: 7.0,
+      unit: 'pH',
+      status: 'Good'
+    },
+    temperature: {
+      current: 27.5,
+      average: 26.8,
+      min: 23,
+      max: 34,
+      unit: '°C',
+      status: 'Normal'
+    },
+    waterLevel: {
+      current: 82,
+      average: 78.5,
+      min: 65,
+      max: 95,
+      unit: '%',
+      status: 'High'
+    }
+  };
+
+
+
+
+    const MetricCard = ({ icon: Icon, title, data, gradient, iconColor }) => {
+    return (
+      <div 
+        className="w-full h-full bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all relative overflow-hidden"
+      >
+        {/* Gradient Background */}
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{ background: gradient }}
+        />
+        
+        {/* Content */}
+        <div className="relative z-10 h-full flex flex-col">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2">
+              <div 
+                className="p-2 rounded-lg"
+                style={{ backgroundColor: iconColor + '15' }}
+              >
+                <Icon size={18} style={{ color: iconColor }} />
+              </div>
+              <h3 
+                className="text-sm font-semibold"
+                style={{ color: 'var(--acc-darka)' }}
+              >
+                {title}
+              </h3>
+            </div>
+            <div 
+              className="text-sm px-2 py-1 rounded-full font-medium"
+              style={{ 
+                backgroundColor: iconColor + '15',
+                color: iconColor
+              }}
+            >
+              {data.status}
+            </div>
+          </div>
+
+          {/* Current Value - Large Display */}
+          <div className="mb-4">
+            <div className="flex items-baseline gap-1">
+              <span 
+                className="text-4xl font-bold"
+                style={{ color: iconColor }}
+              >
+                {data.current}
+              </span>
+              <span 
+                className="text-lg font-medium"
+                style={{ color: 'var(--acc-darkb)' }}
+              >
+                {data.unit}
+              </span>
+            </div>
+            <p className="text-sm mt-1" style={{ color: 'var(--acc-darkc)' }}>
+              Current Reading
+            </p>
+          </div>
+
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-3 gap-3 mt-auto">
+            {/* Average */}
+            <div 
+              className="p-2 rounded-lg"
+              style={{ backgroundColor: 'var(--sage-lighter)' }}
+            >
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--acc-darkb)' }}>
+                Average
+              </p>
+              <p className="text-sm font-bold" style={{ color: 'var(--sage-dark)' }}>
+                {data.average}{data.unit}
+              </p>
+            </div>
+
+            {/* Minimum */}
+            <div 
+              className="p-2 rounded-lg"
+              style={{ backgroundColor: 'var(--sage-lighter)' }}
+            >
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--acc-darkb)' }}>
+                Min
+              </p>
+              <p className="text-sm font-bold" style={{ color: '#3b82f6' }}>
+                {data.min}{data.unit}
+              </p>
+            </div>
+
+            {/* Maximum */}
+            <div 
+              className="p-2 rounded-lg"
+              style={{ backgroundColor: 'var(--sage-lighter)' }}
+            >
+              <p className="text-sm font-medium mb-1" style={{ color: 'var(--acc-darkb)' }}>
+                Max
+              </p>
+              <p className="text-sm font-bold" style={{ color: '#ef4444' }}>
+                {data.max}{data.unit}
+              </p>
+            </div>
+          </div>
+
+          {/* Progress Bar */}
+          <div className="mt-3">
+            <div 
+              className="w-full h-2 rounded-full overflow-hidden"
+              style={{ backgroundColor: 'var(--sage-lighter)' }}
+            >
+              <div 
+                className="h-full rounded-full transition-all duration-500"
+                style={{ 
+                  width: `${Math.min(100, (data.current / data.max) * 100)}%`,
+                  background: gradient
+                }}
+              />
+            </div>
+            <div className="flex justify-between mt-1">
+              <span className="text-sm" style={{ color: 'var(--acc-darkc)' }}>
+                {data.min}{data.unit}
+              </span>
+              <span className="text-sm" style={{ color: 'var(--acc-darkc)' }}>
+                {data.max}{data.unit}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+
+
+
+
+
+
   
   return (
     <div className="grid grid-cols-[12fr_30fr_58fr] grid-rows-[8vh_92vh] 
         h-[100vh] w-[100%] gap-4 overflow-y-auto relative  min-h-screen bg-gradient-to-br from-[#E8F3ED] to-[#C4DED0] ">
 
       <Sidebar/>
-
       <Welcome_box text={
         <>
           <p className="font-bold ">Welcome to GREENLINK</p>
@@ -149,8 +330,10 @@ const Analytics = () => {
     
   
       <main className="h-full w-full  col-start-2 col-end-4 row-start-2 row-end-4">
+
+      
         {/* Navigation Tabs */}
-        <div className="flex gap-2 mb-6">
+        <div   className="flex gap-2 mb-6">
           <button
             onClick={() => setActiveTab('overview')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -171,6 +354,20 @@ const Analytics = () => {
           >
             Trends
           </button>
+
+
+            <button
+            onClick={() => setActiveTab('sensor_analytics')}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+              activeTab === 'sensor_analytics' 
+                ? 'bg-white text-[#027c68] shadow-md' 
+                : 'bg-white/50 text-[#5A8F73] hover:bg-white/70'
+            }`}
+          >
+            Sensor Analytics
+          </button>
+
+
           <button
             onClick={() => setActiveTab('logs')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
@@ -183,6 +380,15 @@ const Analytics = () => {
           </button>
         </div>
         
+
+
+
+
+
+
+
+
+
         {/* Overview Tab */}
         {activeTab === 'overview' && (
           <div className="grid grid-cols-12 gap-4 h-[calc(100vh-140px)] ">
@@ -224,12 +430,17 @@ const Analytics = () => {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-[#5A8F73]">Light</span>
-                    <span className="font-medium text-[#003333]">Optimal</span>
+                    <span className="font-medium text-[#003333]">N/A</span>
                   </div>
                 </div>
               </div>
             </div>
             
+            
+
+
+
+
             {/* Gauges Row */}
             <div className="col-span-8 grid grid-cols-4 gap-4">
               <div className="bg-white rounded-2xl p-4 shadow-lg hover:shadow-xl transition-all">
@@ -246,6 +457,13 @@ const Analytics = () => {
               </div>
             </div>
             
+
+
+
+
+
+
+
             {/* Moisture Trend Chart */}
             <div className="col-span-5 row-span-2 bg-white rounded-2xl p-5 shadow-lg hover:shadow-xl transition-all">
               <h3 className="text-sm font-semibold text-[#003333] mb-4">Soil Moisture Trend</h3>
@@ -307,11 +525,14 @@ const Analytics = () => {
           </div>
         )}
         
-        {/* Trends Tab */}
+  
         {activeTab === 'trends' && (
           <div className="grid grid-cols-2 gap-4 h-[calc(100vh-140px)]">
-            <div className="bg-white rounded-2xl p-6 shadow-lg">
-              <h3 className="text-sm font-semibold text-[#003333] mb-4">Light Intensity</h3>
+
+
+            
+            {/* <div className="bg-white rounded-2xl p-6 shadow-lg">
+              <h3 className="text-sm font-semibold text-[#003333] md">Light Intensity</h3>
               <ResponsiveContainer width="100%" height="90%">
                 <AreaChart data={lightData}>
                   <defs>
@@ -335,7 +556,7 @@ const Analytics = () => {
                   <Area type="monotone" dataKey="lux" stroke="#b0e892" fillOpacity={1} fill="url(#colorLux)" />
                 </AreaChart>
               </ResponsiveContainer>
-            </div>
+            </div> */}
             
             <div className="bg-white rounded-2xl p-6 shadow-lg">
               <h3 className="text-sm font-semibold text-[#003333] mb-4">Multi-Metric Comparison</h3>
@@ -360,6 +581,51 @@ const Analytics = () => {
             </div>
           </div>
         )}
+
+
+        {activeTab === "sensor_analytics" && (
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 grid-rows-2 gap-4 p-6 bg-amber-400" style={{ backgroundColor: 'var(--pal2-whitea)' }}>
+            {/* Moisture Card */}
+            <MetricCard
+              icon={Droplets}
+              title="Soil Moisture"
+              data={metricsData.moisture}
+              gradient="linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%)"
+              iconColor="#0891b2"
+            />
+
+
+          {/* pH Level Card */}
+          <MetricCard
+            icon={Activity}
+            title="pH Level"
+            data={metricsData.ph}
+            gradient="linear-gradient(135deg, #8b5cf6 0%, #a78bfa 100%)"
+            iconColor="#7c3aed"
+          />
+
+          {/* Temperature Card */}
+          <MetricCard
+            icon={Thermometer}
+            title="Temperature"
+            data={metricsData.temperature}
+            gradient="linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%)"
+            iconColor="#d97706"
+          />
+
+          {/* Water Level Card */}
+          <MetricCard
+            icon={Waves}
+            title="Water Level"
+            data={metricsData.waterLevel}
+            gradient="linear-gradient(135deg, #10b981 0%, #34d399 100%)"
+            iconColor="#059669"
+          />
+        </div>
+
+        )}
+
         
         {/* Logs Tab */}
         {activeTab === 'logs' && (

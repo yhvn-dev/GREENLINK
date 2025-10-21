@@ -7,7 +7,7 @@
     /* [PL1] FOUNDATIONS */
     --main-white--: hsl(258, 44%, 93%);
     --white-blple--: hsl(221, 32%, 77%);
-    --purpluish--: hsl(225, 25%, 65%);
+    --purpluish--: #8f9bbc;
     --bluis--: hsl(220, 74%, 62%);
     --mainblue--: hsl(225, 46%, 44%);
     --gainsbro: hsl(0, 0%, 96%);
@@ -37,7 +37,6 @@
     --sage-dark: #5A8F73;
     --sage-medium: #C4DED0;
     
-
     --sancga:#003333;
     --sancgb:#027c68;
     --sancgc:#b0e892;
@@ -328,6 +327,11 @@ button{
 .text_box .text:nth-child(2){
     margin-top: var(--dis-0-6);  
 }
+
+.t-white{
+    color: white;
+}
+
 /* TEXT AND TITLES ================================================================== */
 
 
@@ -388,7 +392,7 @@ button{
     position: relative;
 }
 .form_box label{
-    @apply pointer-events-none left-[2%] bg-white;
+    @apply pointer-events-none left-[4%] bg-white;
     transition: ease 0.4s; padding: 0rem var(--dis-0-6);
     position: absolute; font-size: var(--fns-down-1); color:var(--acc-darkc);
 }
@@ -406,14 +410,6 @@ button{
 select{
     @apply rounded-[10px] cursor-pointer;
 }
-
-
-/* TABLE STYLES */
-
-tr:nth-child(odd){
-    @apply bg-green-50;
-}
-
 
 
 /* MEASUREMENTS ===== ===== ===== ===== ===== ===== ===== ===== =====  */
