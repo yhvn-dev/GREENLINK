@@ -241,3 +241,4 @@ export function Bed_3() {
     </div>
   );
 }
+

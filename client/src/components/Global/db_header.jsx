@@ -4,7 +4,7 @@ import { Search } from "./search"
 export function Db_Header({input,user}) {
   return (
 
-    <section className="container col-start-3 col-end-5 header flex items-center justify-center">
+    <section className="rounded-[10px] col-start-3 col-end-5 header flex items-center justify-center shadow-lg">
         <div className="middle_header center w-[30%] "><Search input={input}/></div>
         <div className="right_header w-[70%] flex flex-row-reverse">
            <img src={user?.profile_picture ? `http://localhost:5000/uploads/${user.profile_picture}` : Pfp} 

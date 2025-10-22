@@ -1,6 +1,6 @@
 import React, { useState,useRef } from 'react'
 import { User,Lock } from "react-feather";
-import { colors } from "../../utils/colors"
+import { colors } from "./../../utils/colors"
 
 export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef}) {
 

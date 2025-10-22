@@ -3,8 +3,7 @@ import api from "../../utils/api"
 import { Link } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 
-import { Form } from "../../components/Login/form"
-import { Hero } from "../../components/Global/hero.jsx"
+import { Form } from "./form.jsx"
 import { Header } from "../../components/Global/header.jsx" 
 
 import {Home as HomeIcon} from "react-feather"
@@ -66,43 +65,18 @@ function Login() {
   }
     
   return (
-    <section className="page  login grid grid-cols-1 grid-rows-[8vh_92vh] h-[100vh] w-full bg-white">
+    <section className="page login grid grid-cols-1 grid-rows-[8vh_92vh] h-[100vh] w-full bg-white">
 
-        <Header
-        
-          navChildren={
-
-            <>     
-              {/* Nav group */}
-              <div 
-                className={`lgn-link_box links_box w-full flex items-center justify-center`} >
-                    
-                  <Link to="/" className="links border-1 rounded-[10px]">  
-                      <p>Home</p>
-                      <svg className='home-icons border-1 rounded-[10px]'><HomeIcon size={18}/></svg>
-                  </Link>
-                  
-                  <Link to="" className="links border-1 rounded-[10px]">
-                      <p>About</p>
-                      <svg className='home-icons'><Phone size={18}/></svg>
-                  </Link>
-
-                  <Link to="/contacts" className="links border-1 rounded-[10px]">     
-                      <p>Contact</p>
-                      <svg className='home-icons'><Info size={18}/></svg>
-                  </Link>    
-              </div>
-
-            </>  
-        }              
-        
-        />
-
-        {/* hero */}  
-           
-            <Hero
-              children={<Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} />}
-            />
+        <Header navChildren={
+            <>
+              <Link to="/">Home</Link>
+            </>
+        }/>
+        <section className="center row-start-2 row-end-3 col-start-1 col-end-2 w-full h-full ">
+            <Form handleSubmit={handleSubmit} errorMsg={errorMsg} successMsg={successMsg} loginInputRef={loginInputRef} passwordRef={passwordRef} /> 
+        </section>
+            
+      
          
         
     </section>

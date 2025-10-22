@@ -1,27 +1,47 @@
 import * as Logos from "./logo"
 import { Nav } from "./nav"
+import { useState,useEffect} from "react";
+import {Leaf} from "lucide-react";
+
 
 export function Header({navChildren}) {
-  return (
-    <div className="header col-start-1 col-end-1 row-start-1 row-end-1 ">
+  const [isScrolled, setIsScrolled] = useState(false);
 
-      <nav className="flex justify-between items-center h-full">
+
+   useEffect(() => {
+      const handleScroll = () => {
+        setIsScrolled(window.scrollY > 50);
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
   
-          <ul className="header_part left flex justify-start items-center h-full w-1/2">
-            <Logos.Text_Logo/>
-          </ul>
 
-          <ul className="h_part h_right flex justify-end items-center w-1/2 h-full" >
+  return (
+
+    <nav
+      className={`fixed top-0  w-full z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/90 backdrop-blur-md' : 'bg-transparent'
+      }`}>
+      <div className="rounded-[10px  h-full w-full max-w-full mx-auto px-6  py-2">
+        <div className="flex items-center justify-between rounded-[10px]">
+
+          {/* Logo Section */}
+          <div className="flex items-center justify-start w-full h-full ">    
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#027c68] to-[#009983] flex items-center justify-center">
+              <Leaf className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-2xl font-bold text-[#003333]">GreenLink</span>
+          </div>
+
+
+          <div className="flex flex-col items-end justify-start h-full w-full ">
+              {navChildren}
+          </div>
           
-            <Nav>
-                {navChildren} 
-            </Nav>     
-              
-          </ul>
+        </div>
+      </div>
+    </nav>
 
-        </nav>
-
-
-  </div>
   )
 }

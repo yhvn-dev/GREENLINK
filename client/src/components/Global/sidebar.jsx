@@ -8,7 +8,7 @@ export function Sidebar() {
   const [isOpen, setModal] = useState(false);
  
   return (
-    <section className="sidebar container flex flex-col col-start-1 col-end-2 row-start-1 row-end-4 p-4">
+    <section className="flex flex-col col-start-1 col-end-2 row-start-1 row-end-4 p-4 rounded-[10px] shadow-lg">
       
       <div className="logo_div flex items-center justify-center h-[10%] w-[95%] mb-6 text-xl font-bold text-green-600">
         LOGO

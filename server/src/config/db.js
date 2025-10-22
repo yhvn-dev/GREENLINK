@@ -43,3 +43,4 @@ db.on("error", (err) => {
 export const query = async (text, params) => {
     return db.query(text, params)
 }
+    
