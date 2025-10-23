@@ -14,7 +14,7 @@ const GaugeChart = ({ value, max, label, unit, icon: Icon, color }) => {
   const rotation = (percentage / 100) * 180 - 90;
   
   return (
-    <div className="flex flex-col items-center justify-center h-full">
+    <div className=" flex flex-col items-center justify-center h-full">
       <div className="relative w-32 h-32">
         <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
           <circle cx="50" cy="50" r="45" fill="none" stroke="#E8F3ED" strokeWidth="8"/>

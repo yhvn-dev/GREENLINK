@@ -4,6 +4,7 @@ import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
 import * as validate from "../../utils/userValidations"
 import {X,Edit,Plus,Upload,Trash} from "react-feather"
 
+
 export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,setBackendError}) {    
       if(!isOpen) return null
 
@@ -93,28 +94,26 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
         bg-transparent-[20%] backdrop-blur-[10px] top-0 left-0 absolute transition-opacity duration-300
         ease-out ${isOpen ? "opacity-100" : "opacity-0"}`}>
 
-            <motion.div className={`${mode === "delete" ? "w-[500px]" : "w-[700px]"} flex flex-col items-center justify-center 
-            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2`} 
+            <motion.div className={`p-4 ${mode === "delete" ? "w-[500px]" && "h-[200px]" : "w-[700px]"} flex flex-col items-center justify-center 
+            rounded-[10px] border-[var(-acc-darkc)] relative bg-white modals z-2 shadow-lg`} 
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ duration: 0.5 }}>
-            
-              <button className='cancel-btn absolute top-[20px] right-[20px]' onClick={handleClose}>
-                <div className='close_icons'><X/></div>
-              </button>
-              
+
+              <button className='absolute top-[20px] right-[20px] transition-colors duration-300 hover:bg-[var(--pal2-whiteb)] rounded-[10px]' onClick={handleClose}>
+                <X/>
+              </button> 
+                        
               {mode === "delete" ? (
                 <>  
-
-                
-                  <div className="flex w-full">
-                   <svg className="svg-icons center"><Trash className="f-icons" size={20}/></svg>
-                   <p className="text-[1.5rem] center">Delete User</p>
+                  <div className="flex items-start justify-start h-[30px] w-full">
+                      <Trash className="mx-4 " size={20}/>
+                      <p >Delete User</p>
                   </div>
-                  <p className="">Are you sure you want to delete user "{fullname}" ?</p>
+                  <p className="mt-8 ">Are you sure you want to delete user "{fullname}" ?</p>
 
-                  <div className="flex down w-[100%]">                  
+                  <div className="flex down w-[100%]  h-full">                  
                     <button onClick={() => handleSubmit(userData)} type="button"
                       className="btn-p-delete">Delete User
                     </button>
@@ -122,19 +121,21 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
                 </>
               ):(
                 <>
-                <div className='center'>
-                    <svg className="m-01 modal">{mode === "insert" ?
-                        <Plus className="f-icons" size={24}/> :
-                        <Edit className="f-icons" size={20}/> }</svg>
-                    <p className='text-[1.5rem] m-x'>{mode === "insert" ? "Add User" : "Update User"}</p>
+
+                <div className='w-full flex items-start justify-start '>
+                      {mode === "insert" ?
+                        <Plus className="mt-[4px] mx-4 transition-colors duration-300 hover:bg-[var(--pal2-whiteb)]" size={24}/> :
+                        <Edit className="mt-2 mx-4 transition-colors duration-300 hover:bg-[var(--pal2-whiteb)]" size={20}/> }
+                    <p className='text-[1.5rem] '>{mode === "insert" ? "Add User" : "Update User"}</p>
                 </div>
               
-                <form onSubmit={onFormSubmit} className="userForm flex flex-col justify-center items-centers
-                w-[100%]"> 
+
+
+                <form onSubmit={onFormSubmit} className="h-full flex flex-col justify-center items-centers
+                w-[100%] p-4"> 
                   <div className="input_part_div left flex justify-center items-center">
                       <section className='form_part left w-1/2  flex flex-col items-center 
                       justify-evenly'>
-
                       {/* username */}
                       <ul className="input_box form_box relative">
                         <input 
@@ -153,7 +154,6 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
                         {backendError && backendError.toLowerCase().includes("username") && (
                           <p className='error-txt'>{backendError}</p>
                         )}
-
                       </ul>
 
                       {/* fullname */}
@@ -228,7 +228,7 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
                     </section>
 
                     <section className='form_part right w-1/2 flex flex-col items-center 
-                    justify-evenly h-full'>
+                    justify-evenly h-full '>
 
                       <ul className="input_box flex flex-col items-center justify-center 
                         h-[70%] w-[80%]">
@@ -237,14 +237,10 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
                         border-[var(--pal2-whiteb)] rounded-full profile-img 
                         max-w-[10rem] max-h-[10rem] h-[8rem] w-[8rem]' alt={Pfp} width={200}/>
                   
-                        <label className="custom-file m-t">
-                          <input type="file" className="profile_picture" name="profile_picture"
-                          onChange={handleFileChanges}
-                          />
-                          <span className="flex items-center justify-center"> 
-                            <svg className="upload_icon"><Upload size={20}/></svg>
-                            Upload Photo
-                          </span>
+                        <label className="mt-4 center rounded-[10px] bg-[var(--pal2-whiteb)]">
+                          <input type="file" className="center px-2 py-1" name="profile_picture"
+                          onChange={handleFileChanges}/>
+                         
                         </label>
                 
                       </ul>

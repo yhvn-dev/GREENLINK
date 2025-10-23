@@ -42,9 +42,9 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
                 {/* username */}
                 <div className="form_box input_box">
 
-                <input ref={loginInputRef} className="form-inp" name="username-email-inp" placeholder=""/>
-                <label>Username or Email</label>
-                <svg className="form-svg"><User size={16} color={colors.accDarkc}/></svg>                           
+                    <input ref={loginInputRef} className="px-2 border-2 border-[--acc-darkc]" name="username-email-inp" placeholder=""/>
+                    <label>Username or Email</label>
+                    <svg className="form-svg"><User size={16} color={colors.accDarkc}/></svg>                           
                 </div>
                 <ol className="formMsg_box flex">
                     {errorMsg.loginInput && <p className="formMsg errMsg justify-start">{errorMsg.loginInput}</p>}
@@ -53,9 +53,9 @@ export function Form({handleSubmit,errorMsg,successMsg,loginInputRef,passwordRef
 
                 {/* password */}
                 <div className="form_box input_box">
-                <input ref={passwordRef} className="form-inp" type="text" name="password-inp" placeholder=""/>
-                <label>Password</label>
-                <svg className="form-svg"><Lock size={16} color={colors.accDarkc}/></svg>
+                    <input ref={passwordRef} className="px-2 border-2 border-[--acc-darkc]" type="text" name="password-inp" placeholder=""/>
+                    <label>Password</label>
+                    <svg className="form-svg"><Lock size={16} color={colors.accDarkc}/></svg>
                 </div>
                 <ol className="formMsg_box flex m-t">
                     {errorMsg.password && <p className="formMsg errMsg justify-start">{errorMsg.password}</p>} 

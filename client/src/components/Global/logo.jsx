@@ -10,7 +10,11 @@ export function Text_Logo() {
 export function Img_Logo(){
     return (
       <>
-        <span className='logo logo_img  wrap'>GREENLINK IMG</span>
+      <div className="mx-4">
+        <span className="logo-text text-3xl text-[var(--sancgb)]">GREEN</span>
+        <span className="logo-text text-3xl">LINK</span>
+      </div>
+     
       </>
     )
 }

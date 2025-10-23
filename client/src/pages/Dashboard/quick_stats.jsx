@@ -1,4 +1,4 @@
-export function Numbers({data_box}) {
+export function Quick_Stats({data_box}) {
   return (
     
     <section className="numbers flex flex-col 

@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Logout } from "./logout";
 import { LogoutModal } from "./logoutModal";
-import { Beer } from "lucide-react";
 
 export function Sidebar() {
   const [isOpen, setModal] = useState(false);
  
   return (
-    <section className="flex flex-col col-start-1 col-end-2 row-start-1 row-end-4 p-4 rounded-[10px] shadow-lg">
+    <section className="bg-white  flex flex-col col-start-1 col-end-2 row-start-1 row-end-4 p-4 rounded-[10px] shadow-lg">
       
       <div className="logo_div flex items-center justify-center h-[10%] w-[95%] mb-6 text-xl font-bold text-green-600">
         LOGO
@@ -21,11 +20,11 @@ export function Sidebar() {
           to="/Dashboard"
           end
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2 my-2 w-full
+            `flex justify-start items-center text-[var(--acc-darkb)] gap-2 py-1 transition-colors duration-300 rounded-[10px] px-2 my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-[#009983]"
-                  : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
+                  ? "text-white bg-[var(--sancgb)] shadow-lg"
+                  : "text-[var(--acc-darkb)]  hover:bg-[var(--sage-light)] hover:text-[var(--acc-darkb)] "
               }`
           }>
        
@@ -38,11 +37,11 @@ export function Sidebar() {
         <NavLink
           to="/users"
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2  my-2 w-full
+            `flex justify-start items-center :text-[var(--acc-darkb)] gap-2 py-1 transition-colors duration-300 rounded-[10px] px-2  my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-[#009983]"
-                  : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
+                  ? "text-white bg-[var(--sancgb)] shadow-lg" 
+                  : "text-[var(--acc-darkb)]  hover:bg-[var(--sage-light)] hover:text-[var(--acc-darkb)]"
               }`
           }>
           <p className="text-sm">Users</p>
@@ -53,11 +52,11 @@ export function Sidebar() {
         <NavLink
           to="/analytics"
           className={({ isActive }) =>
-            `flex items-center gap-2 py-1 transition-colors duration-300 rounded-[5px] px-2 my-2 w-full
+            `flex justify-start items-center gap-2 py-1 transition-colors duration-300 rounded-[10px]  px-2 my-2 w-full
               ${
                 isActive
-                  ? "border-l-4 border-[#009983]"
-                  : "text-gray-300 hover:bg-[var(--pal2-whiteb)] hover:text-white"
+                  ? "text-white bg-[var(--sancgb)] shadow-lg"
+                  : "text-[var(--acc-darkb)] hover:bg-[var(--sage-light)] hover:text-[var(--acc-darkb)] "
               }`
           }
         >

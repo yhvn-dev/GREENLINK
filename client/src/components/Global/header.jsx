@@ -31,7 +31,7 @@ export function Header({navChildren}) {
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#027c68] to-[#009983] flex items-center justify-center">
               <Leaf className="w-6 h-6 text-white" />
             </div>
-            <span className="text-2xl font-bold text-[#003333]">GreenLink</span>
+            <Logos.Img_Logo/>
           </div>
 
 

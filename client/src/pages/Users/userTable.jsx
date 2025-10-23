@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
-import { useMediaQuery } from "../../hooks/useMediaQuery"
   
 export function UserTable({users,setOpen, setMode, setSelectedUser}) {
   

@@ -1,10 +1,9 @@
-import { Wp_header } from "./wp_header"
-import { UserTable } from "../../components/Users/userTable"
+
+import { UserTable } from "./userTable"
 import { useEffect, useState } from "react"
 import { Modal } from "./modal"
 
 import {User} from "react-feather"
-
 import * as userService from "../../data/userService"
 import {SucessMsgs} from "../../components/Global/sucessMsgs"
 
@@ -136,23 +135,22 @@ export function Workspace({refreshChart,searchValue}) {
    
     // ================================================================================
     return (
-      <div className="container user_con workspace flex flex-col h-[100%] w-full row-start-3 row-end-3
-      col-start-2 col-end-4 overflow-y-auto">
+      <div className="bg-white workspace flex flex-col h-[100%] w-full row-start-3 row-end-3
+      col-start-2 col-end-4 overflow-y-auto gap-x- rounded-[10px]">
 
-        <Wp_header
-            left={<>
+        <div className="wp_header flex w-full h-[20%] ">
+            <ol className='h_part left flex items-center justify-start w-1/2 '>
                 <svg className="m-x-6"  ><User size={24}/></svg>
                 <span className='text-2xl'>Users</span>
-            </>}
-            right={<>
-             
+            </ol>
+            <ol className='h_part right flex flex-row-reverse items-center w-1/2'>
                 <button className="btn-p m-x text-[0.9rem]" 
-                onClick={() => 
+               onClick={() => 
                 {setMode("insert");
                 setSelectedUser(null);
                 setOpen(true)}}>ADD USER</button>
 
-                  <select onChange={(e) => {handleFilter(e)}} className="border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl">
+                <select onChange={(e) => {handleFilter(e)}} className="mx-4  px-[1px] py-[1px] border-1 border-[var(--acc-darkc)] rounded-[10px] p-h-0-6 text-sm shadow-xl">
                     <option value="all" class="options">Filter</option>
                     <option value="username" class="options">Username</option>
                     <option value="fullname" class="options">Fullname</option>
@@ -160,15 +158,15 @@ export function Workspace({refreshChart,searchValue}) {
                     <option value="role" class="options">Role</option>
                     <option value="status" class="options">Status</option>  
                     <option value="created_at" class="options">Date</option>  
-                  </select>
-              
-            </>
-            }
-          />
+                </select>
+            </ol>
+      </div>
+
+      
 
         <SucessMsgs txt={sucessMsg} clearMsg={clearMsg}/>
         
-        <div className="table_holder flex flex-col items-center justify-start h-full w-full  overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
+        <div className="bg-white table_holder flex flex-col items-center justify-start h-full w-full  overflow-y-auto shadow-[5px_5px_20px_1px_rgba(53,53,53,0.2)] rounded-[10px]">
             <UserTable
               users={filtered.length > 0 ? filtered : allUsers}
               setOpen={setOpen}

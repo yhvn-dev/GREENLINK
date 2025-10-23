@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, Tooltip } from "recharts";
 import { User } from "react-feather";
 
 import * as color from "../../utils/colors"
+import { div } from "three/tsl";
 
 export function UserChartLegend({roleCount,colors}){
   return(
@@ -81,11 +82,22 @@ export function RoleChart({chartData}) {
       
     </div>
   );
-
-  
+ 
 }
+
 
 
 export function chartBg({}){
   <PieChart width={450} height={230}></PieChart>
+}
+
+
+
+export function CircleProgressChart({percentage,circleWidth}){
+
+  return(
+  <div>
+
+    <svg width={circleWidth} height={circleWidth}></svg>
+  </div>)
 }

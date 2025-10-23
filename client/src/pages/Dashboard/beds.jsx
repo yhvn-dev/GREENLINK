@@ -1,4 +1,3 @@
-import React from "react";
 import { Droplet, Activity } from "lucide-react";
 
 export function Bed_1({ bedNum = "bed_1" }) {

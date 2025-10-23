@@ -120,60 +120,37 @@
 
 }
 
-@font-face {
-    font-family: "Inter Reg";
-    src: url("./assets/Fonts/Inter_18pt-Regular.ttf");
-}
-@font-face {
-    font-family: "Inter Med";
-    src: url("./assets/Fonts/Inter_18pt-Medium.ttf");
-}
+
 @font-face {
     font-family: "Mona Sans";
     src: url("./assets/Fonts/MonaSans-VariableFont_wdth,wght.ttf");
 }
 
+@font-face{
+    font-family: "Moonet";
+    src: url("./assets//Fonts/MoonetdemoRegular-6RnxY.otf");
+}
+
 *{
     font-family: 'Mona Sans', sans-serif;
-    padding:0rem;
-    margin: 0rem;
-    color: var(--acc-darkb);
 }
 
 ::-webkit-scrollbar-track{
     @apply bg-transparent;
 }
-
 svg{
-    width: var(--fns-default-up1-6);  height:var(--fns-default-up1-6);
     @apply cursor-pointer flex items-center justify-center; 
 }
-
-img{
-    object-fit: cover;
-}
-.close_icons{
-    @apply rounded-[10px] p-[0.1rem];
-}
-.close_icons:hover{   
-    background-color: var(--pal2-whiteb);
-    transition: 0.4s;
-}
-.modal-icons{
-   width:2rem;  height:2rem;
-}
+img{object-fit: cover;}
 
 
-
-body{
-    margin: 0rem;
-    padding: 0rem;
-}
 button{
     transition: 0.4s;
 }
 
-.svg-icons{margin: 0.4rem 0rem 0rem var(--dis-0-6);}
+.logo-text{
+    font-family: "Moonet";
+}
 
 /* CONTAINER ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== ===== */
 .down{
@@ -188,12 +165,6 @@ button{
     @apply flex items-center justify-center box-border rounded-[10px] 
     shadow-[5px_5px_20px_1px_var(--shad-alpha-e)] overflow-hidden h-[80%] max-w-[80%];
     width: clamp(300px,80%, 800px);                  
-}
-
-.modals{
-    @apply flex flex-col items-start justify-around rounded-[10px] bg-white 
-    border-2 border-[var(--pal2-whiteb)] ;
-    padding:2rem;
 }
 .half{
     @apply flex items-center h-full w-1/2 ;
@@ -338,7 +309,6 @@ button{
 .forms{
     box-shadow: 5px 5px 20px 1px var(--shad-alpha-d);
 }
-
 /* SUCCESS MESSAGE! */
 .form-svg{
     position: absolute;
@@ -386,20 +356,20 @@ button{
     @apply flex flex-col items-center justify-center relative w-[85%];
     margin: 1rem 0rem;
 }
-.form-inp{
-    @apply w-full; padding:0.2rem 1.8rem 0.2rem  var(--dis-0-6); 
-    border-radius: 10px; border: 2px solid var(--acc-darkc); 
-    position: relative;
-}
 .form_box label{
-    @apply pointer-events-none left-[4%] bg-white;
-    transition: ease 0.4s; padding: 0rem var(--dis-0-6);
-    position: absolute; font-size: var(--fns-down-1); color:var(--acc-darkc);
+   @apply absolute left-[4%] bg-white py-0 px-2 transition-all text-sm pointer-events-none text-[var(--acc-darkb)];
+    top: 50%;
+    transform: translateY(-50%); 
+}
+.form_box svg{
+    @apply absolute top-[4px] right-4 w-5 h-5;
 }
 .form_box input:focus ~ label,
 .form_box input:not(:placeholder-shown) ~ label{
-    transform: translateY(-100%); font-size: var(--fns-default-down-0-6);
+    transform: translateY(-150%); font-size: var(--fns-default-down-0-6);
 }
+
+
 
 .succes_msg_pro{
     @apply bg-[var(--color-success-a-soft)] flex items-center justify-center rounded-[10px] m-1;
@@ -412,8 +382,10 @@ select{
 }
 
 
+
+
 /* MEASUREMENTS ===== ===== ===== ===== ===== ===== ===== ===== =====  */
-/* marin 0.6 */
+/* margin 0.6 */
 .m-r-6{margin-right:0.6rem};
 .m-l-6{margin-left:0.6rem}
 .m-x-6{ margin: 0rem 0.6rem}

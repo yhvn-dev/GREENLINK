@@ -1,8 +1,8 @@
 import axios from "axios"
 import { Sidebar } from "../../components/Global/sidebar"
 import { Db_Header } from "../../components/Global/db_header"
-import { Numbers } from "../../components/Dashboard/numbers" 
-import { Workspace } from "../../components/Dashboard/workspace"
+import { Quick_Stats } from "./quick_stats" 
+import { Workspace } from "./workspace"
 import { Welcome_box } from "../../components/Global/welcome_box"
 
 import { Droplets, Sun, Wind, Activity, AlertTriangle, TrendingUp, Clock, Leaf } from 'lucide-react';
@@ -80,7 +80,7 @@ function Dashboard() {
 
   return (
     <>
-        <section className="page dashboard grid grid-cols-[12fr_30fr_48fr_10fr] grid-rows-[8vh_40vh_52vh] 
+        <section className="bg-gradient-to-br from-[#E8F3ED] to-[#C4DED0] page dashboard grid grid-cols-[12fr_30fr_48fr_10fr] grid-rows-[8vh_40vh_52vh] 
         h-[100vh] w-[100%] gap-x-4 overflow-y-auto  relative">
 
           <Welcome_box
@@ -109,7 +109,7 @@ function Dashboard() {
 
 
           {/* NUMBER CONTAINER */}
-          <Numbers
+          <Quick_Stats
             data_box={
               <>
                 {/* Gauges Row */}
@@ -139,7 +139,7 @@ function Dashboard() {
             
             
           {/* NAVIGATION */}
-          <nav className="p-4 rounded-[10px] flex items-center justify-end flex-col 
+          <nav className="bg-white p-4 rounded-[10px] flex items-center justify-end flex-col 
           col-start-4 col-end-4 row-start-3 row-end-4 ">
               {['bed_1', 'bed_2', 'bed_3'].map((item) => (
               <button
