@@ -89,8 +89,8 @@
 }
 
 @font-face {
-    font-family: "Inter Med";
-    src: url("../../assets/Fonts/Inter_18pt-Medium.ttf");
+    font-family: "Moonet";
+    src: url("../../assets/Fonts/MoonetdemoRegular-6RnxY.otf");
 }
     .container{
         @apply w-full h-full flex items-center justify-center rounded-[10px];
@@ -125,6 +125,11 @@
     }
     .btn_nav svg{
         display: none;
+    }
+
+
+    .hook-txt-b{
+        font-family: "Moonet"
     }
 
    

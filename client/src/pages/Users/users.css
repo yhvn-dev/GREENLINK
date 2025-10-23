@@ -110,11 +110,6 @@
     --dis-6-8:6.84rem;
 }
 
-body{
-    padding: 0;
-    margin: 0;
- 
-}
 
 .container{
     @apply bg-[var(--pal2-whitea)];
@@ -164,3 +159,7 @@ input{
         border: 2px solid var(--acc-darkc); 
     }
    
+.form-inp{
+    @apply border-2  border-[var(--acc-darkb)] ;
+    padding:0.1rem 0.6rem;
+}

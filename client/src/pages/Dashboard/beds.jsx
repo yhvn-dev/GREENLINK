@@ -16,8 +16,6 @@ export function Bed_1({ bedNum = "bed_1" }) {
   };
 
 
-
-
   const BedLayout = ({ bedData }) => (
     <div className="w-full overflow-x-auto pb-4">
       <div className="min-w-max px-6 py-8">

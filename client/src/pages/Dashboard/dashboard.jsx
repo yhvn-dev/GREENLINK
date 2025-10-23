@@ -5,9 +5,7 @@ import { Quick_Stats } from "./quick_stats"
 import { Workspace } from "./workspace"
 import { Welcome_box } from "../../components/Global/welcome_box"
 
-import { Droplets, Sun, Wind, Activity, AlertTriangle, TrendingUp, Clock, Leaf } from 'lucide-react';
-import { LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-
+import { Droplets, Sun, Wind, Activity } from 'lucide-react';
 
 import "./dashboard.css"
 import "./dashboard_responsive.css"

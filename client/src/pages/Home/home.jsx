@@ -3,6 +3,9 @@ import { Droplets, Sun, Wind, Activity, Leaf, TrendingUp, MapPin, Mail, Phone, M
 
 import {Link} from "react-router-dom"
 import {Header} from "../../components/Global/header"
+import {Dashboard_Mockup} from "./dashboard_mockup"
+
+import "./home.css"
 
 function Home(){
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -78,14 +81,16 @@ function Home(){
                 <span className="text-[#027c68] font-semibold text-sm">Smart Agriculture Solution</span>
               </div>
               
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-[#003333] leading-none">
+              <h1 className="hook-txt-a text-6xl md:text-7xl lg:text-8xl font-bold text-[#003333] leading-none">
                 Nurture
-                <br />
-                <span className="text-[#027c68]">Growth</span>
+                <br/>
+                  <span className="text-[var(--sancgb)] font-bold">
+                    Growth
+                  </span>
                 <br />
                 Effortlessly
               </h1>
-              
+                
               <p className="text-xl text-[#5A8F73] leading-relaxed max-w-lg">
                 Revolutionize your farming with our intelligent automatic plant watering system. Monitor soil moisture, temperature, humidity, pH levels, and water levels in real-time.
               </p>
@@ -119,42 +124,50 @@ function Home(){
 
             {/* Image/Visual Space */}
             <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden shadow-2xl bg-gradient-to-br from-[#E8F3ED] to-[#C4DED0] p-8">
-                <div className="aspect-square bg-white rounded-2xl shadow-xl flex items-center justify-center">
+              <div className="center rounded-3xl  p-8">
+                <div className="relative rounded-full h-130 w-130 bg-white shadow-sm flex items-center justify-center">
                   <div className="text-center space-y-4">
                     <div className="w-32 h-32 mx-auto bg-gradient-to-br from-[#027c68] to-[#009983] rounded-full flex items-center justify-center">
                       <Droplets className="w-16 h-16 text-white" />
                     </div>
                     <div className="text-[#003333] font-semibold text-lg">Smart Irrigation</div>
                     <div className="text-[#5A8F73]">Powered by IoT Sensors</div>
+
+                    {/* Floating Cards */}
+                    <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-[#E8F3ED]">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-[#E8F3ED] rounded-xl flex items-center justify-center">
+                          <Sun className="w-6 h-6 text-[#027c68]" />
+                        </div>
+                        <div>
+                          <div className="text-sm text-[#5A8F73]">Temperature</div>
+                          <div className="text-xl font-bold text-[#003333]">24°C</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-[#E8F3ED]">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 bg-[#E8F3ED] rounded-xl flex items-center justify-center">
+                          <Wind className="w-6 h-6 text-[#027c68]" />
+                        </div>
+                        <div>
+                          <div className="text-sm text-[#5A8F73]">Humidity</div>
+                          <div className="text-xl font-bold text-[#003333]">65%</div>
+                        </div>
+                      </div>
+                    </div>
+
+                    
+
                   </div>
+
+
+
                 </div>
               </div>
               
-              {/* Floating Cards */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-2xl shadow-xl p-4 border border-[#E8F3ED]">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#E8F3ED] rounded-xl flex items-center justify-center">
-                    <Sun className="w-6 h-6 text-[#027c68]" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-[#5A8F73]">Temperature</div>
-                    <div className="text-xl font-bold text-[#003333]">24°C</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl shadow-xl p-4 border border-[#E8F3ED]">
-                <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#E8F3ED] rounded-xl flex items-center justify-center">
-                    <Wind className="w-6 h-6 text-[#027c68]" />
-                  </div>
-                  <div>
-                    <div className="text-sm text-[#5A8F73]">Humidity</div>
-                    <div className="text-xl font-bold text-[#003333]">65%</div>
-                  </div>
-                </div>
-              </div>
+           
             </div>
           </div>
         </div>
@@ -232,76 +245,9 @@ function Home(){
         </div>
       </section>
 
-      {/* Dashboard Preview Section */}
-      <section id="dashboard" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl md:text-6xl font-bold text-[#003333] mb-6">
-              Your Control Center
-            </h2>
-            <p className="text-xl text-[#5A8F73] max-w-2xl mx-auto">
-              Access all your farm data through our intuitive dashboard interface
-            </p>
-          </div>
+      <Dashboard_Mockup/>
 
-          {/* Mac Browser Mockup */}
-          <div className="relative max-w-6xl mx-auto">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-[#003333] bg-[#003333]">
-              {/* Browser Chrome */}
-              <div className="bg-[#E8F3ED] px-4 py-3 flex items-center gap-2">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
-                  <div className="w-3 h-3 rounded-full bg-[#28ca42]"></div>
-                </div>
-                <div className="flex-1 mx-4 bg-white rounded-lg px-4 py-1.5 text-sm text-[#5A8F73] flex items-center">
-                  <span className="text-[#003333] font-medium">greenlink.farm/dashboard</span>
-                </div>
-              </div>
-
-              {/* Dashboard Content */}
-              <div className="bg-gradient-to-br from-[#E8F3ED] to-white p-8">
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-6">
-                  {[
-                    { label: 'Moisture', value: '48%', icon: Droplets, color: '#027c68' },
-                    { label: 'Temperature', value: '24°C', icon: Sun, color: '#b0e892' },
-                    { label: 'Humidity', value: '65%', icon: Wind, color: '#7BA591' },
-                    { label: 'pH Level', value: '6.8', icon: Activity, color: '#009983' },
-                    { label: 'Water', value: '85%', icon: Droplets, color: '#5A8F73' }
-                  ].map((stat, index) => (
-                    <div key={index} className="bg-white rounded-2xl p-4 shadow-lg">
-                      <div className="flex flex-col items-center text-center">
-                        <stat.icon className="w-6 h-6 mb-2" style={{ color: stat.color }} />
-                        <div className="text-2xl font-bold text-[#003333]">{stat.value}</div>
-                        <div className="text-xs text-[#5A8F73] mt-1">{stat.label}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <div className="bg-white rounded-2xl p-6 shadow-lg">
-                  <div className="text-sm font-semibold text-[#003333] mb-4">BED 1 - MONITORING</div>
-                  <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-                    {['A1', 'A2', 'A3', 'A4', 'A5', 'A6'].map((zone) => (
-                      <div key={zone} className="bg-[#E8F3ED] rounded-xl p-3 text-center">
-                        <div className="text-xs font-bold text-[#027c68] mb-1">{zone}</div>
-                        <div className="text-lg font-bold text-[#003333]">65%</div>
-                        <div className="text-xs text-[#5A8F73]">Optimal</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-lg text-[#5A8F73] mb-6">
-              Real-time data visualization • Multi-bed management • Historical analytics
-            </p>
-          </div>
-        </div>
-      </section>
+    
 
       {/* Farm Information Section */}
       <section id="farm" className="py-24 bg-gradient-to-b from-[#E8F3ED] to-white">

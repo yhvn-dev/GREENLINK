@@ -309,12 +309,6 @@ button{
 .forms{
     box-shadow: 5px 5px 20px 1px var(--shad-alpha-d);
 }
-/* SUCCESS MESSAGE! */
-.form-svg{
-    position: absolute;
-    right:1%;
-    top:28%;
-}
 
 
 
@@ -357,12 +351,15 @@ button{
     margin: 1rem 0rem;
 }
 .form_box label{
-   @apply absolute left-[4%] bg-white py-0 px-2 transition-all text-sm pointer-events-none text-[var(--acc-darkb)];
+   @apply absolute left-[4%] bg-white py-0 px-2 text-sm pointer-events-none text-[var(--acc-darkc)];
     top: 50%;
+    transition: 0.5s ease;
     transform: translateY(-50%); 
 }
+
+
 .form_box svg{
-    @apply absolute top-[4px] right-4 w-5 h-5;
+    @apply absolute top-[5px] right-4 w-5 h-5;
 }
 .form_box input:focus ~ label,
 .form_box input:not(:placeholder-shown) ~ label{

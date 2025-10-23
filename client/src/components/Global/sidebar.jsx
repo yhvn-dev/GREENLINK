@@ -2,6 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Logout } from "./logout";
 import { LogoutModal } from "./logoutModal";
+import {User,LayoutPanelTop,ChartNoAxesCombined,LogOut} from "lucide-react"
+
 
 export function Sidebar() {
   const [isOpen, setModal] = useState(false);
@@ -27,7 +29,8 @@ export function Sidebar() {
                   : "text-[var(--acc-darkb)]  hover:bg-[var(--sage-light)] hover:text-[var(--acc-darkb)] "
               }`
           }>
-       
+                        
+          <LayoutPanelTop  className=" mx-2" strokeWidth={1.5} size={18}/>
           <p className="text-sm">Dashboard</p>
         </NavLink>
 
@@ -44,6 +47,8 @@ export function Sidebar() {
                   : "text-[var(--acc-darkb)]  hover:bg-[var(--sage-light)] hover:text-[var(--acc-darkb)]"
               }`
           }>
+
+          <User className="mx-2"  strokeWidth={1.5} size={18}/>
           <p className="text-sm">Users</p>
         </NavLink>
 
@@ -60,7 +65,7 @@ export function Sidebar() {
               }`
           }
         >
-      
+          <ChartNoAxesCombined  className="mx-2" strokeWidth={1.5} size={18}/>
           <p className="text-sm">Analytics</p>
         </NavLink>      
       </div>

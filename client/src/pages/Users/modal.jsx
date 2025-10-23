@@ -1,8 +1,9 @@
-import {motion,AnimatePresence} from "framer-motion";
+import {motion} from "framer-motion";
 import { useEffect, useState } from 'react'
 import Pfp from "../../assets/Images/Default Profile Picture 2.jpg"
 import * as validate from "../../utils/userValidations"
-import {X,Edit,Plus,Upload,Trash} from "react-feather"
+import {X,UserPen,UserPlus,Trash2} from "lucide-react"
+
 
 
 export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,setBackendError}) {    
@@ -108,8 +109,8 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
               {mode === "delete" ? (
                 <>  
                   <div className="flex items-start justify-start h-[30px] w-full">
-                      <Trash className="mx-4 " size={20}/>
-                      <p >Delete User</p>
+                      <Trash2 className="mr-4 mt-[4px] " size={24}/>
+                      <p className="text-2xl" >Delete User</p>
                   </div>
                   <p className="mt-8 ">Are you sure you want to delete user "{fullname}" ?</p>
 
@@ -124,8 +125,8 @@ export function Modal({isOpen,onClose,mode,handleSubmit,userData,backendError,se
 
                 <div className='w-full flex items-start justify-start '>
                       {mode === "insert" ?
-                        <Plus className="mt-[4px] mx-4 transition-colors duration-300 hover:bg-[var(--pal2-whiteb)]" size={24}/> :
-                        <Edit className="mt-2 mx-4 transition-colors duration-300 hover:bg-[var(--pal2-whiteb)]" size={20}/> }
+                        <UserPlus className="mx-4 mt-[4px]" not-visited: size={24}/> :
+                        <UserPen className="mx-4 mt-[4px]" not-visited: size={24}/> }
                     <p className='text-[1.5rem] '>{mode === "insert" ? "Add User" : "Update User"}</p>
                 </div>
               

@@ -16,7 +16,6 @@ export function Workspace({refreshChart,searchValue}) {
   const [allUsers,setAllUsers] = useState([]) 
   const [filtered,setFiltered] = useState([])
 
- 
   const clearMsg = () => setSucessMsg("");
 
   useEffect(() =>{
@@ -140,7 +139,7 @@ export function Workspace({refreshChart,searchValue}) {
 
         <div className="wp_header flex w-full h-[20%] ">
             <ol className='h_part left flex items-center justify-start w-1/2 '>
-                <svg className="m-x-6"  ><User size={24}/></svg>
+               <User className="mx-4" size={24}/>
                 <span className='text-2xl'>Users</span>
             </ol>
             <ol className='h_part right flex flex-row-reverse items-center w-1/2'>

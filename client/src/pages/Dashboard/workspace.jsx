@@ -11,12 +11,12 @@ export function Workspace({ bed }) {
       grid-rows-[1fr_9fr] grid-cols-[1fr] rounded-[10px] overflow-y-auto
        overflow-hidden'> 
 
-        <div className='center w-full h-full col-start-1 col-end-4 bg-transparent '>
+        <div className='center w-full h-full col-start-1 col-end-4 bg-transparent mb-4 '>
             <ol className="wp_part left w-full h-full flex items-center justify-start ">
               <h1
                 className="center text-2xl font-bold mb-2 text-[var(--sancga)">
-                    <Leaf />
-                    <span className='mx-2'>Greenhouse Monitoring System</span>
+                    <Leaf className="mx-4" />
+                    <span >Greenhouse Monitoring System</span>
                 </h1>
                 <p className="text-sm px-4">
                     Real-time soil moisture and pH level monitoring

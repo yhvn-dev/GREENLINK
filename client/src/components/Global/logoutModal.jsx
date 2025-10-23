@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import {motion,AnimatePresence} from "framer-motion";
 import axios from "axios"
 
-import {X} from 'react-feather';
+import { LogOut,X} from "react-feather";
 
 export function LogoutModal({isOpen,onClose}) {
   const navigate = useNavigate()
@@ -36,8 +36,6 @@ export function LogoutModal({isOpen,onClose}) {
     }
 
   return (
-
-
     <section className="modal_bg flex items-center justify-center h-full w-full absolute
     top-0 left-0 bg-transparent-[20%]  backdrop-blur-[10px] z-[1]">
 
@@ -53,7 +51,7 @@ export function LogoutModal({isOpen,onClose}) {
           </button>
           
           <ul className='flex justify-start items-center'> 
-          
+            <LogOut className="mr-4" strokeWidth={1.5} size={24} />
             <p className="text-[1.5rem] text-[var(--acc-darkb)]">Logout Your Account?</p>
           </ul>
  
